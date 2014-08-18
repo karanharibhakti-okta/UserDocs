@@ -1,16 +1,24 @@
+
 <html>
 <head>
 
 
-
+<link href="resources/css/Styles_1.css" media="all" rel="stylesheet" type="text/css" />
 <link href="resources/css/Styles_2.css" media="all" rel="stylesheet" type="text/css" />
+<style type="text/css">
+body {
+	background-color: #FFFFFF;
+}
+</style>
+<title>Okta SSO Setup</title>
 
-<title>Okta SAML Setup</title>
 
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-<script type="text/javascript">
+<!-- <script> src=”resources/scripts/getAppValues.js” ></script> -->
+
+<script>
 function processData(data) {
   $('#signOnUrl').html(data["signOnUrl"]);
   $('#signOutUrl').html(data["signOutUrl"]);
@@ -67,9 +75,18 @@ $(document).ready(function($) {
       });
     }
   }
+
+  
+  $('#mailto').on('click', function() {
+      var to = "DedicatedSAMLComplaintLine@okta.com"; // I am assuming this will always be same!
+      var body = "Dear Okta,%0D%0A%0D%0AI used your SAML setup instruction. I want you to know…%0D%0AI completed the SAML setup?%0D%0AI found errors in this doc?%0D%0A%0D%0AHere’s what I noticed:";
+      var subject = "Update Doc:" + $('h1').text();       
+      var mailto = "mailto:" + to + "?subject=" + subject + "&body=" + body;
+      window.location.href = mailto;
+    });
+
 });
 </script>
-
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
@@ -77,14 +94,13 @@ $(document).ready(function($) {
 
 <div class="okta-instructions">
 <p>&nbsp;&nbsp;<img style="border: 0; padding: 0; padding-left: 5px;" src="images/design/Okta_logo.png" alt="Okta" /> </p>
-<h1>&nbsp;&nbsp;&nbsp;Configuring SAML 2.0 in BlueJeans</h1>
+<h1>&nbsp;&nbsp;Configuring SAML 2.0 in BlueJeans</h1>
 
 <div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
 <p><strong>Please sign-in to the Okta Admin app to have your organization specific variables generated for you. You might not be able to complete the setup without these generated variables.</strong></p>
 </div>
 <ol>
 <li>Sign in to BlueJeans &nbsp;at&nbsp;<a href="http://www.bluejeans.com" target="_blank">www.bluejeans.com</a>&nbsp;as a user with rights to edit SAML configuration.</li>
-<li>This is a test.<ol><li>First</li><li>Second</li></ol></li>
 <li>Select the&nbsp;<strong style="font-size: 14px;">Admin</strong>&nbsp;tab, and then the&nbsp;<strong style="font-size: 14px;">Security</strong>&nbsp;tab, as shown at the bottom of this page.</li>
 <li>Click the <strong>SAML Single Sign On</strong> button.</li>
 <li>
@@ -106,7 +122,7 @@ $(document).ready(function($) {
 </li>
 <li>Done!</li>
 </ol><img style="border: 0; padding: 20px;" src="images/apps/bluejeans8.png" alt="BlueJeans Admin Console" />
-<p><strong>Comments? </strong>Please send any comments on these instructions to <a href="mailto:DedicatedSAMLComplaintLine@okta.com">DedicatedSAMLComplaintLine@okta.com</a>.</p>
+<p><strong>Comments? </strong>Please send any comments on these instructions to <a id ="mailto" href="javascript:void(0);">DedicatedSAMLComplaintLine@okta.com</a>.</p>
 </div>
 </body>
 </html>
