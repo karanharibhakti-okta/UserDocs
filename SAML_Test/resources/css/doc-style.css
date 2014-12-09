@@ -1,0 +1,211 @@
+/* General styles */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-family: 'proxima-nova', Arial, Helvetica, sans-serif;
+    vertical-align: baseline;
+    background: transparent;
+    color: #5e5e5e;
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body {
+    background: #ffffff;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.clearfix {
+    display: block;
+}
+.clearfix:after {
+    content: '.';
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+/* Page header */
+
+.header {
+    background-color: #035886;
+    padding: 25px 0;
+}
+.logo-container {
+    margin: 0 auto;
+    width: 1000px;
+}
+.logo-container img {
+    width: 100px;
+}
+/* Instructions layout */
+
+.okta-instructions {
+    overflow-x: hidden;
+    width: 1000px;
+    margin: 0 auto;
+    padding: 20px 0 40px;
+}
+.okta-instructions * + * {
+    margin-top: 1em;
+}
+.okta-instructions li + li {
+    margin-top: 0;
+}
+.okta-instructions ul {
+    margin-left: 2em;
+}
+.okta-instructions ul {
+    list-style-type: disc;
+}
+.okta-instructions ul li {
+    list-style-type: disc;
+}
+.okta-instructions ol {
+    list-style-type: none;
+    margin-top: 1em;
+    margin-left: 25px;
+    padding: 0;
+    counter-reset: li;
+}
+.okta-instructions ol > li {
+    position: relative;
+    padding-left: 10px;
+    min-height: 3em;
+}
+ol > li:before {
+    color: #ffffff;
+    background-color: #03496F;
+    position: absolute;
+    top: 0;
+    left: -25px;
+    width: 20px;
+    height: 20px;
+    font-size: 16px;
+    line-height: 21px;
+    text-align: center;
+    padding: 2px;
+    border-radius: 50%;
+    content: counter(li);
+    counter-increment: li;
+}
+.okta-instructions ol > li > ol > li {
+    list-style-type: lower-alpha;
+}
+.okta-instructions ol > li > ol > li:before {
+    content: counter(li, lower-alpha);
+}
+/*.okta-instructions p, .okta-instructions span, .okta-instructions li {
+    font-size: 1.1em;
+}*/
+/* Headings */
+
+.okta-instructions h1 {
+    font-size: 36px;
+    font-weight: bold;
+}
+.okta-instructions h2 {
+    font-size: 30px;
+}
+.okta-instructions h3 {
+    font-size: 24px;
+}
+.okta-instructions h4 {
+    font-size: 18px;
+}
+.okta-instructions h1, .okta-instructions h2 {
+    color: #5e5e5e
+}
+.okta-instructions h3, .okta-instructions h4 {
+    color: #6d6d6d;
+}
+.okta-instructions a {
+    color: #3682B3;
+}
+.okta-instructions img {
+    display: block;
+    max-width: 100%;
+}
+/* Code and quotes */
+
+kbd, blockquote {
+    background: #f9f9f9;
+    border: 1px solid #e1e1e1;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 1px 1px rgba(160, 160, 160, 0.1) inset;
+    display: block;
+    padding: 9px 19px;
+    margin-bottom: 20px;
+    line-height: 20px;
+    margin-top: 0;
+}
+
+kbd, code, kbd *, code * {
+    font-family: 'Andale Mono', 'Courier New', Courier, monospace;
+    letter-spacing: -0.04em;
+    font-weight: normal;
+}
+/* Callouts */
+
+.okta-callout {
+    position: relative;
+    padding: 15px 15px 15px 60px;
+    background-color: #f9f9f9;
+    border: 1px solid #e1e1e1;
+    border-radius: 3px;
+    line-height: 1.5em;
+}
+.okta-error,
+.okta-danger {
+    background-color: #c84b4b;
+    border-color: #B43737;
+}
+.okta-error *,
+.okta-danger * {
+    color: #ffffff !important;
+}
+.okta-warning {
+    background-color: #fffbea;
+    border-color: #EFD34C;
+}
+.okta-success {
+    background-color: #e6f0d0;
+    border-color: #c3d595;
+}
+
+.okta-callout * {
+    margin: 0;
+}
+.okta-callout h2,
+.okta-callout h3 {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.okta-callout .icon-24 {
+    background-image: url(callouts-sprite.png);
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+    display: block;
+    position: absolute;
+    top: 16px;
+    left: 20px;
+}
+.icon-info {
+    background-position: 0 0;
+}
+.icon-success {
+    background-position: -24px 0;
+}
+.icon-warning {
+    background-position: -48px 0;
+}
+.icon-error {
+    background-position: -72px 0;
+}
