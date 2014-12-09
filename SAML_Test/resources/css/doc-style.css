@@ -54,9 +54,6 @@ body {
 .okta-instructions * + * {
     margin-top: 1em;
 }
-.okta-instructions li + li {
-    margin-top: 0;
-}
 .okta-instructions ul {
     margin-left: 2em;
 }
@@ -76,7 +73,7 @@ body {
 .okta-instructions ol > li {
     position: relative;
     padding-left: 10px;
-    min-height: 3em;
+    line-height: 1.8em;
 }
 ol > li:before {
     color: #ffffff;
