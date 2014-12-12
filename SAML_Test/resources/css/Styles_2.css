@@ -1,0 +1,101 @@
+
+
+html {margin-left:4px}
+
+html, body {
+background: #FFFFFF;
+font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size:14px;
+}
+
+
+
+#top-right  
+{
+color: #FFFFFF;
+padding-left: 20px;
+padding-bottom: 5px;
+}
+
+
+li
+{
+background-image: url(arrow.gif);
+background-repeat: no-repeat;
+background-position: 100% .4em;
+padding-right: .6em;
+margin: 2em 0;
+}
+
+kbd, textarea {
+    background: #F8F8F8;
+    border: 1px solid #DDDDDD;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 1px 1px rgba(160, 160, 160, 0.1) inset;
+    display: block;
+    padding: 9px 19px;
+    margin-bottom: 20px;
+    line-height: 20px;
+    margin-top: 0;
+}
+
+
+html, body {
+background: #fffff;
+font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+
+ol li { list-style-type: decimal; }
+ol li ol li { list-style-type: lower-alpha; }
+
+
+.okta-callout
+{
+  padding: 15px 15px 15px 50px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  background-image: url(../../images/design/error.png);
+  background-repeat:  no-repeat;
+  background-position: 20 30;
+}
+
+.okta-danger {
+line-height: 20px;
+ margin-left: 20px;
+vertical-align: middle;
+background-color: #fae5e5;
+border-color: #f5b3b3;
+background-image: url(../../images/design/error.png);
+  background-repeat:  no-repeat;
+  background-position: 20 30;
+}
+
+.okta-warning {
+    line-height: 20px;
+    background-color: #FDF5E4;
+    border-color: #EFD9AD;
+    background-image: url(../../images/design/warning.png);
+  background-repeat:  no-repeat;
+  background-position: 20 30;
+}../
+
+.okta-success {
+  background-color: #e6f0d0;
+  border-color: #c3d595;
+  background-image: url(../../images/design/green_tick.png);
+  background-repeat:  no-repeat;
+  background-position: 20 30;
+}
+
+
+.okta-info {
+  background-color: #eef6f9;
+  border-color: #d6e9f0;
+  padding: 19px;
+}
+
