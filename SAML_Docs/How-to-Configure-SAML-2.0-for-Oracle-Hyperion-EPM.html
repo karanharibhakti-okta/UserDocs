@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" />-->
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
 <script type="text/javascript">
 try{Typekit.load();}catch(e){}
 </script>
@@ -96,7 +96,7 @@ $(document).ready(function($) {
 </div>
 <h3>Environment and Prerequisites</h3>
 <p>These SAML instructions were tested on an Oracle 11G database in the following environment:</p>
-<p><img style="border: 0; padding: 0;" src="/attachments/token/G0SQMEnmPJVY5ZiYpmGtoUG6T/?name=Hyperion_env.png" alt="Hyperion_env.png" /></p>
+<p><img style="border: 0; padding: 0;" src="images/apps/Hyperion_env.png" alt="Hyperion_env.png" /></p>
 <p>You must have a configured EPM Weblogic Domain. These instructions are based on the following environment:</p>
 <ul>
 <li><span style="font-size: 14px; background-color: #efefef;">Server running EPM: win-citrix.krish.com</span></li>
@@ -112,34 +112,34 @@ $(document).ready(function($) {
 </li>
 <li><span>Select <strong>Activate Changes</strong> and restart the managed server and Admin server.</span>&nbsp;</li>
 <li><span>Login again to Weblogic Admin console and create Weblogic as a SP.</span>&nbsp;<ol>
-<li><span>Navigate to <strong>EPMServer0 &gt; Federation Services &gt; SAML 2.0</strong> Service Provider. Configure the parameters as below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/bN3rK5Xh65lJy0nIKIoToTMKt/?name=Hyperion_1.png" alt="Hyperion_1.png" /><br /></span></li>
-<li>&nbsp;Save the configuration and go to the SAML 2.0 General tab and select the configuration shown below.&nbsp;Do not enable <strong>Recipient Check</strong>.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/0GNaH16u5Gg6Ioh8mbiSo1Ehs/?name=Hyperion_3.png" alt="Hyperion_3.png" /></li>
+<li><span>Navigate to <strong>EPMServer0 &gt; Federation Services &gt; SAML 2.0</strong> Service Provider. Configure the parameters as below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Hyperion_1.png" alt="Hyperion_1.png" /><br /></span></li>
+<li>&nbsp;Save the configuration and go to the SAML 2.0 General tab and select the configuration shown below.&nbsp;Do not enable <strong>Recipient Check</strong>.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Hyperion_3.png" alt="Hyperion_3.png" /></li>
 <li>&nbsp;<span>Save the configuration.</span></li>
 </ol></li>
 <li>&nbsp;Add the following lines into the <strong>mod_wl_ohs.conf</strong> file located under the OHS&nbsp;config directory to forward requests to WLS from OHS. Restart the server after making the changes.<br /><br /> <kbd>&lt;LocationMatch ^/saml2/&gt;<br />SetHandler weblogic-handler<br />WebLogicCluster HSS Server name:HSS port<br />&lt;/LocationMatch&gt;</kbd></li>
 <li><span>Login back to the Admin console and navigate to the&nbsp;<strong>EPMServer0 &gt; Federation Services &gt; SAML 2.0 General</strong> tab. Select Publish Metadata and save the file in any desired location.</span>&nbsp;</li>
-<li><span>Next, sign in to Okta and create a <strong>Template SAML 2.0 App</strong>. Use the configuration shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/lziXXlfim4QPSzUmJnWyhz2TC/?name=Hyperion_3.png" alt="Hyperion_3.png" /><br /><br /><span><strong>Note:</strong> You can find the <strong>Post Back URL</strong> from the metadata that you published in Step 6. Be sure the <strong>Request</strong> is <em>Uncompressed</em> as shown above.</span><br /></span></li>
+<li><span>Next, sign in to Okta and create a <strong>Template SAML 2.0 App</strong>. Use the configuration shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Hyperion_3.png" alt="Hyperion_3.png" /><br /><br /><span><strong>Note:</strong> You can find the <strong>Post Back URL</strong> from the metadata that you published in Step 6. Be sure the <strong>Request</strong> is <em>Uncompressed</em> as shown above.</span><br /></span></li>
 <li>
 <p>After you configure the SAML 2.0 template App in Okta, navigate to the <strong>Sign On</strong> tab for the template app, and select <strong>View Setup Instructions</strong>. Download the metadata and save it on the EPM server, in any desired location.</p>
 </li>
 <li><span>Sign in to Weblogic Admin console and navigate to <strong>Security Realms &gt; myrealm &gt; Providers</strong>.</span></li>
-<li><span>Select <strong>SAML2_IdentityAssertor</strong> and go to <strong>Management</strong> tab. Create a new Web Single Sign-On Identity provider Partner as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/PnTNmkxraUqzdszNbZR4EXFrV/?name=Hyperion_4.png" alt="Hyperion_4.png" /><br /></span></li>
-<li>&nbsp;<span>Select the Okta IDP metadata and the select <strong>OK</strong>, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/yVWIA2RCaf9VBV8ezxfBHL7fB/?name=Hyperion_5.png" alt="Hyperion_5.png" /><br /></span></li>
-<li>&nbsp;<span>&nbsp;Edit the identity partner. Enable and configure it as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/l6v4epU5HyvAXjZguy6jk0svb/?name=Hyperion_6.png" alt="Hyperion_6.png" /><br /></span></li>
+<li><span>Select <strong>SAML2_IdentityAssertor</strong> and go to <strong>Management</strong> tab. Create a new Web Single Sign-On Identity provider Partner as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Hyperion_4.png" alt="Hyperion_4.png" /><br /></span></li>
+<li>&nbsp;<span>Select the Okta IDP metadata and the select <strong>OK</strong>, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Hyperion_5.png" alt="Hyperion_5.png" /><br /></span></li>
+<li>&nbsp;<span>&nbsp;Edit the identity partner. Enable and configure it as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Hyperion_6.png" alt="Hyperion_6.png" /><br /></span></li>
 <li><span>Save the file and activate the changes. Restart the weblogic if necessary.</span>&nbsp;</li>
 <li><span>&nbsp;If you have already integrated a LDAP directory to EPM, enable SSO by completing steps a–e, below.</span><br /><ol>
-<li><span>Sign in to the <strong>EPM console</strong> and open the <strong>Shared Service console</strong>. A screen similar to the following displays.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/SbhVDxfbaKpTC4NcRqeC0uIuX/?name=Hyperion_7.png" alt="Hyperion_7.png" /><br /><strong>Note:</strong> In this example,&nbsp;<span>active directory is configured in addition to the EPM directory store.</span></span></li>
-<li><span>Select <strong>Administration &gt; Configure User Directories</strong>, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/xV5TSgN8O9FDc0v9SEKg9noIe/?name=Hyperion_8.png" alt="Hyperion_8.png" /><br /></span></li>
-<li><span>The following screen opens. Select the <strong>Security Options</strong> tab, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/GmMyNP6MP7uCZhXgI867slPYZ/?name=Hyperion_9.png" alt="Hyperion_9.png" /><br /></span></li>
-<li><span>On the <strong>Security Options</strong> tab, check <strong>Enable SSO</strong>, in the <em>Single Sign-On Configuration</em> section. Configure the other options as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/xabOeSfSgLPorY13qXWSu28nr/?name=Hyperion_10.png" alt="Hyperion_10.png" /><br /></span></li>
+<li><span>Sign in to the <strong>EPM console</strong> and open the <strong>Shared Service console</strong>. A screen similar to the following displays.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Hyperion_7.png" alt="Hyperion_7.png" /><br /><strong>Note:</strong> In this example,&nbsp;<span>active directory is configured in addition to the EPM directory store.</span></span></li>
+<li><span>Select <strong>Administration &gt; Configure User Directories</strong>, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Hyperion_8.png" alt="Hyperion_8.png" /><br /></span></li>
+<li><span>The following screen opens. Select the <strong>Security Options</strong> tab, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Hyperion_9.png" alt="Hyperion_9.png" /><br /></span></li>
+<li><span>On the <strong>Security Options</strong> tab, check <strong>Enable SSO</strong>, in the <em>Single Sign-On Configuration</em> section. Configure the other options as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Hyperion_10.png" alt="Hyperion_10.png" /><br /></span></li>
 <li><span>Select <strong>OK</strong>.</span></li>
 </ol></li>
 <li><span>Sign in to the Weblogic Admin console. Make sure you have the users available in Weblogic realm. In this example, AD is integrated in the EPM as directory store; consequently, use the same directory store in Weblogic to pull the users to ensure the user set is the same in both Weblogic and Oracle EPM.</span>&nbsp;</li>
 <li><span>Navigate to <strong>Security Realms &gt; myrealm &gt; Providers</strong> and create a new Active Directory authenticator. In this example, it is named AD. Use this or any name that meets your organization's naming conventions.</span></li>
-<li><span>Edit the new provider and select the <strong>Provider Specific</strong> tab. Configure according to your environment, using the configuration shown below as a guide.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/cROXnPBECPz62KH28Um7JSFlY/?name=Hyperion_11.png" alt="Hyperion_11.png" /><br /></span></li>
+<li><span>Edit the new provider and select the <strong>Provider Specific</strong> tab. Configure according to your environment, using the configuration shown below as a guide.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Hyperion_11.png" alt="Hyperion_11.png" /><br /></span></li>
 <li>Save the configuration.</li>
 <li>Edit the config.xml located under domain <em>C:\Oracle\Middleware\user_projects\domains\EPMSystem\config</em>. Change the <strong>Sharedservices</strong> app deployment from <em>DD only</em> to <em>customRolesandPolicies</em>, as shown below. <kbd> &lt;app-deployment&gt;<br /> &lt;name&gt;SHAREDSERVICES#11.1.2.0&lt;/name&gt;<br /> &lt;target&gt;EPMServer&lt;/target&gt;<br /> &lt;module-type&gt;ear&lt;/module-type&gt;<br /> &lt;source-path&gt;C:\Oracle\Middleware\EPMSystem11R1/products/Foundation/AppServer/InstallableApps/common/interop.ear&lt;/source-path&gt;<br /> &lt;security-dd-model&gt;CustomRolesAndPolicies&lt;/security-dd-model&gt;<br /> &lt;staging-mode&gt;nostage&lt;/staging-mode&gt;<br /> &lt;/app-deployment&gt;<br /></kbd></li>
-<li><span>To enable an SP-initiated session, go to the Weblogic Admin console and edit the <strong>EPMServer0</strong>. Navigate to the screen shown below and add the condition for the default policy. You can specify the group or users that are allowed access. In example shown below, a username is added.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/lvDiKWKkcfb4W76PTKDge4Uff/?name=Hyperion_12.png" alt="Hyperion_12.png" /><br /></span></li>
+<li><span>To enable an SP-initiated session, go to the Weblogic Admin console and edit the <strong>EPMServer0</strong>. Navigate to the screen shown below and add the condition for the default policy. You can specify the group or users that are allowed access. In example shown below, a username is added.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Hyperion_12.png" alt="Hyperion_12.png" /><br /></span></li>
 <li>
 <p>Save the file and restart the server. This imports all the users and groups to Weblogic if you have integrated a LDAP store. You can also create a user inside Weblogic without integrating with LDAP server.&nbsp; Be sure you have the user both in Weblogic and EPM.</p>
 </li>

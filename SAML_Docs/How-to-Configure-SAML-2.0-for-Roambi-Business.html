@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" />-->
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
 <script type="text/javascript">
 try{Typekit.load();}catch(e){}
 </script>
@@ -101,20 +101,20 @@ $(document).ready(function($) {
 </div>
 <ol>
 <li>Log in to <a href="https://business.roambi.com/login" target="_blank">Roambi Business</a> and select&nbsp;<strong>Invite Users.</strong></li>
-<li>On the left menu, select&nbsp;<strong>Single Sign-On.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/pq2xdOYSvNY34xzyefwZieTpn/?name=Roambi_1.png" alt="Roambi_1.png" /><br /></strong></li>
+<li>On the left menu, select&nbsp;<strong>Single Sign-On.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Roambi_1.png" alt="Roambi_1.png" /><br /></strong></li>
 <li>Set <strong>Enable Single Sign-On with SAML</strong>&nbsp;to <strong>ON.</strong></li>
 <li>Copy and paste the following in the <strong>Sign-in Page URL</strong> field:<br /><br /><kbd id="signOnUrl"> Sign into the Okta Admin dashboard to generate this value.</kbd>&nbsp;</li>
 <li>Copy and paste the following in the <strong>Sign-Out Page URL</strong> field:<br /><br /><kbd id="signOutUrl"> Sign into the Okta Admin dashboard to generate this value.</kbd></li>
 <li>Download the following certificate. Select <strong>Choose File</strong> in the <strong>Verification Certificate</strong> field and choose the file you just downloaded.<br /><br /><kbd id="downloadCertificate"> Sign into the Okta Admin dashboard to generate this value.</kbd></li>
-<li>Copy the <strong>ACS URL</strong> on the Roambi Single Sign-On page.<br /><img src="/attachments/token/r2tOcK6tfDcPfVJPmZefDvJ4j/?name=Screen+Shot+2014-04-07+at+4.51.08+PM.png" alt="Screen_Shot_2014-04-07_at_4.51.08_PM.png" /><br /><br /></li>
-<li>In Okta, go to the <strong>General</strong> tab and paste the URL you copied in Step 7 into the <strong>ACS Url</strong> field.<br /><img src="/attachments/token/UIo6AUGHauedsctzk1N2N9Zca/?name=Screen+Shot+2014-04-07+at+4.53.33+PM.png" alt="Screen_Shot_2014-04-07_at_4.53.33_PM.png" /><br /><br /></li>
+<li>Copy the <strong>ACS URL</strong> on the Roambi Single Sign-On page.<br /><img src="images/apps/Screen+Shot+2014-04-07+at+4.51.08+PM.png" alt="Screen_Shot_2014-04-07_at_4.51.08_PM.png" /><br /><br /></li>
+<li>In Okta, go to the <strong>General</strong> tab and paste the URL you copied in Step 7 into the <strong>ACS Url</strong> field.<br /><img src="images/apps/Screen+Shot+2014-04-07+at+4.53.33+PM.png" alt="Screen_Shot_2014-04-07_at_4.53.33_PM.png" /><br /><br /></li>
 <li>Save the settings in both Okta and Roambi.</li>
 <li>Done!</li>
 </ol>
 <h2>Understanding the Roambi Business SAML Flow</h2>
 <ol>
 <li>Roambi Business currently supports the SP-initiated SAML flow. After you set up SAML for your account, go to <a href="https://business.roambi.com/login" target="_blank">https://business.roambi.com/login</a>&nbsp;to authenticate with SAML.</li>
-<li>Select <strong>Other Login Options</strong>.<br /><br /> <img style="border: 0; padding: 0;" src="/attachments/token/ob7wXVyIiYbpxDjYkbzfXHNCZ/?name=Screen+Shot+2014-04-07+at+3.25.09+PM.png" alt="Screen_Shot_2014-04-07_at_3.25.09_PM.png" /></li>
+<li>Select <strong>Other Login Options</strong>.<br /><br /> <img style="border: 0; padding: 0;" src="images/apps/Screen+Shot+2014-04-07+at+3.25.09+PM.png" alt="Screen_Shot_2014-04-07_at_3.25.09_PM.png" /></li>
 <li>Select <strong>Single Sign-On</strong>, enter your <strong>Email Address</strong>, and select&nbsp;<strong>Enter</strong>.</li>
 <li>If you already have an active session in Okta, you are directly logged into Roambi Business. If you do not have an active session in Okta, you are redirected to Okta to enter Okta credentials. After you have entered your Okta credentials, you are logged into Roambi Business.</li>
 <li>For the convenience of your end users, <strong>Okta recommends that you hide the Roambi app and set up a Bookmark app</strong> with the Roambi logo. For instructions on setting up a Bookmark app and hiding the original app, see <a href="https://support.okta.com/entries/27685638-Simulating-an-IDP-initiated-Flow-with-the-Bookmark-App" target="_blank">Simulating an IDP-initiated Flow with the Bookmark App</a>.</li>

@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" />-->
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
 <script type="text/javascript">
 try{Typekit.load();}catch(e){}
 </script>
@@ -95,25 +95,25 @@ $(document).ready(function($) {
 <p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
 </div>
 <ol>
-<li>Sign into AWS and select <strong>Create SAML Provider</strong>, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/PJ10Hga6xhig5CI0cXPNWvbta/?name=Amazon_AWS_0.png" alt="Amazon_AWS_0.png" width="722" height="114" /></li>
+<li>Sign into AWS and select <strong>Create SAML Provider</strong>, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Amazon_AWS_0.png" alt="Amazon_AWS_0.png" width="722" height="114" /></li>
 <li>
 <p>Provide the following&nbsp;<strong>IDP metadata</strong>&nbsp;when prompted.<br /><br /><textarea id="idpMetadata" style="margin: 0px; height: 214px; width: 700px;">Sign into the Okta Admin dashboard to generate this value.</textarea></p>
 </li>
 <li>
-<p>&nbsp;Be sure to copy the <strong>Provider ARN</strong> when it displays, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/aO7eWITDGavq3fvVOwiIg9ole/?name=Amazon_AWS_1.png" alt="Amazon_AWS_1.png" width="690" height="396" /></p>
+<p>&nbsp;Be sure to copy the <strong>Provider ARN</strong> when it displays, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Amazon_AWS_1.png" alt="Amazon_AWS_1.png" width="690" height="396" /></p>
 </li>
 <li>
-<p>Select <strong>Roles</strong> from the list on the left, and then select <strong>Create New Role</strong> at the top.&nbsp;<br /><br />Provide a friendly name for your role. For Role Type, select <strong>Role For Identity Provider Access,</strong> and then select <strong>Grant Web Single Sign-On (web SSO) access to SAML provider</strong>, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/CSDKuTtnVC3QRrY8baUQH6jKG/?name=Amazon_AWS_4.png" alt="Amazon_AWS_4.png" /></p>
+<p>Select <strong>Roles</strong> from the list on the left, and then select <strong>Create New Role</strong> at the top.&nbsp;<br /><br />Provide a friendly name for your role. For Role Type, select <strong>Role For Identity Provider Access,</strong> and then select <strong>Grant Web Single Sign-On (web SSO) access to SAML provider</strong>, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Amazon_AWS_4.png" alt="Amazon_AWS_4.png" /></p>
 <p><strong>Note:</strong> If you already have an existing role with the type <strong>Grant Web Single Sign-On (web SSO) access to SAML providers</strong>, you can modify it to work with the SAML provider you just created in the previous step.</p>
 </li>
 <li>
 <p>Verify the role trust policy. Choose the access policy, such as permissions, that federated users will inherit when using this role.</p>
 </li>
 <li>
-<p>Review your settings, and then select <strong>Create Role</strong>. You should be able to see the new role, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/QEknBg67G7eCuhVdmOle7yBsd/?name=Amazon_AWS_3.png" alt="Amazon_AWS_3.png" /><br /><br /></p>
+<p>Review your settings, and then select <strong>Create Role</strong>. You should be able to see the new role, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Amazon_AWS_3.png" alt="Amazon_AWS_3.png" /><br /><br /></p>
 </li>
-<li>In Okta, enter the Provider ARN that you copied in step 3 into the&nbsp;&nbsp;<strong>Identity Provider ARN (Amazon Resource Name)</strong>&nbsp;field, as shown below.<br /><img style="border: 0; padding: 0;" src="/attachments/token/hOXaFu3X1uL7f9Kc0xWqS41rq/?name=Amazon_AWS_6.png" alt="Amazon_AWS_6.png" /></li>
-<li>In Okta, enable User Management for your app, and assign users. Specify the role as the role that you created in step 6, as shown below. If you are on Okta SSO or you do NOT want to enable User Management, go to step 10.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/X5GpHqkB9iDXKmFfxpnkoIkmF/?name=Amazon_AWS_5.png" alt="Amazon_AWS_5.png" /></li>
+<li>In Okta, enter the Provider ARN that you copied in step 3 into the&nbsp;&nbsp;<strong>Identity Provider ARN (Amazon Resource Name)</strong>&nbsp;field, as shown below.<br /><img style="border: 0; padding: 0;" src="images/apps/Amazon_AWS_6.png" alt="Amazon_AWS_6.png" /></li>
+<li>In Okta, enable User Management for your app, and assign users. Specify the role as the role that you created in step 6, as shown below. If you are on Okta SSO or you do NOT want to enable User Management, go to step 10.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Amazon_AWS_5.png" alt="Amazon_AWS_5.png" /></li>
 <li>
 <p dir="ltr">Optionally, you can specify the region that your users sign in to. To specify a region, on the Okta Dashboard for the Amazon Web Services application, select the <strong>Sign On</strong> tab. Enter one of the values shown below in the&nbsp;<strong>Default Relay State&nbsp;</strong>field. Continue to Step 11.</p>
 <table class="auto" style="border-collapse: collapse;" border="1" cellspacing="5" cellpadding="5">
@@ -134,7 +134,7 @@ $(document).ready(function($) {
 </tbody>
 </table>
 </li>
-<li><span>If you are using the Okta SSO Edition or do not want to turn on User Management, copy the <strong>Role ARN</strong> from Amazon and paste it after the <strong>Identity provider ARN</strong> as comma separated value (For example, &lt;identityProviderARN&gt;,&lt;RoleARN&gt;) as shown below.&nbsp;<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/6aV556IVfxSiL0wSc8TlCkxUr/?name=AWS_1.png" alt="AWS_1.png" /><br /><img style="border: 0; padding: 0;" src="/attachments/token/DHfibUUXAdGTsg3fswqhTvNfL/?name=AWS_2.png" alt="AWS_2.png" /><br /><br /><span>Remember to add the Identity Provider to the <strong>Trusted Entities</strong> of the Role you are using, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/DIlypZlMAwS7gnSOTsECHijc1/?name=AWS_3.png" alt="AWS_3.png" /></span><br /></span></li>
+<li><span>If you are using the Okta SSO Edition or do not want to turn on User Management, copy the <strong>Role ARN</strong> from Amazon and paste it after the <strong>Identity provider ARN</strong> as comma separated value (For example, &lt;identityProviderARN&gt;,&lt;RoleARN&gt;) as shown below.&nbsp;<br /><br /><img style="border: 0; padding: 0;" src="images/apps/AWS_1.png" alt="AWS_1.png" /><br /><img style="border: 0; padding: 0;" src="images/apps/AWS_2.png" alt="AWS_2.png" /><br /><br /><span>Remember to add the Identity Provider to the <strong>Trusted Entities</strong> of the Role you are using, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/AWS_3.png" alt="AWS_3.png" /></span><br /></span></li>
 <li>Done!</li>
 </ol></div>
 </body>
