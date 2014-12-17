@@ -91,34 +91,59 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<h1>&nbsp;&nbsp;Configuring SAML 2.0 in BlueJeans</h1>
-
 <div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>Please sign-in to the Okta Admin app to have your organization specific variables generated for you. You might not be able to complete the setup without these generated variables.</strong></p>
+<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
 </div>
 <ol>
-<li>Sign in to BlueJeans &nbsp;at&nbsp;<a href="http://www.bluejeans.com" target="_blank">www.bluejeans.com</a>&nbsp;as a user with rights to edit SAML configuration.</li>
-<li>Select the&nbsp;<strong style="font-size: 14px;">Admin</strong>&nbsp;tab, and then the&nbsp;<strong style="font-size: 14px;">Security</strong>&nbsp;tab, as shown at the bottom of this page.</li>
-<li>Click the <strong>SAML Single Sign On</strong> button.</li>
 <li>
-<p>Download the following&nbsp;<strong>Certificate.&nbsp;</strong>&nbsp;Add it to the <strong>Certificate Path</strong> in Blue Jeans by selecting <strong>Browse</strong> and uploading it.</p>
-<kbd id="downloadCertificate">Sign in to the Okta Admin app to generate this variable.</kbd></li>
-<li>
-<p>Enter the following text for the <strong>Login URL</strong>.</p>
-<kbd id="signOnUrl">Sign in to the Okta Admin app to generate this variable.</kbd></li>
-<li>
-<p>Modify the following text for the <strong>Password Change URL</strong>, where &lt;company name&gt; is the name of your company. For example, if your company is named <em>acme</em>, enter <em><a style="text-decoration: none; color: black;" onclick="return false;">https://acme.bluejeans.com</a></em>.</p>
-<kbd>https://&lt;company name&gt;.bluejeans.com</kbd></li>
-<li>
-<p>Modify the following text for the <strong>Logout URL</strong>, where &lt;company name&gt; is the name of your company.</p>
-<kbd><span>https://&lt;company name&gt;.bluejeans.com</span></kbd></li>
-<li>Fill in the <strong>User ID</strong> and<strong> Email</strong>&nbsp;fields with the correct information for your organization.<br /><br /><strong>Note:</strong> If the User ID field is not visible, <strong>uncheck</strong> <em>Pick User ID from &lt;saml2:NameID&gt; element</em>. This box is checked in the screenshot below.</li>
-<li>Copy the information in the <strong>RelayState</strong> field in BlueJeans. In Okta, paste this information into the <strong>Default Relay State</strong> field, as shown below.<br /><img style="border: 0; padding: 0;" src="images/apps/bluejeans3.jpg" alt="bluejeans3.jpg" /></li>
-<li>
-<p>Click <strong>Save Changes</strong>.</p>
+<p>The root folder of the Voyager application that is installed on the Voyager web server is shown below.&nbsp;<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/VV3h2IilOsc4ydlfqfW4hJ4os/?name=Yardi_1.png" alt="Yardi_1.png" /></p>
 </li>
-<li>Done!</li>
-</ol><img style="border: 0; padding: 20px;" src="images/apps/bluejeans8.png" alt="BlueJeans Admin Console" />
-</div>
+<li>In that folder, there is an application called&nbsp;<strong>VoyagerConfig.exe</strong>. Open that application to configure Single Sign-On (SSO). The screen shown below opens.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/aMHcFlF2yfbeXkVkBWFVsRetY/?name=Yardi_2.png" alt="Yardi_2.png" /></li>
+<li>Enter all the following field settings.<ol>
+<li>
+<p><strong>Login Version</strong></p>
+<kbd>SSO</kbd></li>
+<li>
+<p><strong>SSOType</strong></p>
+<kbd>SAML2</kbd></li>
+<li>
+<p><strong>IP ID</strong></p>
+<kbd id="issuer">Sign into the Okta Admin dashboard to generate this value. </kbd></li>
+<li>
+<p><strong>IP Sign Auth Req</strong></p>
+<kbd>&lt;unchecked&gt;</kbd></li>
+<li>
+<p><strong>IP Sign Thumb</strong></p>
+<kbd id="certFingerPrint">Sign into the Okta Admin dashboard to generate this value. </kbd></li>
+<li>
+<p><strong>IP LoginUrl</strong></p>
+<kbd id="signOnUrl"> Sign into the Okta Admin dashboard to generate this value.</kbd></li>
+<li>
+<p><strong>SP ID</strong></p>
+<kbd>&lt;yourBaseURL&gt;/trust</kbd>
+<p>Substitute your base Voyager URL for <em>&lt;yourBaseURL&gt;</em>.</p>
+</li>
+<li>
+<p><strong>SP Assertion Url</strong></p>
+<kbd>&lt;yourBaseURL&gt;/pages/LoginSSO.aspx </kbd>
+<p>Substitute your base Voyager URL for <em>&lt;yourBaseURL&gt;</em>.</p>
+</li>
+<li>
+<p><strong><strong>Issuer&nbsp;</strong>Cert Revocation Mode</strong></p>
+<kbd>Online</kbd></li>
+<li>
+<p><strong>Issuer Certif Validation Mode</strong></p>
+<kbd>none</kbd></li>
+<li>
+<p><strong>Claim Type Name</strong></p>
+<kbd>username</kbd></li>
+</ol></li>
+<li>
+<p>Verify that the <strong>Username</strong> values in Yardi Voyager, shown below, match the usernames in Okta on the <strong>People</strong> tab for the Yardi Voyager application.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/qRNfnBBB2ZvnaSuH1alOrPJZa/?name=Yardi_3.png" alt="Yardi_3.png" /></p>
+</li>
+<li>
+<p>Done!<br /><br /><strong>Note:</strong> SP-initiated SSO is support. IdP-iniated SSO and Just In Time (JIT) provisioning are not supported.</p>
+</li>
+</ol></div>
 </body>
 </html>

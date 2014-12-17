@@ -91,34 +91,24 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<h1>&nbsp;&nbsp;Configuring SAML 2.0 in BlueJeans</h1>
-
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>Please sign-in to the Okta Admin app to have your organization specific variables generated for you. You might not be able to complete the setup without these generated variables.</strong></p>
-</div>
-<ol>
-<li>Sign in to BlueJeans &nbsp;at&nbsp;<a href="http://www.bluejeans.com" target="_blank">www.bluejeans.com</a>&nbsp;as a user with rights to edit SAML configuration.</li>
-<li>Select the&nbsp;<strong style="font-size: 14px;">Admin</strong>&nbsp;tab, and then the&nbsp;<strong style="font-size: 14px;">Security</strong>&nbsp;tab, as shown at the bottom of this page.</li>
-<li>Click the <strong>SAML Single Sign On</strong> button.</li>
-<li>
-<p>Download the following&nbsp;<strong>Certificate.&nbsp;</strong>&nbsp;Add it to the <strong>Certificate Path</strong> in Blue Jeans by selecting <strong>Browse</strong> and uploading it.</p>
-<kbd id="downloadCertificate">Sign in to the Okta Admin app to generate this variable.</kbd></li>
-<li>
-<p>Enter the following text for the <strong>Login URL</strong>.</p>
-<kbd id="signOnUrl">Sign in to the Okta Admin app to generate this variable.</kbd></li>
-<li>
-<p>Modify the following text for the <strong>Password Change URL</strong>, where &lt;company name&gt; is the name of your company. For example, if your company is named <em>acme</em>, enter <em><a style="text-decoration: none; color: black;" onclick="return false;">https://acme.bluejeans.com</a></em>.</p>
-<kbd>https://&lt;company name&gt;.bluejeans.com</kbd></li>
-<li>
-<p>Modify the following text for the <strong>Logout URL</strong>, where &lt;company name&gt; is the name of your company.</p>
-<kbd><span>https://&lt;company name&gt;.bluejeans.com</span></kbd></li>
-<li>Fill in the <strong>User ID</strong> and<strong> Email</strong>&nbsp;fields with the correct information for your organization.<br /><br /><strong>Note:</strong> If the User ID field is not visible, <strong>uncheck</strong> <em>Pick User ID from &lt;saml2:NameID&gt; element</em>. This box is checked in the screenshot below.</li>
-<li>Copy the information in the <strong>RelayState</strong> field in BlueJeans. In Okta, paste this information into the <strong>Default Relay State</strong> field, as shown below.<br /><img style="border: 0; padding: 0;" src="images/apps/bluejeans3.jpg" alt="bluejeans3.jpg" /></li>
-<li>
-<p>Click <strong>Save Changes</strong>.</p>
+<p>When an application only supports an SP-initiated flow, you can simulate an IDP-initiated flow with the Bookmark app.&nbsp; With the Bookmark application, the end user clicks a chicklet in Okta and is signed into the application. Internally, the chicklet calls Bookmark that goes to the URL for your domain in the app, and then calls Okta. You can customize the chicklet for Bookmark to display the logo for the application with the SP-initiated flow, so the end user experience is not different from logging on to any other application.</p>
+<h2>Using the Bookmark Application</h2>
+<ol class="bullets">
+<li>First, set up the application with an SP-initiated flow. This creates a chicklet. Be sure to hide this chicklet.<br /><br />To hide the chiclet, select the <strong>General</strong> tab in the application. Then, click the <strong>Edit</strong> button. Check both options in the <strong>Application Visibility</strong> section, shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/iC98FWDrK5vfehrudeBd3BT4q/?name=Hide_Chicklet.png" alt="Hide_Chicklet.png" /></li>
+<li>Then, add a Bookmark app. Enter the name of the app and the URL for your domain that was determined when you created the SP-initiated flow app, as shown below.<br /><br /><strong>Important:</strong> <strong>Do not hide the Bookmark app.</strong> Leave both Application Visibility boxes unchecked, as shown below.<br /><br />
+<p><img style="border: 0; padding: 0;" src="/attachments/token/zgq24bznbzz6mes/?name=Bookmark_App_1.jpg" alt="Bookmark_App_1.jpg" /></p>
 </li>
-<li>Done!</li>
-</ol><img style="border: 0; padding: 20px;" src="images/apps/bluejeans8.png" alt="BlueJeans Admin Console" />
+<li value="3">Continue to the next screen and assign the app, as desired.</li>
+</ol>
+<h2>Changing the Chicklet Appearance</h2>
+<p>To make the chicklet for the Bookmark app look like the app that is called, you can add the logo and description of that app to the Bookmark app.</p>
+<ol>
+<li>After assigning the app, the screen shown below displays. Move the cursor to the position indicated by the red arrow. An edit button with a pencil icon appears. Click this icon to open the logo edit screen.
+<p><img src="/attachments/token/gbffbculnqwfo0n/?name=Bookmark_App_2.jpg" alt="Bookmark_App_2.jpg" />&nbsp; &nbsp; &nbsp; &nbsp;<img style="border: 0; padding: 0;" src="/attachments/token/644q4r65chrn7ia/?name=Bookmark_App_3.jpg" alt="Bookmark_App_3.jpg" /></p>
+</li>
+<li value="2">The <strong>Edit Logo</strong> window opens. Change the logo as desired to make it clear to the end users which app is opened.</li>
+</ol>
+<p><img style="border: 0; padding: 0;" src="/attachments/token/mijrxj60l3rcxul/?name=Bookmark_App_4.jpg" alt="Bookmark_App_4.jpg" /></p>
 </div>
 </body>
 </html>

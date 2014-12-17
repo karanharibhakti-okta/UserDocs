@@ -91,34 +91,24 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<h1>&nbsp;&nbsp;Configuring SAML 2.0 in BlueJeans</h1>
-
 <div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>Please sign-in to the Okta Admin app to have your organization specific variables generated for you. You might not be able to complete the setup without these generated variables.</strong></p>
+<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
 </div>
 <ol>
-<li>Sign in to BlueJeans &nbsp;at&nbsp;<a href="http://www.bluejeans.com" target="_blank">www.bluejeans.com</a>&nbsp;as a user with rights to edit SAML configuration.</li>
-<li>Select the&nbsp;<strong style="font-size: 14px;">Admin</strong>&nbsp;tab, and then the&nbsp;<strong style="font-size: 14px;">Security</strong>&nbsp;tab, as shown at the bottom of this page.</li>
-<li>Click the <strong>SAML Single Sign On</strong> button.</li>
 <li>
-<p>Download the following&nbsp;<strong>Certificate.&nbsp;</strong>&nbsp;Add it to the <strong>Certificate Path</strong> in Blue Jeans by selecting <strong>Browse</strong> and uploading it.</p>
-<kbd id="downloadCertificate">Sign in to the Okta Admin app to generate this variable.</kbd></li>
+<p dir="ltr">Copy the following <strong style="background-color: initial;">IDP Metadata</strong> into a text file. Save it with the file name <em style="background-color: initial;">metadata.xml</em>.</p>
+<textarea id="idpMetadata" style="margin-top: 0px; margin-bottom: 0px; height: 266px; width: 700px;">Sign into the Okta Admin dashboard to generate this value.</textarea></li>
 <li>
-<p>Enter the following text for the <strong>Login URL</strong>.</p>
-<kbd id="signOnUrl">Sign in to the Okta Admin app to generate this variable.</kbd></li>
+<p>Send a message to Jostle support at support@jostle.me and request SAML support. Include the following two items in the message.</p>
+<ol>
+<li>Attach the metadata.xml file you saved in step 1.</li>
 <li>
-<p>Modify the following text for the <strong>Password Change URL</strong>, where &lt;company name&gt; is the name of your company. For example, if your company is named <em>acme</em>, enter <em><a style="text-decoration: none; color: black;" onclick="return false;">https://acme.bluejeans.com</a></em>.</p>
-<kbd>https://&lt;company name&gt;.bluejeans.com</kbd></li>
-<li>
-<p>Modify the following text for the <strong>Logout URL</strong>, where &lt;company name&gt; is the name of your company.</p>
-<kbd><span>https://&lt;company name&gt;.bluejeans.com</span></kbd></li>
-<li>Fill in the <strong>User ID</strong> and<strong> Email</strong>&nbsp;fields with the correct information for your organization.<br /><br /><strong>Note:</strong> If the User ID field is not visible, <strong>uncheck</strong> <em>Pick User ID from &lt;saml2:NameID&gt; element</em>. This box is checked in the screenshot below.</li>
-<li>Copy the information in the <strong>RelayState</strong> field in BlueJeans. In Okta, paste this information into the <strong>Default Relay State</strong> field, as shown below.<br /><img style="border: 0; padding: 0;" src="images/apps/bluejeans3.jpg" alt="bluejeans3.jpg" /></li>
-<li>
-<p>Click <strong>Save Changes</strong>.</p>
-</li>
-<li>Done!</li>
-</ol><img style="border: 0; padding: 20px;" src="images/apps/bluejeans8.png" alt="BlueJeans Admin Console" />
-</div>
+<p>Copy and paste the following text into the message and label it&nbsp;<strong>IDP Issuer/Entity ID</strong>.</p>
+<kbd id="issuer">Sign in to the Okta Admin app to generate this variable.</kbd></li>
+</ol></li>
+<li><span data-mce-mark="1"><span data-mce-mark="1"><span data-mce-mark="1"><span data-mce-mark="1">After Jostle confirms that SAML is enabled, sign in to Jostle as an administrator.</span></span></span></span></li>
+<li><span data-mce-mark="1"><span data-mce-mark="1"><span data-mce-mark="1"><span data-mce-mark="1">Follow the instructions in the Jostle document <a href="http://forum.jostle.me/entries/56694916-Converting-Password-Authenticated-Users-to-SSO" target="_blank">Converting Password Authenticated Users to SSO</a> using either or both methods described in that document.</span></span></span></span></li>
+<li><span data-mce-mark="1"><span data-mce-mark="1"><span data-mce-mark="1"><span data-mce-mark="1">Done!<br /><br /><strong>Note:</strong> Jostle supports both IdP-initiated and SP-initiated flows. Just in Time (JIT) provisioning is not supported.</span></span></span></span></li>
+</ol></div>
 </body>
 </html>

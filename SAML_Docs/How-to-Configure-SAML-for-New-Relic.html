@@ -91,34 +91,31 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<h1>&nbsp;&nbsp;Configuring SAML 2.0 in BlueJeans</h1>
-
 <div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>Please sign-in to the Okta Admin app to have your organization specific variables generated for you. You might not be able to complete the setup without these generated variables.</strong></p>
+<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
 </div>
+<h2>Before you begin</h2>
+<div class="okta-callout okta-warning">
+<p><strong>Read this before you enable SAML</strong></p>
+<p>Enabling SAML will affect all users who use this application, which means that users will not be able to sign-in through their regular log-in page. They will only be able to access the app through the Okta service.</p>
+<p><strong>Backup URL</strong></p>
+<p>New Relic does not provide backup log-in url where users can sign-in using their normal username and password. You can call New Relic support to turn off SAML, if necessary.</p>
+</div>
+<p>Sign in to <strong>New Relic</strong> as a user with rights to edit SAML configuration.</p>
 <ol>
-<li>Sign in to BlueJeans &nbsp;at&nbsp;<a href="http://www.bluejeans.com" target="_blank">www.bluejeans.com</a>&nbsp;as a user with rights to edit SAML configuration.</li>
-<li>Select the&nbsp;<strong style="font-size: 14px;">Admin</strong>&nbsp;tab, and then the&nbsp;<strong style="font-size: 14px;">Security</strong>&nbsp;tab, as shown at the bottom of this page.</li>
-<li>Click the <strong>SAML Single Sign On</strong> button.</li>
+<li>Go to <strong>Account Settings</strong>.<strong><br /><img src="/attachments/token/1G2mGjtEEm0HYQ70gp3eTYSEE/?name=Screen+Shot+2014-03-21+at+11.24.00+AM+%282%29.png" alt="Screen_Shot_2014-03-21_at_11.24.00_AM__2_.png" /><br /></strong></li>
+<li>Next, go to<strong> Security and authentication &gt; Sign sign on &gt; Configure</strong>.<strong><br /><img src="/attachments/token/rVDaEID4tINuOWQJYRijMMJDd/?name=Screen+Shot+2014-03-21+at+11.23.32+AM.png" alt="Screen_Shot_2014-03-21_at_11.23.32_AM.png" /><br /></strong></li>
+<li>Download and upload the&nbsp;following&nbsp;Identity Provider Certificate in the<strong> Upload New Certificate</strong> field:<strong><br /><br /></strong><kbd id="downloadCertificate"> Sign in to the Okta Admin app to have this variable generated for you</kbd></li>
 <li>
-<p>Download the following&nbsp;<strong>Certificate.&nbsp;</strong>&nbsp;Add it to the <strong>Certificate Path</strong> in Blue Jeans by selecting <strong>Browse</strong> and uploading it.</p>
-<kbd id="downloadCertificate">Sign in to the Okta Admin app to generate this variable.</kbd></li>
+<p>Copy and paste the following into the<strong> Remote Login URL </strong>field:<strong>&nbsp;</strong></p>
+<kbd id="signOnUrl"> Sign in to the Okta Admin app to have this variable generated for you </kbd></li>
 <li>
-<p>Enter the following text for the <strong>Login URL</strong>.</p>
-<kbd id="signOnUrl">Sign in to the Okta Admin app to generate this variable.</kbd></li>
-<li>
-<p>Modify the following text for the <strong>Password Change URL</strong>, where &lt;company name&gt; is the name of your company. For example, if your company is named <em>acme</em>, enter <em><a style="text-decoration: none; color: black;" onclick="return false;">https://acme.bluejeans.com</a></em>.</p>
-<kbd>https://&lt;company name&gt;.bluejeans.com</kbd></li>
-<li>
-<p>Modify the following text for the <strong>Logout URL</strong>, where &lt;company name&gt; is the name of your company.</p>
-<kbd><span>https://&lt;company name&gt;.bluejeans.com</span></kbd></li>
-<li>Fill in the <strong>User ID</strong> and<strong> Email</strong>&nbsp;fields with the correct information for your organization.<br /><br /><strong>Note:</strong> If the User ID field is not visible, <strong>uncheck</strong> <em>Pick User ID from &lt;saml2:NameID&gt; element</em>. This box is checked in the screenshot below.</li>
-<li>Copy the information in the <strong>RelayState</strong> field in BlueJeans. In Okta, paste this information into the <strong>Default Relay State</strong> field, as shown below.<br /><img style="border: 0; padding: 0;" src="images/apps/bluejeans3.jpg" alt="bluejeans3.jpg" /></li>
-<li>
-<p>Click <strong>Save Changes</strong>.</p>
+<p>In New Relic, copy the <strong>Assertion Consumer URL </strong>and paste it into the<strong> Login URL field </strong>in Okta Configuration, under the <strong>General</strong> tab.<br /><strong><img src="/attachments/token/Vo0erAAkFWCCCz6HVZSj92cPx/?name=Screen+Shot+2014-03-21+at+11.54.01+AM.png" alt="Screen_Shot_2014-03-21_at_11.54.01_AM.png" /><br /><br /></strong></p>
 </li>
+<li>Save the Configuration in both Okta and New Relic.</li>
+<li>Click <strong>Test SAML Login</strong> in New Relic to test your configuration.</li>
+<li>After the test passes, click <strong>Enable SAML Login</strong> in New Relic.<br /><img src="/attachments/token/aQBduvnToYmE5zAja2Xn0zbd9/?name=Screen+Shot+2014-03-21+at+11.59.10+AM.png" alt="Screen_Shot_2014-03-21_at_11.59.10_AM.png" /></li>
 <li>Done!</li>
-</ol><img style="border: 0; padding: 20px;" src="images/apps/bluejeans8.png" alt="BlueJeans Admin Console" />
-</div>
+</ol></div>
 </body>
 </html>

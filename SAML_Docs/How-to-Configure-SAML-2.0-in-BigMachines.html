@@ -91,34 +91,56 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<h1>&nbsp;&nbsp;Configuring SAML 2.0 in BlueJeans</h1>
-
 <div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>Please sign-in to the Okta Admin app to have your organization specific variables generated for you. You might not be able to complete the setup without these generated variables.</strong></p>
+<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
 </div>
+<h2>Sign in to BigMachines</h2>
+<p class="margin-btm-15 indent-10">First, contact BigMachines to enable Single Sign-on for your site. After it's been enabled, navigate to the&nbsp;<strong>Single Sign On Setup</strong>&nbsp;page: sign in to your BigMachines admin account, select&nbsp;<strong>Admin</strong>&nbsp;from the top left, and select&nbsp;<strong>Single Sign-On</strong>&nbsp;under&nbsp;<strong>User and Company Administration</strong>&nbsp;on the right-hand side of the page.</p>
+<p>On the&nbsp;<strong>Single Sign On Setup</strong>&nbsp;page:</p>
 <ol>
-<li>Sign in to BlueJeans &nbsp;at&nbsp;<a href="http://www.bluejeans.com" target="_blank">www.bluejeans.com</a>&nbsp;as a user with rights to edit SAML configuration.</li>
-<li>Select the&nbsp;<strong style="font-size: 14px;">Admin</strong>&nbsp;tab, and then the&nbsp;<strong style="font-size: 14px;">Security</strong>&nbsp;tab, as shown at the bottom of this page.</li>
-<li>Click the <strong>SAML Single Sign On</strong> button.</li>
 <li>
-<p>Download the following&nbsp;<strong>Certificate.&nbsp;</strong>&nbsp;Add it to the <strong>Certificate Path</strong> in Blue Jeans by selecting <strong>Browse</strong> and uploading it.</p>
-<kbd id="downloadCertificate">Sign in to the Okta Admin app to generate this variable.</kbd></li>
-<li>
-<p>Enter the following text for the <strong>Login URL</strong>.</p>
-<kbd id="signOnUrl">Sign in to the Okta Admin app to generate this variable.</kbd></li>
-<li>
-<p>Modify the following text for the <strong>Password Change URL</strong>, where &lt;company name&gt; is the name of your company. For example, if your company is named <em>acme</em>, enter <em><a style="text-decoration: none; color: black;" onclick="return false;">https://acme.bluejeans.com</a></em>.</p>
-<kbd>https://&lt;company name&gt;.bluejeans.com</kbd></li>
-<li>
-<p>Modify the following text for the <strong>Logout URL</strong>, where &lt;company name&gt; is the name of your company.</p>
-<kbd><span>https://&lt;company name&gt;.bluejeans.com</span></kbd></li>
-<li>Fill in the <strong>User ID</strong> and<strong> Email</strong>&nbsp;fields with the correct information for your organization.<br /><br /><strong>Note:</strong> If the User ID field is not visible, <strong>uncheck</strong> <em>Pick User ID from &lt;saml2:NameID&gt; element</em>. This box is checked in the screenshot below.</li>
-<li>Copy the information in the <strong>RelayState</strong> field in BlueJeans. In Okta, paste this information into the <strong>Default Relay State</strong> field, as shown below.<br /><img style="border: 0; padding: 0;" src="images/apps/bluejeans3.jpg" alt="bluejeans3.jpg" /></li>
-<li>
-<p>Click <strong>Save Changes</strong>.</p>
+<p>Set&nbsp;<strong>Single Sign On Method</strong>&nbsp;to&nbsp;<strong>Federated Authentication</strong>.&nbsp;</p>
 </li>
-<li>Done!</li>
-</ol><img style="border: 0; padding: 20px;" src="images/apps/bluejeans8.png" alt="BlueJeans Admin Console" />
+<li>
+<p>Enter your&nbsp;<strong>BigMachines Issuer URL</strong>. It should be in the following format:<strong>https://customername.bigmachines.com</strong>.</p>
+</li>
+<li>
+<p>Download your BigMachines verification certificate and then upload it in the <strong>Verification certificate</strong> section</p>
+<kbd id="downloadCertificate">Sign in to the Okta Admin app to have this variable generated for you</kbd></li>
+<li>
+<p>Leave&nbsp;<strong>SAML Requested Name Identifier Format</strong>&nbsp;blank.</p>
+</li>
+<li>
+<p>Copy and paste the following into&nbsp;<strong>SAML Identity Provider URL</strong>:</p>
+<kbd id="signOnUrl">Sign in to the Okta Admin app to have this variable generated for you</kbd></li>
+<li>
+<p>Copy and paste the following into&nbsp;<strong>Logout Redirect URL</strong>:</p>
+<kbd id="signOutUrl">Sign in to the Okta Admin app to have this variable generated for you</kbd></li>
+<li>
+<p>Leave the&nbsp;<strong>SAML User ID Type</strong>&nbsp;and&nbsp;<strong>SAML User ID Location</strong>&nbsp;as the defaults</p>
+</li>
+<li class="important">
+<p>Press&nbsp;<strong>Apply</strong></p>
+</li>
+</ol>
+<p><img src="/attachments/token/je9kfai3phsmiye/?name=bigmachines-1.png" alt="bigmachines-1.png" width="763" height="510" /></p>
+<h2>Enable Single Sign-On for Users</h2>
+<p>You must also enable single sign-on for your users:</p>
+<p>From the Admin &gt; Users page, select a Login from the left-hand column</p>
+<ol>
+<li>
+<p>Set&nbsp;<strong>Enable for SSO</strong>&nbsp;to&nbsp;<strong>Enabled for SSO</strong>&nbsp;or&nbsp;<strong>SSO Only</strong>.&nbsp;</p>
+</li>
+<li>
+<p>Leave&nbsp;<strong>External SSO ID</strong>&nbsp;blank.</p>
+</li>
+</ol>
+<p><img src="/attachments/token/dyrp5b0jqqonig1/?name=bigmachines-2.png" alt="bigmachines-2.png" width="750" height="436" /></p>
+<h2>Done!</h2>
+<div class="instructions-text-wide">
+<p>Your users are ready to single sign-on to BigMachines!</p>
+<p>You can assign BigMachines access to users from their user profile.</p>
+</div>
 </div>
 </body>
 </html>

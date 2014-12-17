@@ -91,34 +91,23 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<h1>&nbsp;&nbsp;Configuring SAML 2.0 in BlueJeans</h1>
-
 <div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>Please sign-in to the Okta Admin app to have your organization specific variables generated for you. You might not be able to complete the setup without these generated variables.</strong></p>
+<p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
 </div>
 <ol>
-<li>Sign in to BlueJeans &nbsp;at&nbsp;<a href="http://www.bluejeans.com" target="_blank">www.bluejeans.com</a>&nbsp;as a user with rights to edit SAML configuration.</li>
-<li>Select the&nbsp;<strong style="font-size: 14px;">Admin</strong>&nbsp;tab, and then the&nbsp;<strong style="font-size: 14px;">Security</strong>&nbsp;tab, as shown at the bottom of this page.</li>
-<li>Click the <strong>SAML Single Sign On</strong> button.</li>
+<li>Send an email message to Biba support at <strong>saml@biba.com</strong> and request that they enable SAML for your organization.</li>
 <li>
-<p>Download the following&nbsp;<strong>Certificate.&nbsp;</strong>&nbsp;Add it to the <strong>Certificate Path</strong> in Blue Jeans by selecting <strong>Browse</strong> and uploading it.</p>
-<kbd id="downloadCertificate">Sign in to the Okta Admin app to generate this variable.</kbd></li>
+<p>Copy and save the following IdP Metadata show below with the filename <strong>metadata.xml</strong>.</p>
+<textarea id="idpMetadata" style="margin: 0px; height: 214px; width: 799px;">Sign into the Okta Admin dashboard to generate this value.</textarea></li>
 <li>
-<p>Enter the following text for the <strong>Login URL</strong>.</p>
-<kbd id="signOnUrl">Sign in to the Okta Admin app to generate this variable.</kbd></li>
-<li>
-<p>Modify the following text for the <strong>Password Change URL</strong>, where &lt;company name&gt; is the name of your company. For example, if your company is named <em>acme</em>, enter <em><a style="text-decoration: none; color: black;" onclick="return false;">https://acme.bluejeans.com</a></em>.</p>
-<kbd>https://&lt;company name&gt;.bluejeans.com</kbd></li>
-<li>
-<p>Modify the following text for the <strong>Logout URL</strong>, where &lt;company name&gt; is the name of your company.</p>
-<kbd><span>https://&lt;company name&gt;.bluejeans.com</span></kbd></li>
-<li>Fill in the <strong>User ID</strong> and<strong> Email</strong>&nbsp;fields with the correct information for your organization.<br /><br /><strong>Note:</strong> If the User ID field is not visible, <strong>uncheck</strong> <em>Pick User ID from &lt;saml2:NameID&gt; element</em>. This box is checked in the screenshot below.</li>
-<li>Copy the information in the <strong>RelayState</strong> field in BlueJeans. In Okta, paste this information into the <strong>Default Relay State</strong> field, as shown below.<br /><img style="border: 0; padding: 0;" src="images/apps/bluejeans3.jpg" alt="bluejeans3.jpg" /></li>
-<li>
-<p>Click <strong>Save Changes</strong>.</p>
+<p>Attach the file you saved in step 2 to the email message.</p>
 </li>
-<li>Done!</li>
-</ol><img style="border: 0; padding: 20px;" src="images/apps/bluejeans8.png" alt="BlueJeans Admin Console" />
+<li><span style="font-size: 14px; background-color: initial;">Biba will process your request&nbsp;and send you your <strong>SSO URL</strong>. (https://www.biba.com/auth/acme_okta_com for example).</span></li>
+<li><span style="font-size: 14px; background-color: initial;">In Okta, select the <strong>General</strong> tab for the Biba &nbsp;app, as shown below.<br /><img src="/attachments/token/HIZF6ZRgJJ9OpukkpO7PvVYjx/?name=Untitled.png" alt="Untitled.png" /><br /></span></li>
+<li><span style="font-size: 14px; background-color: initial;">Paste the value for the SSO URL that you just received in step 4 from Biba, to the <strong>SSO URL</strong> field as shown above.</span></li>
+<li><span style="font-size: 14px; background-color: initial;">Done!<br /><br /><strong>Note:</strong> IdP-initiated and SP-initiated flows are supported. For an SP-initiated flow, use the link:&nbsp;<strong><a style="text-decoration: none; color: black;" onclick="return false;">https://www.biba.com/auth/&lt;yourSubDomain&gt;.okta.com</a>.&nbsp;</strong>Just In Time (JIT) provisioning is not supported.</span></li>
+</ol>
+<h2>&nbsp;</h2>
 </div>
 </body>
 </html>

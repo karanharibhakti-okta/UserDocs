@@ -1,0 +1,188 @@
+<html>
+<head>
+<link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript" />-->
+<script type="text/javascript">
+try{Typekit.load();}catch(e){}
+</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<title>Setup SSO</title>
+
+<!-- <script> src=”resources/scripts/getAppValues.js” ></script> -->
+
+<script>
+function processData(data) {
+  $('#signOnUrl').html(data["signOnUrl"]);
+  $('#signOutUrl').html(data["signOutUrl"]);
+  $('#changePasswordUrl').html(data["changePasswordUrl"]);
+  $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
+   $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
+  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#x509CertText').html(data["x509CertText"]);
+  $('#x509CertTextPem').html(data["x509CertTextPem"]);
+  $('#x509CertTextPem').css("white-space", "pre");
+  $('#certFingerPrint').html(data["certFingerPrint"]);
+  $('#validFrom').html(data["validFrom"]);
+  $('#validTo').html(data["validTo"]);
+  $('#issuer').html(data["issuer"]);
+$('#metadataUrl').html(data["signOnUrl"]);
+ $('#errorUrl').html(data["signOutUrl"]);
+ $('#timeoutUrl').html(data["signOutUrl"]);
+ $('#delAuthUrl').html(data["delAuthUrl"]);
+ $('#saml11SignOnUrl').html(data["saml11SignOnUrl"]);    
+}
+function getURLParameter(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+}
+$(document).ready(function($) {
+  // This condition is to ensure that the ajax api code is executed only on the intended pages
+  if ($('#loginAdminApp').length > 0) {
+    var app = getURLParameter('app');
+    var subdomain = getURLParameter('subdomain');
+    var instanceId = getURLParameter('instanceId');
+    var baseAdminUrl = getURLParameter('baseAdminUrl');
+    var url;
+    if ((subdomain == null && baseAdminUrl == null) || app == null || instanceId == null) {
+      $('#loginAdminApp').show();
+    } else {
+      var endpoint = '/api/internal/v1/setup/help/saml/' + app + '/' + instanceId + '?callback=processData';
+      if (baseAdminUrl) {
+        url = baseAdminUrl + endpoint;
+      } else if (subdomain) {
+        url = 'https://' + subdomain + '.okta-admin.com' + endpoint;
+      }
+      $.ajax({
+        type: 'GET',
+        url: url,
+        jsonp: false,
+        jsonpCallback: 'processData',
+        dataType: 'jsonp',
+        success: function(json) {
+          $('#loginAdminApp').hide();
+        },
+        error: function(e,jqXHR,ajaxSettings,thrownError) {
+          $('#loginAdminApp').show();
+        },
+        timeout: 3000
+      });
+    }
+  }
+
+  
+  $('#mailto').on('click', function() {
+      var to = "DedicatedSAMLComplaintLine@okta.com"; // I am assuming this will always be same!
+      var body = "Dear Okta,%0D%0A%0D%0AI used your SAML setup instruction. I want you to know…%0D%0AI completed the SAML setup?%0D%0AI found errors in this doc?%0D%0A%0D%0AHere’s what I noticed:";
+      var subject = "Update Doc:" + $('h1').text();       
+      var mailto = "mailto:" + to + "?subject=" + subject + "&body=" + body;
+      window.location.href = mailto;
+    });
+
+});
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="header clearfix">
+        <div class="logo-container">
+            <img src="resources/css/okta-logo-white.png" alt="Okta" />
+        </div>
+    </div>
+
+<div class="okta-instructions">
+<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
+<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+</div>
+<ol class="bullets"><ol class="bullets">
+<li>
+<p>Ask your ServiceNow representative to enable&nbsp;<strong>SAML 2.0</strong>&nbsp;in your instance.</p>
+</li>
+<li>
+<p>As the system admin, go to the&nbsp;<strong>SAML 2 Single Sign-on</strong>&nbsp;section in ServiceNow.</p>
+</li>
+<li>
+<p>Click on the&nbsp;<strong>Properties</strong>&nbsp;section. Refer to the following screenshot for steps 4 and 5.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/zp64wEDy8EHCq0aNA2SDrjW9h/?name=Servicenow_v2_1.png" alt="Servicenow_v2_1.png" /></p>
+</li>
+<li>
+<p>Enter the following values in the&nbsp;<strong>SAML 2.0 Single Sign-on properties</strong>&nbsp;section.&nbsp;</p>
+<ul>
+<li>
+<p><strong>Enable external authentication</strong><kbd class="dashed-kbd">Yes</kbd></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Enter the following values in the&nbsp;<strong>Identity Provider properties</strong>&nbsp;section. Leave the rest as defaults.</p>
+<ul>
+<li><strong><span data-mce-mark="1">The Identity Provider URL which will issue the SAML2 security token with user info.</span><br /><br /></strong>Take the value below. Remove&nbsp;<span data-mce-mark="1"><em>http://www.okta.com/</em> from the left of the expression. Enter the remaining characters.<br />Example: If the value below is&nbsp;<span data-mce-mark="1"><em>http://www.okta.com/k2k4m91fUADSXDTSBBDL</em>, enter&nbsp;<span data-mce-mark="1"><em>k2k4m91fUADSXDTSBBDL</em>.</span></span></span>
+<p><kbd id="issuer">Sign into the Okta Admin dashboard to generate this value.</kbd></p>
+</li>
+<li><strong>The base URL to the Identity Provider's AuthnRequest service. </strong>The AuthnRequest will be posted to this URL as the SAMLRequest parameter.<strong><br /></strong>
+<p><kbd id="signOnUrl">Sign into the Okta Admin dashboard to generate this value.</kbd></p>
+</li>
+<li>
+<p><strong>The base URL to the Identity Provider's SingleLogoutRequest service. </strong>The LogoutRequest will be posted to this URL as the SAMLRequest parameter.<br /><kbd id="signOutUrl"><span data-mce-mark="1">Sign into the Okta Admin dashboard to generate this value.</span></kbd></p>
+</li>
+<li>Leave <strong>Sign LogoutRequest</strong> unchecked.</li>
+<li>
+<p><strong>When SAML 2.0 single sign-on fails because the session is not authenticated, or this is the first login, redirect to this URL. </strong>This is the base URL where the initial SAML 2.0 AuthnRequest is sent using the SAMLRequest parameter.<kbd id="metadataUrl">Sign into the Okta Admin dashboard to generate this value.</kbd></p>
+</li>
+<li>Enter the following <strong>protocol binding.</strong>
+<p><kbd>urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect</kbd></p>
+</li>
+<li><span style="background-color: initial;" data-mce-mark="1">Leave&nbsp;</span><strong style="background-color: initial;">Sign AuthnRequest</strong> unchecked.</li>
+<li>URL to redirect users after logout, typically back to the portal that enabled the SSO.
+<p><br /><kbd>Enter the user login page for ServiceNow; for example, <strong>https://acme.service-now.com</strong>.</kbd></p>
+</li>
+</ul>
+</li>
+<li>Enter the following values in the&nbsp;<strong>Service Provider (Service-Now) properties</strong>&nbsp;section. Leave the rest as defaults. Refer to the following screenshot for step 6.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/GSTyPdvqnugCBZK7stlhFXtpt/?name=Servicenow_v2_2.png" alt="Servicenow_v2_2.png" /><br />
+<ul>
+<li><strong>The URL to the Service-now instance homepage.</strong>
+<p><kbd>Enter your homepage URL; for example, <strong>https://acme.service-now.com/navpage.do</strong>.</kbd></p>
+</li>
+<li><strong>The entity identification, or the issuer.<br /><br /></strong>
+<p><kbd>Enter the The Identity Provider URL from the first bullet in step 5, above.</kbd></p>
+</li>
+<li><strong>The audience uri that accepts the SAML2 token.</strong>
+<p><kbd>Enter the user login page for ServiceNow; for example, <strong>https://acme.service-now.com</strong>.</kbd></p>
+</li>
+<li><strong>The User table field to match with the Subject's NameID element in the SAMLResponse.</strong>
+<p><kbd>email</kbd></p>
+</li>
+<li><strong>The NameID policy to use for returning the Subject's NameID in the SAMLResponse.</strong>
+<p><kbd>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</kbd></p>
+</li>
+<li>&nbsp;Check <strong>Yes</strong> for&nbsp;<strong>Create an AuthnContextClass request in the AuthnRequest statement.</strong></li>
+<li><strong>The AuthnContextClassRef method that will be included in our SAML 2.0 AuthnRequest to the Identity Provider.</strong>
+<p><kbd>urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport</kbd></p>
+</li>
+<li>&nbsp;Do not change the other settings.</li>
+</ul>
+</li>
+<li>
+<p>Go to the&nbsp;<strong>x509 Certificate</strong>&nbsp;section. Refer to the following screenshot for step 8. <img style="border: 0; padding: 0;" src="/attachments/token/3jzvnkjzehsvt0x/?name=ServiceNow_2.jpg" alt="ServiceNow_2.jpg" /></p>
+</li>
+<li>
+<p>Add a new certificate with the following properities:</p>
+<ul>
+<li>
+<p><strong>Name</strong><kbd class="dashed-kbd">SAML 2.0</kbd></p>
+</li>
+<li>
+<p><strong>Format</strong><kbd class="dashed-kbd">PEM</kbd></p>
+</li>
+<li>
+<p><strong>Type</strong><kbd class="dashed-kbd">Trust Store Cert</kbd></p>
+</li>
+<li>
+<p><strong>PEM Certificate</strong> – cut and paste the following certificate including the <em>Begin Certificate</em>&nbsp;and <em>End <em>Certificate</em></em>&nbsp;lines into the PEM Certificate field.</p>
+<pre id="x509CertTextPem">Sign in to the Okta Admin app to generate this variable. </pre>
+</li>
+</ul>
+</li>
+<li>Done!</li>
+</ol></ol></div>
+</body>
+</html>

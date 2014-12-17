@@ -1,0 +1,158 @@
+<html>
+<head>
+<link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript" />-->
+<script type="text/javascript">
+try{Typekit.load();}catch(e){}
+</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<title>Setup SSO</title>
+
+<!-- <script> src=”resources/scripts/getAppValues.js” ></script> -->
+
+<script>
+function processData(data) {
+  $('#signOnUrl').html(data["signOnUrl"]);
+  $('#signOutUrl').html(data["signOutUrl"]);
+  $('#changePasswordUrl').html(data["changePasswordUrl"]);
+  $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
+   $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
+  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#x509CertText').html(data["x509CertText"]);
+  $('#x509CertTextPem').html(data["x509CertTextPem"]);
+  $('#x509CertTextPem').css("white-space", "pre");
+  $('#certFingerPrint').html(data["certFingerPrint"]);
+  $('#validFrom').html(data["validFrom"]);
+  $('#validTo').html(data["validTo"]);
+  $('#issuer').html(data["issuer"]);
+$('#metadataUrl').html(data["signOnUrl"]);
+ $('#errorUrl').html(data["signOutUrl"]);
+ $('#timeoutUrl').html(data["signOutUrl"]);
+ $('#delAuthUrl').html(data["delAuthUrl"]);
+ $('#saml11SignOnUrl').html(data["saml11SignOnUrl"]);    
+}
+function getURLParameter(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+}
+$(document).ready(function($) {
+  // This condition is to ensure that the ajax api code is executed only on the intended pages
+  if ($('#loginAdminApp').length > 0) {
+    var app = getURLParameter('app');
+    var subdomain = getURLParameter('subdomain');
+    var instanceId = getURLParameter('instanceId');
+    var baseAdminUrl = getURLParameter('baseAdminUrl');
+    var url;
+    if ((subdomain == null && baseAdminUrl == null) || app == null || instanceId == null) {
+      $('#loginAdminApp').show();
+    } else {
+      var endpoint = '/api/internal/v1/setup/help/saml/' + app + '/' + instanceId + '?callback=processData';
+      if (baseAdminUrl) {
+        url = baseAdminUrl + endpoint;
+      } else if (subdomain) {
+        url = 'https://' + subdomain + '.okta-admin.com' + endpoint;
+      }
+      $.ajax({
+        type: 'GET',
+        url: url,
+        jsonp: false,
+        jsonpCallback: 'processData',
+        dataType: 'jsonp',
+        success: function(json) {
+          $('#loginAdminApp').hide();
+        },
+        error: function(e,jqXHR,ajaxSettings,thrownError) {
+          $('#loginAdminApp').show();
+        },
+        timeout: 3000
+      });
+    }
+  }
+
+  
+  $('#mailto').on('click', function() {
+      var to = "DedicatedSAMLComplaintLine@okta.com"; // I am assuming this will always be same!
+      var body = "Dear Okta,%0D%0A%0D%0AI used your SAML setup instruction. I want you to know…%0D%0AI completed the SAML setup?%0D%0AI found errors in this doc?%0D%0A%0D%0AHere’s what I noticed:";
+      var subject = "Update Doc:" + $('h1').text();       
+      var mailto = "mailto:" + to + "?subject=" + subject + "&body=" + body;
+      window.location.href = mailto;
+    });
+
+});
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="header clearfix">
+        <div class="logo-container">
+            <img src="resources/css/okta-logo-white.png" alt="Okta" />
+        </div>
+    </div>
+
+<div class="okta-instructions">
+<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
+<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+</div>
+<div class="okta-callout okta-warning">
+<p><strong>Read this before you enable SAML</strong></p>
+<p>Enabling SAML will affect all users who use this application, which means that users will not be able to sign in through their regular sign in page. They will only be able to access the app through the Okta service, except as noted below.</p>
+<p>Coupa&nbsp;<span>supports both SP-initiated and IdP-initiated SAML flows.</span></p>
+</div>
+<div class="instructions clearfix">
+<div class="instructions-text"><ol class="bullets"><ol class="bullets">
+<li>
+<p>Sign in to Coupa as a user with Coupa Administrative rights.</p>
+</li>
+<li>
+<p>Click on the&nbsp;<strong>Setup</strong>&nbsp;tab in the top menu, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/hisVnT6GCEHVX1vY5Ok2db8yC/?name=Coupa_1.png" alt="Coupa_1.png" /></p>
+</li>
+<li>
+<p>Several groups of links are displayed, including a group titled&nbsp;<strong>Company Setup</strong>. In the&nbsp;<strong>Company Setup</strong>&nbsp;group, click on the&nbsp;<strong>Security controls</strong>&nbsp;link, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/GQV7IhWgDOhFg2i7hubzasrkk/?name=Coupa_2.png" alt="Coupa_2.png" /></p>
+</li>
+<li>
+<p>Check the&nbsp;<strong>Log in using SAML</strong>&nbsp;checkbox, if it is not checked, as shown below. When checked, new UI elements appear on the page<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/ipi7cCICPQC4Qd31mb6EiAdqv/?name=Coupa_3.png" alt="Coupa_3.png" /></p>
+</li>
+<li>
+<p>Copy the following <strong>Metadata</strong>, and save it in a file named <em>metadata.xml</em>.</p>
+<textarea id="idpMetadata" style="margin-top: 0px; margin-bottom: 0px; height: 435px;">Sign into the Okta Admin app to generate this variable.</textarea></li>
+<li>
+<p>Select <strong>Choose File</strong> next to <strong>Upload Idp metadata</strong>, as shown above. Choose the file <em>metadata.xml</em> that you just created.</p>
+</li>
+<li>
+<p>In Okta, under the Sign on tab in the Coupa app, set the <strong>Default Relay State</strong> to <br /><em>&lt;your-coupa-login-url&gt;/sessions/saml_post, as shown below.</em><br /><br />Example: If you sign in to <em><a style="text-decoration: none; color: black;" onclick="return false;">https://acme.coupacloud.com</a></em>, enter <strong><a style="text-decoration: none; color: black;" onclick="return false;">https://acme.coupacloud.com/sessions/saml_post</a></strong> for the Default Relay State.</p>
+</li>
+<li>
+<p>On the same screen in Okta, enter one of the following URLs for <strong>Your Coupa SAML URL</strong>, as shown below.</p>
+<ul>
+<li>For Staging environments, enter:&nbsp;<strong><a style="text-decoration: none; color: black;" onclick="return false;">https://devsso35.coupahost.com/sp/ACS.saml2</a></strong></li>
+<li>For Production environments, enter:&nbsp;<strong><a style="text-decoration: none; color: black;" onclick="return false;">https://prdsso40.coupahost.com/sp/ACS.saml2</a></strong></li>
+</ul>
+<p><img style="border: 0; padding: 0;" src="/attachments/token/c1SIXfzzFtoGY4W6yBAiQLy6k/?name=Coupa_5.png" alt="Coupa_5.png" /></p>
+</li>
+<li><strong>&nbsp;</strong>In Coupa, select Users in the lower menu on the top of the screen, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/dL5yFjHPvxUbEYj6AaVlIIOHT/?name=Coupa_6.png" alt="Coupa_6.png" /></li>
+<li>Select the <strong>Edit</strong> icon under Actions for the user for whom you want to enable SAML, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/OS9utOD5q2HhbwFRSBo8QkU0K/?name=Coupa_7.png" alt="Coupa_7.png" /></li>
+<li>
+<p>Copy the email address in the <strong>Login</strong> field to the <strong>Single Sign-On ID</strong> field, as shown below. The fields must be the same.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/OzUKdHCuRGQ4RV0FuzYXm3C9s/?name=Coupa_8.png" alt="Coupa_8.png" /></p>
+</li>
+<li>
+<p>Scroll down and select Save in the lower right of the window, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/Ioq95XqXjXWq3x3oDV7dJEWJ8/?name=Coupa_4.png" alt="Coupa_4.png" /></p>
+</li>
+<li>Set the <strong>Single Sign-On ID</strong> for additional users, if desired.
+<p>&nbsp;</p>
+</li>
+<li>
+<p>Done!<br /><br /></p>
+</li>
+</ol></ol>
+<h3>Note</h3>
+</div>
+</div>
+<div class="instructions clearfix">
+<div class="instructions-text instructions-text-wide">
+<p>The user(s) you've setup according to the above directions are ready to single sign-on to Coupa! Once authentication via SAML is enabled and configured for a user account, authentication to Coupa using username and password is disabled for that user account&nbsp;<strong>except for those accounts with Coupa Administrative rights</strong>. Those user accounts can still authenticate with username/password at this URL:&nbsp;<a style="text-decoration: none; color: black;" onclick="return false;">https://acme.coupahost.com/sessions/support_login</a></p>
+</div>
+</div>
+</div>
+</body>
+</html>

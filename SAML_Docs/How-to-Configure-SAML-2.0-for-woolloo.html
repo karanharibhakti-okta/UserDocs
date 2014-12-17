@@ -91,34 +91,40 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<h1>&nbsp;&nbsp;Configuring SAML 2.0 in BlueJeans</h1>
-
 <div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>Please sign-in to the Okta Admin app to have your organization specific variables generated for you. You might not be able to complete the setup without these generated variables.</strong></p>
+<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
 </div>
+<p>&nbsp;</p>
 <ol>
-<li>Sign in to BlueJeans &nbsp;at&nbsp;<a href="http://www.bluejeans.com" target="_blank">www.bluejeans.com</a>&nbsp;as a user with rights to edit SAML configuration.</li>
-<li>Select the&nbsp;<strong style="font-size: 14px;">Admin</strong>&nbsp;tab, and then the&nbsp;<strong style="font-size: 14px;">Security</strong>&nbsp;tab, as shown at the bottom of this page.</li>
-<li>Click the <strong>SAML Single Sign On</strong> button.</li>
+<li>Sign in to your woolloo account. Select <strong>Settings</strong> on the menu bar and scroll down to the <strong>Singlesign-on (SSO) via OKTA</strong> section, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/mvOxUQITT6d99LEqJMT4VSUcv/?name=woolloo_1.png" alt="woolloo_1.png" /><strong><br /><br /></strong></li>
+<li>Check the button next to <strong>Singlesign-on (SSO) via OKTA</strong>, as shown above.</li>
 <li>
-<p>Download the following&nbsp;<strong>Certificate.&nbsp;</strong>&nbsp;Add it to the <strong>Certificate Path</strong> in Blue Jeans by selecting <strong>Browse</strong> and uploading it.</p>
-<kbd id="downloadCertificate">Sign in to the Okta Admin app to generate this variable.</kbd></li>
+<p>Copy and paste the following Single Sign-On URL.</p>
+<kbd id="signOnUrl"> Sign in to the Okta Admin app to generate this variable.</kbd></li>
 <li>
-<p>Enter the following text for the <strong>Login URL</strong>.</p>
-<kbd id="signOnUrl">Sign in to the Okta Admin app to generate this variable.</kbd></li>
+<p>Copy and paste the following <strong>Certificate Fingerprint</strong>, as shown above.</p>
+<kbd id="certFingerPrint">Sign in to the Okta Admin app to generate this variable.</kbd></li>
 <li>
-<p>Modify the following text for the <strong>Password Change URL</strong>, where &lt;company name&gt; is the name of your company. For example, if your company is named <em>acme</em>, enter <em><a style="text-decoration: none; color: black;" onclick="return false;">https://acme.bluejeans.com</a></em>.</p>
-<kbd>https://&lt;company name&gt;.bluejeans.com</kbd></li>
-<li>
-<p>Modify the following text for the <strong>Logout URL</strong>, where &lt;company name&gt; is the name of your company.</p>
-<kbd><span>https://&lt;company name&gt;.bluejeans.com</span></kbd></li>
-<li>Fill in the <strong>User ID</strong> and<strong> Email</strong>&nbsp;fields with the correct information for your organization.<br /><br /><strong>Note:</strong> If the User ID field is not visible, <strong>uncheck</strong> <em>Pick User ID from &lt;saml2:NameID&gt; element</em>. This box is checked in the screenshot below.</li>
-<li>Copy the information in the <strong>RelayState</strong> field in BlueJeans. In Okta, paste this information into the <strong>Default Relay State</strong> field, as shown below.<br /><img style="border: 0; padding: 0;" src="images/apps/bluejeans3.jpg" alt="bluejeans3.jpg" /></li>
-<li>
-<p>Click <strong>Save Changes</strong>.</p>
-</li>
-<li>Done!</li>
-</ol><img style="border: 0; padding: 20px;" src="images/apps/bluejeans8.png" alt="BlueJeans Admin Console" />
+<p>Copy and paste the following <strong>SSO Sign Out URL</strong>, as shown above.</p>
+<kbd id="signOutUrl"> Sign in to the Okta Admin app to generate this variable.</kbd></li>
+<li>Done!<br /><br />Note: woolloo supports <strong>both</strong> IdP-initiated and SP-initiated flows.</li>
+</ol>
+<ul>
+<ul>
+<ul>
+<ul>
+<ul>
+<ul>
+<ul>
+<li>To use the IdP-initiated flow, go to your Okta Dashboard and click the woolloo chicklet.</li>
+<li>To use the SP-initiated flow, go to your woolloo sign in page and select Single Sign On. Your woolloo sign in page has the format <a style="text-decoration: none; color: black;" onclick="return false;"><strong>https://&lt;company name&gt;.woolloo.net</strong></a>, where <em>&lt;company name&gt;</em> is your company name.</li>
+</ul>
+</ul>
+</ul>
+</ul>
+</ul>
+</ul>
+</ul>
 </div>
 </body>
 </html>

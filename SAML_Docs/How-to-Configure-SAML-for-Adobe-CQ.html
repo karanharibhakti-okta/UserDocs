@@ -91,34 +91,40 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<h1>&nbsp;&nbsp;Configuring SAML 2.0 in BlueJeans</h1>
-
 <div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>Please sign-in to the Okta Admin app to have your organization specific variables generated for you. You might not be able to complete the setup without these generated variables.</strong></p>
+<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
 </div>
 <ol>
-<li>Sign in to BlueJeans &nbsp;at&nbsp;<a href="http://www.bluejeans.com" target="_blank">www.bluejeans.com</a>&nbsp;as a user with rights to edit SAML configuration.</li>
-<li>Select the&nbsp;<strong style="font-size: 14px;">Admin</strong>&nbsp;tab, and then the&nbsp;<strong style="font-size: 14px;">Security</strong>&nbsp;tab, as shown at the bottom of this page.</li>
-<li>Click the <strong>SAML Single Sign On</strong> button.</li>
 <li>
-<p>Download the following&nbsp;<strong>Certificate.&nbsp;</strong>&nbsp;Add it to the <strong>Certificate Path</strong> in Blue Jeans by selecting <strong>Browse</strong> and uploading it.</p>
-<kbd id="downloadCertificate">Sign in to the Okta Admin app to generate this variable.</kbd></li>
-<li>
-<p>Enter the following text for the <strong>Login URL</strong>.</p>
-<kbd id="signOnUrl">Sign in to the Okta Admin app to generate this variable.</kbd></li>
-<li>
-<p>Modify the following text for the <strong>Password Change URL</strong>, where &lt;company name&gt; is the name of your company. For example, if your company is named <em>acme</em>, enter <em><a style="text-decoration: none; color: black;" onclick="return false;">https://acme.bluejeans.com</a></em>.</p>
-<kbd>https://&lt;company name&gt;.bluejeans.com</kbd></li>
-<li>
-<p>Modify the following text for the <strong>Logout URL</strong>, where &lt;company name&gt; is the name of your company.</p>
-<kbd><span>https://&lt;company name&gt;.bluejeans.com</span></kbd></li>
-<li>Fill in the <strong>User ID</strong> and<strong> Email</strong>&nbsp;fields with the correct information for your organization.<br /><br /><strong>Note:</strong> If the User ID field is not visible, <strong>uncheck</strong> <em>Pick User ID from &lt;saml2:NameID&gt; element</em>. This box is checked in the screenshot below.</li>
-<li>Copy the information in the <strong>RelayState</strong> field in BlueJeans. In Okta, paste this information into the <strong>Default Relay State</strong> field, as shown below.<br /><img style="border: 0; padding: 0;" src="images/apps/bluejeans3.jpg" alt="bluejeans3.jpg" /></li>
-<li>
-<p>Click <strong>Save Changes</strong>.</p>
+<p>Install the <strong>Adobe Experience Manager</strong>.</p>
 </li>
-<li>Done!</li>
-</ol><img style="border: 0; padding: 20px;" src="images/apps/bluejeans8.png" alt="BlueJeans Admin Console" />
-</div>
+<li>Open the <strong>Content Explorer</strong> located at <strong>yourServer/crx/explorer/browser/index.jsp</strong> where <em>yourServer</em> is the name of your server.</li>
+<li>
+<p>Under /<strong>etc/key</strong> in the repository, create a node called <strong>saml</strong>. Inside this node, add a new binary property called <strong>idp_cert</strong> that refers to the public certificate of the identity provider, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/W2ohtGVuN1kPn9Rng9LQ8pENH/?name=AdobeCQ_1.png" alt="AdobeCQ_1.png" /></p>
+</li>
+<li>
+<p>Download the Identity Provider Certificate by selecting the link shown below.&nbsp;</p>
+<kbd id="downloadCertificate"> Sign into the Okta Admin dashboard to generate this value. </kbd></li>
+<li>
+<p>Upload it to the certificate field by clicking the <strong>Browse</strong> button, as shown above.</p>
+</li>
+<li>Open the&nbsp;<strong>Adobe Experience Manager Web Console Configuration</strong>&nbsp;located at&nbsp;<strong>yourServer/system/console/configMgr</strong>&nbsp;where&nbsp;<em>yourServer</em>&nbsp;is the name of your server.</li>
+<li>Configure the Adobe Granite SAML 2.0 Authentication Handler, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/8qvrYXvffd3xnvQwgiRyQhCLO/?name=AdobeCQ_2.png" alt="AdobeCQ_2.png" /><br /><ol>
+<li>
+<p>Enter the following IDP URL.</p>
+<kbd id="signOnUrl"> Sign into the Okta Admin dashboard to generate this value.</kbd></li>
+<li>Enter the URL of your server for the <strong>Service Provider Entity ID</strong>.</li>
+<li>Enter <strong>uid</strong> for the <strong>UserID Attribute</strong>.</li>
+<li>Select <strong>Save</strong>.</li>
+</ol></li>
+<li>Configure the <strong>Apache Sling Filter</strong>.<ol>
+<li>Check the <strong>Allow Empty</strong> checkbox.</li>
+<li>Enter <strong>yourSubDomain.okta.com</strong> in Allow Hosts, where <em>yourSubdomain</em> is the name of your subdomain.</li>
+<li>Select <strong>Save</strong>.</li>
+</ol></li>
+<li>
+<p>Done!</p>
+</li>
+</ol><strong>Note:</strong> IdP-initiated and SP-initiated flows and Just In Time (JIT) provisioning are all supported. For an SP-initiated flow, use the Service Provider Entity ID URL that you entered in step 7b.</div>
 </body>
 </html>

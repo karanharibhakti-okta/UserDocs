@@ -91,34 +91,33 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<h1>&nbsp;&nbsp;Configuring SAML 2.0 in BlueJeans</h1>
-
 <div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>Please sign-in to the Okta Admin app to have your organization specific variables generated for you. You might not be able to complete the setup without these generated variables.</strong></p>
+<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
 </div>
 <ol>
-<li>Sign in to BlueJeans &nbsp;at&nbsp;<a href="http://www.bluejeans.com" target="_blank">www.bluejeans.com</a>&nbsp;as a user with rights to edit SAML configuration.</li>
-<li>Select the&nbsp;<strong style="font-size: 14px;">Admin</strong>&nbsp;tab, and then the&nbsp;<strong style="font-size: 14px;">Security</strong>&nbsp;tab, as shown at the bottom of this page.</li>
-<li>Click the <strong>SAML Single Sign On</strong> button.</li>
 <li>
-<p>Download the following&nbsp;<strong>Certificate.&nbsp;</strong>&nbsp;Add it to the <strong>Certificate Path</strong> in Blue Jeans by selecting <strong>Browse</strong> and uploading it.</p>
-<kbd id="downloadCertificate">Sign in to the Okta Admin app to generate this variable.</kbd></li>
-<li>
-<p>Enter the following text for the <strong>Login URL</strong>.</p>
-<kbd id="signOnUrl">Sign in to the Okta Admin app to generate this variable.</kbd></li>
-<li>
-<p>Modify the following text for the <strong>Password Change URL</strong>, where &lt;company name&gt; is the name of your company. For example, if your company is named <em>acme</em>, enter <em><a style="text-decoration: none; color: black;" onclick="return false;">https://acme.bluejeans.com</a></em>.</p>
-<kbd>https://&lt;company name&gt;.bluejeans.com</kbd></li>
-<li>
-<p>Modify the following text for the <strong>Logout URL</strong>, where &lt;company name&gt; is the name of your company.</p>
-<kbd><span>https://&lt;company name&gt;.bluejeans.com</span></kbd></li>
-<li>Fill in the <strong>User ID</strong> and<strong> Email</strong>&nbsp;fields with the correct information for your organization.<br /><br /><strong>Note:</strong> If the User ID field is not visible, <strong>uncheck</strong> <em>Pick User ID from &lt;saml2:NameID&gt; element</em>. This box is checked in the screenshot below.</li>
-<li>Copy the information in the <strong>RelayState</strong> field in BlueJeans. In Okta, paste this information into the <strong>Default Relay State</strong> field, as shown below.<br /><img style="border: 0; padding: 0;" src="images/apps/bluejeans3.jpg" alt="bluejeans3.jpg" /></li>
-<li>
-<p>Click <strong>Save Changes</strong>.</p>
+<p>Go to Unison at https://unison.com/login and sign in.</p>
 </li>
-<li>Done!</li>
-</ol><img style="border: 0; padding: 20px;" src="images/apps/bluejeans8.png" alt="BlueJeans Admin Console" />
-</div>
+<li>
+<p>Select the gear icon in the upper right, and then select <strong>Administration</strong>, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/8Z5qqWThVLOUz5MldY7XbZPZ6/?name=Unison_1.png" alt="Unison_1.png" /></p>
+</li>
+<li>In the window that opens, select the <strong>Authorization</strong> tab, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/GsU1t6i6po3d0AJ38zbQ8ZVyh/?name=Unison_2.png" alt="Unison_2.png" /></li>
+<li>In the Service Provider Data section, copy your <strong>Organization ID</strong> that is located at end the of Metadata URL, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/hqsmBQgO7lL8NiAOU28cZ6DLt/?name=Unison_5.png" alt="Unison_5.png" /></li>
+<li>In Okta, in the <strong>General</strong> tab for the Unison app, paste the <strong>Organization ID</strong> that you just copied, and select <strong>Save</strong>, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/oMJT2oisH6qiFDQSsHPbwwZ3z/?name=unison_6.png" alt="unison_6.png" /></li>
+<li>
+<p>In the Identity Provider Data section, copy the following information into the <strong>Sign in URL</strong>&nbsp;field, as shown below.</p>
+<kbd id="signOnUrl"> Sign into the Okta Admin dashboard to generate this value. </kbd></li>
+<li>
+<p>Copy and paste the following certificate into the <strong>Verification Certificate</strong> field, as shown below. Be cure to copy the <em>Begin Certificate</em> and <em>End Certificate</em> lines.</p>
+<pre id="x509CertTextPem"> Sign into the Okta Admin dashboard to generate this value. </pre>
+</li>
+<li>Select <strong>Submit</strong>, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/l57MX6cOyPu8H8dY4zRJgdoB6/?name=Unison_3.png" alt="Unison_3.png" /></li>
+<li>
+<p>In the Authorization Options section, select <strong>Yes</strong> for <strong>Allow accounts to be automatically created by SSO</strong>, if desired, as shown below.</p>
+</li>
+<li>Check <strong>SAML</strong> for <strong>Allowed login methods for people in the company</strong>, as shown below.</li>
+<li>Select <strong>Submit</strong>, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/WjCaF5BzjWd5nxALG8WZxbiQW/?name=Unison_4.png" alt="Unison_4.png" /></li>
+<li>Done!<br /><br /><strong>Note:</strong> Unison only supports an IdP-initiated flow.</li>
+</ol></div>
 </body>
 </html>

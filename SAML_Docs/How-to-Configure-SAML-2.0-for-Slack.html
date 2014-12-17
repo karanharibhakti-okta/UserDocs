@@ -91,34 +91,34 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<h1>&nbsp;&nbsp;Configuring SAML 2.0 in BlueJeans</h1>
-
 <div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>Please sign-in to the Okta Admin app to have your organization specific variables generated for you. You might not be able to complete the setup without these generated variables.</strong></p>
+<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
 </div>
 <ol>
-<li>Sign in to BlueJeans &nbsp;at&nbsp;<a href="http://www.bluejeans.com" target="_blank">www.bluejeans.com</a>&nbsp;as a user with rights to edit SAML configuration.</li>
-<li>Select the&nbsp;<strong style="font-size: 14px;">Admin</strong>&nbsp;tab, and then the&nbsp;<strong style="font-size: 14px;">Security</strong>&nbsp;tab, as shown at the bottom of this page.</li>
-<li>Click the <strong>SAML Single Sign On</strong> button.</li>
 <li>
-<p>Download the following&nbsp;<strong>Certificate.&nbsp;</strong>&nbsp;Add it to the <strong>Certificate Path</strong> in Blue Jeans by selecting <strong>Browse</strong> and uploading it.</p>
-<kbd id="downloadCertificate">Sign in to the Okta Admin app to generate this variable.</kbd></li>
-<li>
-<p>Enter the following text for the <strong>Login URL</strong>.</p>
-<kbd id="signOnUrl">Sign in to the Okta Admin app to generate this variable.</kbd></li>
-<li>
-<p>Modify the following text for the <strong>Password Change URL</strong>, where &lt;company name&gt; is the name of your company. For example, if your company is named <em>acme</em>, enter <em><a style="text-decoration: none; color: black;" onclick="return false;">https://acme.bluejeans.com</a></em>.</p>
-<kbd>https://&lt;company name&gt;.bluejeans.com</kbd></li>
-<li>
-<p>Modify the following text for the <strong>Logout URL</strong>, where &lt;company name&gt; is the name of your company.</p>
-<kbd><span>https://&lt;company name&gt;.bluejeans.com</span></kbd></li>
-<li>Fill in the <strong>User ID</strong> and<strong> Email</strong>&nbsp;fields with the correct information for your organization.<br /><br /><strong>Note:</strong> If the User ID field is not visible, <strong>uncheck</strong> <em>Pick User ID from &lt;saml2:NameID&gt; element</em>. This box is checked in the screenshot below.</li>
-<li>Copy the information in the <strong>RelayState</strong> field in BlueJeans. In Okta, paste this information into the <strong>Default Relay State</strong> field, as shown below.<br /><img style="border: 0; padding: 0;" src="images/apps/bluejeans3.jpg" alt="bluejeans3.jpg" /></li>
-<li>
-<p>Click <strong>Save Changes</strong>.</p>
+<p>Sign into Slack as a Team Owner and go to <strong>Team Administration</strong>, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/lC7Z3hI24SZLa5H7bPywaNazB/?name=Screen-1.png" alt="Screen-1.png" /></p>
 </li>
+<li>
+<p>Select<strong> Authentication i</strong>n the Menu bar on the left side<span>, as shown below</span>.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/zPE3L9fXolx3IUn9Bvwqx9yeD/?name=Screen-2.png" alt="Screen-2.png" /><br /><br /></p>
+</li>
+<li>Select&nbsp;<strong>Configure</strong>&nbsp;next to SAML Authentication, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/nUQMN6vJBL1nedQ5MZ8wALvVP/?name=Screen-3.png" alt="Screen-3.png" /></li>
+<li>
+<p>Select&nbsp;<strong>OKTA&nbsp;</strong>under <strong>SAML Authentication Settings.&nbsp;<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/Kr6IFaB1NhUydEOuTbgyXRY40/?name=Screen+Shot+2014-10-22+at+12.57.57+PM.png" alt="Screen_Shot_2014-10-22_at_12.57.57_PM.png" /><br /></strong></p>
+</li>
+<li>
+<p>Copy and paste the following link into the <strong>SAML SSO URL</strong> field, as shown above.<br /><br /> <kbd id="signOnUrl"> Sign into the Okta Admin dashboard to generate this value.</kbd></p>
+</li>
+<li>
+<p>Copy and paste the following link to the <strong>Identity Provider Issuer</strong> field<span>, as shown above.</span></p>
+<kbd id="issuer">Sign into the Okta Admin dashboard to generate this value.</kbd></li>
+<li>
+<p class="p1">Copy and paste the following to the <strong>Public Certificate</strong> field<span>, as shown above.</span><br /><br /><kbd id="x509CertText">Sign into the Okta Admin Dashboard to generate this variable.</kbd></p>
+</li>
+<li>Under <strong>Settings, </strong>select the desired option for SAML Authentication for users.</li>
+<li>Select&nbsp;<strong>Save Configuration</strong>.</li>
 <li>Done!</li>
-</ol><img style="border: 0; padding: 20px;" src="images/apps/bluejeans8.png" alt="BlueJeans Admin Console" />
+</ol>
+<p><strong>Note:</strong> Slack supports <strong>IDP-initiated flow</strong>, <strong>SP-initiated flow</strong>, and <strong>Just In Time (JIT) provisioning</strong>. For SP-initiated login, go to <strong><a style="text-decoration: none; color: black;" onclick="return false;">https://&lt;subdomain&gt;.slack.com</a></strong> where <em>&lt;subdomain&gt;</em> is your organization's Slack subdomain. Then, select <em>Sign in with Okta</em>, as shown below.<em><br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/XjmSGpETINIJhBHpTb7LC0WTt/?name=Screen+Shot+2014-10-22+at+1.14.13+PM.png" alt="Screen_Shot_2014-10-22_at_1.14.13_PM.png" /></em></p>
 </div>
 </body>
 </html>

@@ -91,34 +91,27 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<h1>&nbsp;&nbsp;Configuring SAML 2.0 in BlueJeans</h1>
-
 <div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>Please sign-in to the Okta Admin app to have your organization specific variables generated for you. You might not be able to complete the setup without these generated variables.</strong></p>
+<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
 </div>
 <ol>
-<li>Sign in to BlueJeans &nbsp;at&nbsp;<a href="http://www.bluejeans.com" target="_blank">www.bluejeans.com</a>&nbsp;as a user with rights to edit SAML configuration.</li>
-<li>Select the&nbsp;<strong style="font-size: 14px;">Admin</strong>&nbsp;tab, and then the&nbsp;<strong style="font-size: 14px;">Security</strong>&nbsp;tab, as shown at the bottom of this page.</li>
-<li>Click the <strong>SAML Single Sign On</strong> button.</li>
 <li>
-<p>Download the following&nbsp;<strong>Certificate.&nbsp;</strong>&nbsp;Add it to the <strong>Certificate Path</strong> in Blue Jeans by selecting <strong>Browse</strong> and uploading it.</p>
-<kbd id="downloadCertificate">Sign in to the Okta Admin app to generate this variable.</kbd></li>
-<li>
-<p>Enter the following text for the <strong>Login URL</strong>.</p>
-<kbd id="signOnUrl">Sign in to the Okta Admin app to generate this variable.</kbd></li>
-<li>
-<p>Modify the following text for the <strong>Password Change URL</strong>, where &lt;company name&gt; is the name of your company. For example, if your company is named <em>acme</em>, enter <em><a style="text-decoration: none; color: black;" onclick="return false;">https://acme.bluejeans.com</a></em>.</p>
-<kbd>https://&lt;company name&gt;.bluejeans.com</kbd></li>
-<li>
-<p>Modify the following text for the <strong>Logout URL</strong>, where &lt;company name&gt; is the name of your company.</p>
-<kbd><span>https://&lt;company name&gt;.bluejeans.com</span></kbd></li>
-<li>Fill in the <strong>User ID</strong> and<strong> Email</strong>&nbsp;fields with the correct information for your organization.<br /><br /><strong>Note:</strong> If the User ID field is not visible, <strong>uncheck</strong> <em>Pick User ID from &lt;saml2:NameID&gt; element</em>. This box is checked in the screenshot below.</li>
-<li>Copy the information in the <strong>RelayState</strong> field in BlueJeans. In Okta, paste this information into the <strong>Default Relay State</strong> field, as shown below.<br /><img style="border: 0; padding: 0;" src="images/apps/bluejeans3.jpg" alt="bluejeans3.jpg" /></li>
-<li>
-<p>Click <strong>Save Changes</strong>.</p>
+<p dir="ltr">Go to <a href="https://admin.subspacesw.com/">https://admin.subspacesw.com</a> and login with your email address and the password.</p>
 </li>
-<li>Done!</li>
-</ol><img style="border: 0; padding: 20px;" src="images/apps/bluejeans8.png" alt="BlueJeans Admin Console" />
-</div>
+<li>
+<p dir="ltr"><span data-mce-mark="1">Select the <strong>Users</strong> link on the left side of the page, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/R8PEgXi7zbUl7gr3rKkB4w86a/?name=SubSpace_1.png" alt="SubSpace_1.png" /></span></p>
+</li>
+<li>
+<p dir="ltr"><span data-mce-mark="1">On the Users page that opens, select the <strong>gear icon</strong> next to the text&nbsp;<span data-mce-mark="1"><span data-mce-mark="1"><em>Single Sign-On: Not Enabled</em>, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/Yh6njsm810b7B2XlEANm1teFs/?name=SubSpace_2a.png" alt="SubSpace_2a.png" /></span></span></span></p>
+</li>
+<li>
+<p dir="ltr">Copy the following <strong style="background-color: initial;">IDP Metadata</strong> into a text file. Save it with the file name <em style="background-color: initial;">metadata.xml</em>.</p>
+<textarea id="idpMetadata" style="margin-top: 0px; margin-bottom: 0px; height: 266px; width: 700px;">Sign into the Okta Admin dashboard to generate this value.</textarea></li>
+<li>
+<p>Select&nbsp;<span id="docs-internal-guid-330f523a-8d7b-7761-1c4a-f7ef0442717c" data-mce-mark="1"><span data-mce-mark="1"><strong>Import New Metadata</strong>, as shown below. Navigate to the <em>metadata.xml</em> file you just saved when prompted.<br /><br /><img style="border: 0; padding: 0;" src="/attachments/token/vp9ac5w5eWQwXQpQ8aGcWQco1/?name=SubSpace_3.png" alt="SubSpace_3.png" /><br /></span></span></p>
+</li>
+<li><span data-mce-mark="1"><span data-mce-mark="1">After the metadata is imported, the message&nbsp;<span id="docs-internal-guid-330f523a-8d7d-3702-c8f2-543892a93fe6" data-mce-mark="1"><span data-mce-mark="1"><strong>Single Sign-On: Enabled</strong> appears.</span></span></span></span></li>
+<li><span data-mce-mark="1"><span data-mce-mark="1"><span data-mce-mark="1"><span data-mce-mark="1">Done!<br /><br /><strong>Note:</strong> Subspace supports both IdP-initiated and SP-initiated flows.</span></span></span></span></li>
+</ol></div>
 </body>
 </html>

@@ -1,0 +1,134 @@
+<html>
+<head>
+<link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript" />-->
+<script type="text/javascript">
+try{Typekit.load();}catch(e){}
+</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<title>Setup SSO</title>
+
+<!-- <script> src=”resources/scripts/getAppValues.js” ></script> -->
+
+<script>
+function processData(data) {
+  $('#signOnUrl').html(data["signOnUrl"]);
+  $('#signOutUrl').html(data["signOutUrl"]);
+  $('#changePasswordUrl').html(data["changePasswordUrl"]);
+  $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
+   $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
+  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#x509CertText').html(data["x509CertText"]);
+  $('#x509CertTextPem').html(data["x509CertTextPem"]);
+  $('#x509CertTextPem').css("white-space", "pre");
+  $('#certFingerPrint').html(data["certFingerPrint"]);
+  $('#validFrom').html(data["validFrom"]);
+  $('#validTo').html(data["validTo"]);
+  $('#issuer').html(data["issuer"]);
+$('#metadataUrl').html(data["signOnUrl"]);
+ $('#errorUrl').html(data["signOutUrl"]);
+ $('#timeoutUrl').html(data["signOutUrl"]);
+ $('#delAuthUrl').html(data["delAuthUrl"]);
+ $('#saml11SignOnUrl').html(data["saml11SignOnUrl"]);    
+}
+function getURLParameter(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+}
+$(document).ready(function($) {
+  // This condition is to ensure that the ajax api code is executed only on the intended pages
+  if ($('#loginAdminApp').length > 0) {
+    var app = getURLParameter('app');
+    var subdomain = getURLParameter('subdomain');
+    var instanceId = getURLParameter('instanceId');
+    var baseAdminUrl = getURLParameter('baseAdminUrl');
+    var url;
+    if ((subdomain == null && baseAdminUrl == null) || app == null || instanceId == null) {
+      $('#loginAdminApp').show();
+    } else {
+      var endpoint = '/api/internal/v1/setup/help/saml/' + app + '/' + instanceId + '?callback=processData';
+      if (baseAdminUrl) {
+        url = baseAdminUrl + endpoint;
+      } else if (subdomain) {
+        url = 'https://' + subdomain + '.okta-admin.com' + endpoint;
+      }
+      $.ajax({
+        type: 'GET',
+        url: url,
+        jsonp: false,
+        jsonpCallback: 'processData',
+        dataType: 'jsonp',
+        success: function(json) {
+          $('#loginAdminApp').hide();
+        },
+        error: function(e,jqXHR,ajaxSettings,thrownError) {
+          $('#loginAdminApp').show();
+        },
+        timeout: 3000
+      });
+    }
+  }
+
+  
+  $('#mailto').on('click', function() {
+      var to = "DedicatedSAMLComplaintLine@okta.com"; // I am assuming this will always be same!
+      var body = "Dear Okta,%0D%0A%0D%0AI used your SAML setup instruction. I want you to know…%0D%0AI completed the SAML setup?%0D%0AI found errors in this doc?%0D%0A%0D%0AHere’s what I noticed:";
+      var subject = "Update Doc:" + $('h1').text();       
+      var mailto = "mailto:" + to + "?subject=" + subject + "&body=" + body;
+      window.location.href = mailto;
+    });
+
+});
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="header clearfix">
+        <div class="logo-container">
+            <img src="resources/css/okta-logo-white.png" alt="Okta" />
+        </div>
+    </div>
+
+<div class="okta-instructions">
+<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
+<p><strong>Please sign-in to the Okta Admin app to have your organization specific variables generated for you. You might not be able to complete the setup without these generated variables.</strong></p>
+</div>
+<ol>
+<li>Fill out the <a href="http://survey.qualtrics.com/SE/?SID=SV_5zghwEKLJGfIbYw" target="_blank">Qualtrics SSO Survey</a> to contact the Qualtrics support team and request SAML 2.0.&nbsp;</li>
+<li>On the first page of the survey, follow the links to the Qualtrics documentation, as desired. Select the <strong>&gt;&gt;</strong> button to move to the next screen.</li>
+<li>Select <strong>Yes</strong> to indicate you have read the documents, and then, select the&nbsp;<strong>&gt;&gt;</strong>&nbsp;button to move to the next screen.</li>
+<li>Enter your name, address, and organization information. Select <strong>SAML/Shibboleh</strong> for the SSO method to implement.&nbsp;Select the<strong>&nbsp;&gt;&gt;</strong>&nbsp;button to move to the next screen.</li>
+<li>For the next page of the survey, check the following responses.<ol>
+<li>Question: Are you a member of the InCommon Federation? Answer: <strong>No</strong></li>
+<li>Question: Which metadata type will you be using: Answer: <strong>SAML 2.0</strong></li>
+<li>Question:&nbsp;If you are using Shibboleth 1.3 or if your metadata does not contain a Single Logout Service, please provide the URL where you would like us to redirect your users upon logout. &nbsp;Answer: <strong><a style="text-decoration: none; color: black;" onclick="return false;">https://&lt;yourSubDomain&gt;.okta.com/</a> </strong>where &lt;yourSubDomain&gt; is the name of your Qualtrics subdomain.</li>
+<li>
+<p>Question:&nbsp;What is the EntityID of the Identity Provider? Answer: Enter the information shown below.</p>
+<kbd id="issuer">Sign into the Okta Administrator Dashboard to generate this value.</kbd></li>
+<li>Select the <strong>&gt;&gt;</strong> button to move to the next screen.</li>
+</ol></li>
+<li>On the next page of the survey, check the following response.<ol>
+<li>Question:&nbsp;Will this be an SP initiated or IdP initiated workflow? Answer: <strong>IdP Initiated</strong>.</li>
+<li>Select the&nbsp;<strong style="font-size: 14px; background-color: initial;">&gt;&gt;</strong>&nbsp;button to move to the next screen.</li>
+</ol></li>
+<li>On the next page of the survey that begins with the text <em>Copy and paste the link below...</em>, select the&nbsp;<strong>&gt;&gt;</strong>&nbsp;button to move to the next screen.</li>
+<li>Copy and save the following IdP Metadata show below with the filename <strong>metadata.xml</strong>.&nbsp;<br /> <textarea id="idpMetadata" style="margin: 0px; height: 214px; width: 799px;">Sign into the Okta Admin dashboard to generate this value.</textarea></li>
+<li>
+<p>On the next page of the survey, select the following responses.</p>
+<ol>
+<li>For the section <em>Please attach your identity provider metadata below</em>, select <strong>Browse</strong>. Navigate to the file <em>metadata.txt</em> that you just saved in step 8, above, and select it.</li>
+<li>For <em>Attribute containing the user's unique username or ID</em>, enter <strong>uid</strong>.</li>
+<li>For <em>Attribute containing the user's firstname</em>, enter <strong>firstName</strong>.</li>
+<li>For <em>Attribute containing the user's lastname</em>, enter <strong>lastName</strong>.</li>
+<li>For <em>Attribute containing the user's email address</em>, enter <strong>email</strong>.</li>
+<li>For <em>Please select the mapping that would like to set up</em>, check <strong>None</strong>.</li>
+<li>S<span>elect the&nbsp;</span><strong>&gt;&gt;</strong><span>&nbsp;button to move to the next screen.</span></li>
+</ol></li>
+<li>On the final page of the survey that begins <em>If you have any other notes or considerations</em>, select the <strong>Submit</strong> button.</li>
+<li>Qualtrics will process your request. After SAML is enabled, they will send you a confirmation email. After you receive the confirmation, you can begin assigning people to the application.</li>
+<li>After you receive the confirmation email from Qualtrics, you can assign people to the application</li>
+<li>Done!</li>
+</ol><br style="background-color: initial;" /><strong style="background-color: initial;">Note:</strong><span style="background-color: initial;"> IdP-initiated flows, SP-initiated flows, and Just In Time (JIT) provisioning are all supported. For an SP-initiated flow, use the single sign on URL <strong><a style="text-decoration: none; color: black;" onclick="return false;">https://&lt;yourSubDomain&gt;.qualtrics.com</a></strong>, where &lt;yourSubDomain&gt; is your Qualtrics subdomain.</span></div>
+</body>
+</html>
