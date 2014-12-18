@@ -1,0 +1,123 @@
+<html>
+<head>
+<link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script type="text/javascript">
+try{Typekit.load();}catch(e){}
+</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<title>Setup SSO</title>
+
+<!-- <script> src=”resources/scripts/getAppValues.js” ></script> -->
+
+<script>
+function processData(data) {
+  $('#signOnUrl').html(data["signOnUrl"]);
+  $('#signOutUrl').html(data["signOutUrl"]);
+  $('#changePasswordUrl').html(data["changePasswordUrl"]);
+  $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
+   $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
+  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#x509CertText').html(data["x509CertText"]);
+  $('#x509CertTextPem').html(data["x509CertTextPem"]);
+  $('#x509CertTextPem').css("white-space", "pre");
+  $('#certFingerPrint').html(data["certFingerPrint"]);
+  $('#validFrom').html(data["validFrom"]);
+  $('#validTo').html(data["validTo"]);
+  $('#issuer').html(data["issuer"]);
+$('#metadataUrl').html(data["signOnUrl"]);
+ $('#errorUrl').html(data["signOutUrl"]);
+ $('#timeoutUrl').html(data["signOutUrl"]);
+ $('#delAuthUrl').html(data["delAuthUrl"]);
+ $('#saml11SignOnUrl').html(data["saml11SignOnUrl"]);    
+}
+function getURLParameter(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+}
+$(document).ready(function($) {
+  // This condition is to ensure that the ajax api code is executed only on the intended pages
+  if ($('#loginAdminApp').length > 0) {
+    var app = getURLParameter('app');
+    var subdomain = getURLParameter('subdomain');
+    var instanceId = getURLParameter('instanceId');
+    var baseAdminUrl = getURLParameter('baseAdminUrl');
+    var url;
+    if ((subdomain == null && baseAdminUrl == null) || app == null || instanceId == null) {
+      $('#loginAdminApp').show();
+    } else {
+      var endpoint = '/api/internal/v1/setup/help/saml/' + app + '/' + instanceId + '?callback=processData';
+      if (baseAdminUrl) {
+        url = baseAdminUrl + endpoint;
+      } else if (subdomain) {
+        url = 'https://' + subdomain + '.okta-admin.com' + endpoint;
+      }
+      $.ajax({
+        type: 'GET',
+        url: url,
+        jsonp: false,
+        jsonpCallback: 'processData',
+        dataType: 'jsonp',
+        success: function(json) {
+          $('#loginAdminApp').hide();
+        },
+        error: function(e,jqXHR,ajaxSettings,thrownError) {
+          $('#loginAdminApp').show();
+        },
+        timeout: 3000
+      });
+    }
+  }
+
+  
+  $('#mailto').on('click', function() {
+      var to = "DedicatedSAMLComplaintLine@okta.com"; // I am assuming this will always be same!
+      var body = "Dear Okta,%0D%0A%0D%0AI used your SAML setup instruction. I want you to know…%0D%0AI completed the SAML setup?%0D%0AI found errors in this doc?%0D%0A%0D%0AHere’s what I noticed:";
+      var subject = "Update Doc:" + $('h1').text();       
+      var mailto = "mailto:" + to + "?subject=" + subject + "&body=" + body;
+      window.location.href = mailto;
+    });
+
+});
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="header clearfix">
+        <div class="logo-container">
+            <img src="resources/css/okta-logo-white.png" alt="Okta" />
+        </div>
+    </div>
+
+<div class="okta-instructions">
+<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
+<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+</div>
+<ol>
+<li>
+<p>Go to Unison at https://unison.com/login and sign in.</p>
+</li>
+<li>
+<p>Select the gear icon in the upper right, and then select <strong>Administration</strong>, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Unison_1.png" alt="Unison_1.png" /></p>
+</li>
+<li>In the window that opens, select the <strong>Authorization</strong> tab, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Unison_2.png" alt="Unison_2.png" /></li>
+<li>In the Service Provider Data section, copy your <strong>Organization ID</strong> that is located at end the of Metadata URL, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Unison_5.png" alt="Unison_5.png" /></li>
+<li>In Okta, in the <strong>General</strong> tab for the Unison app, paste the <strong>Organization ID</strong> that you just copied, and select <strong>Save</strong>, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/unison_6.png" alt="unison_6.png" /></li>
+<li>
+<p>In the Identity Provider Data section, copy the following information into the <strong>Sign in URL</strong>&nbsp;field, as shown below.</p>
+<kbd id="signOnUrl"> Sign into the Okta Admin dashboard to generate this value. </kbd></li>
+<li>
+<p>Copy and paste the following certificate into the <strong>Verification Certificate</strong> field, as shown below. Be cure to copy the <em>Begin Certificate</em> and <em>End Certificate</em> lines.</p>
+<pre id="x509CertTextPem"> Sign into the Okta Admin dashboard to generate this value. </pre>
+</li>
+<li>Select <strong>Submit</strong>, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Unison_3.png" alt="Unison_3.png" /></li>
+<li>
+<p>In the Authorization Options section, select <strong>Yes</strong> for <strong>Allow accounts to be automatically created by SSO</strong>, if desired, as shown below.</p>
+</li>
+<li>Check <strong>SAML</strong> for <strong>Allowed login methods for people in the company</strong>, as shown below.</li>
+<li>Select <strong>Submit</strong>, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Unison_4.png" alt="Unison_4.png" /></li>
+<li>Done!<br /><br /><strong>Note:</strong> Unison only supports an IdP-initiated flow.</li>
+</ol></div>
+</body>
+</html>

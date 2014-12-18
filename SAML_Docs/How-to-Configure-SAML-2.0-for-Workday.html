@@ -1,0 +1,165 @@
+<html>
+<head>
+<link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script type="text/javascript">
+try{Typekit.load();}catch(e){}
+</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<title>Setup SSO</title>
+
+<!-- <script> src=”resources/scripts/getAppValues.js” ></script> -->
+
+<script>
+function processData(data) {
+  $('#signOnUrl').html(data["signOnUrl"]);
+  $('#signOutUrl').html(data["signOutUrl"]);
+  $('#changePasswordUrl').html(data["changePasswordUrl"]);
+  $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
+   $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
+  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#x509CertText').html(data["x509CertText"]);
+  $('#x509CertTextPem').html(data["x509CertTextPem"]);
+  $('#x509CertTextPem').css("white-space", "pre");
+  $('#certFingerPrint').html(data["certFingerPrint"]);
+  $('#validFrom').html(data["validFrom"]);
+  $('#validTo').html(data["validTo"]);
+  $('#issuer').html(data["issuer"]);
+$('#metadataUrl').html(data["signOnUrl"]);
+ $('#errorUrl').html(data["signOutUrl"]);
+ $('#timeoutUrl').html(data["signOutUrl"]);
+ $('#delAuthUrl').html(data["delAuthUrl"]);
+ $('#saml11SignOnUrl').html(data["saml11SignOnUrl"]);    
+}
+function getURLParameter(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+}
+$(document).ready(function($) {
+  // This condition is to ensure that the ajax api code is executed only on the intended pages
+  if ($('#loginAdminApp').length > 0) {
+    var app = getURLParameter('app');
+    var subdomain = getURLParameter('subdomain');
+    var instanceId = getURLParameter('instanceId');
+    var baseAdminUrl = getURLParameter('baseAdminUrl');
+    var url;
+    if ((subdomain == null && baseAdminUrl == null) || app == null || instanceId == null) {
+      $('#loginAdminApp').show();
+    } else {
+      var endpoint = '/api/internal/v1/setup/help/saml/' + app + '/' + instanceId + '?callback=processData';
+      if (baseAdminUrl) {
+        url = baseAdminUrl + endpoint;
+      } else if (subdomain) {
+        url = 'https://' + subdomain + '.okta-admin.com' + endpoint;
+      }
+      $.ajax({
+        type: 'GET',
+        url: url,
+        jsonp: false,
+        jsonpCallback: 'processData',
+        dataType: 'jsonp',
+        success: function(json) {
+          $('#loginAdminApp').hide();
+        },
+        error: function(e,jqXHR,ajaxSettings,thrownError) {
+          $('#loginAdminApp').show();
+        },
+        timeout: 3000
+      });
+    }
+  }
+
+  
+  $('#mailto').on('click', function() {
+      var to = "DedicatedSAMLComplaintLine@okta.com"; // I am assuming this will always be same!
+      var body = "Dear Okta,%0D%0A%0D%0AI used your SAML setup instruction. I want you to know…%0D%0AI completed the SAML setup?%0D%0AI found errors in this doc?%0D%0A%0D%0AHere’s what I noticed:";
+      var subject = "Update Doc:" + $('h1').text();       
+      var mailto = "mailto:" + to + "?subject=" + subject + "&body=" + body;
+      window.location.href = mailto;
+    });
+
+});
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="header clearfix">
+        <div class="logo-container">
+            <img src="resources/css/okta-logo-white.png" alt="Okta" />
+        </div>
+    </div>
+
+<div class="okta-instructions">
+<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
+<p><strong>Please sign-in to the Okta Admin app to have your organization specific variables generated for you. You might not be able to complete the setup without these generated variables.</strong></p>
+</div>
+<h2>Before you begin</h2>
+<div class="okta-callout okta-warning">
+<p><strong>Read this before you enable SAML</strong></p>
+<p>Enabling SAML will affect all users who use this application, which means that users will not be able to sign-in through their regular log-in page, if you enable SP initiated SSO. Users will only be able to access the app through the Okta service.</p>
+<p><strong>Backup URL</strong></p>
+<p>Workday provides a backup log-in url where users can sign-in using their normal username and password in the following format:&nbsp;<strong>[Your Workday URL]/login.flex?redirect=n</strong><br /><br />If you log into:&nbsp;<a style="text-decoration: none; color: black;" onclick="return false;">https://acme.workday.com/login-auth.html,</a> [Your Workday URL] is: <a style="text-decoration: none; color: black;" onclick="return false;">https://acme.workday.com</a>.</p>
+</div>
+<h2>Sign In to Workday</h2>
+<p>Go to the <strong>Edit Tenant Setup</strong> page. To get there, search for <strong>Edit Tenant Setup</strong> in the home screen search box, then click the <strong>Edit Tenant Setup</strong> link in the search results. The step numbers match the numbers in the screenshots shown below.</p>
+<ol>
+<li>
+<p>Click on the&nbsp;<strong>Single Sign On</strong>&nbsp;(right-most) tab</p>
+</li>
+<li>
+<p>Click on the plus icon underneath&nbsp;<strong>Redirection URLs</strong>&nbsp;to add a row.</p>
+</li>
+<li>
+<p>Input the following into&nbsp;<strong>Login Redirect URL</strong>:</p>
+<kbd>[org URL]/login-saml2.flex<br />Example: https://impl.workday.com/acme/login-saml2.flex</kbd></li>
+<li>
+<p>Input the following into&nbsp;<strong>Mobile Redirect URL</strong>:</p>
+<kbd>[org URL]/login-saml2.flex<br />Example: https://impl.workday.com/acme/login-saml2.flex</kbd></li>
+<li>
+<p>Copy and paste the following into&nbsp;<strong>Logout Redirect URL</strong>:</p>
+<kbd id="signOutUrl">Sign into the Okta Admin dashboard to generate this value.</kbd></li>
+<li>
+<p>Select an&nbsp;<strong>Environment</strong>.</p>
+</li>
+<li>
+<p>Check&nbsp;<strong>Enable SAML Access</strong>.</p>
+</li>
+<li>
+<p>Copy and paste the following into&nbsp;<strong>Identity Provider ID</strong>:</p>
+<kbd id="issuer">Sign into the Okta Admin dashboard to generate this value.</kbd></li>
+<li>
+<p>Click the icon next to the&nbsp;<strong>x509 Public Key</strong>&nbsp;field, select&nbsp;<strong>Create</strong>&nbsp;from the left-hand column, and select&nbsp;<strong>Create x509 Certificate</strong>&nbsp;from the right-hand column. This will bring you to the&nbsp;<strong>Create x509 Certificate</strong>&nbsp;screen. Steps a–e are shown in the second screenshot below.</p>
+<ol class="bullets">
+<li>
+<p>Enter a unique name for your certificate, for example,&nbsp;<strong>okta.cert</strong>.</p>
+</li>
+<li>
+<p>Copy and paste the following into&nbsp;<strong>Valid From</strong>:<kbd id="validFrom">Sign into the Okta Admin dashboard to generate this value.</kbd></p>
+</li>
+<li>
+<p>Copy and paste the following into&nbsp;<strong>Valid To</strong>:<kbd id="validTo">Sign into the Okta Admin dashboard to generate this value.</kbd></p>
+</li>
+<li>
+<p>Copy and paste the certificate listed below into the&nbsp;<strong>Certificate</strong>&nbsp;field:</p>
+<pre id="x509CertTextPem">Sign into the Okta Admin dashboard to generate this value.</pre>
+</li>
+<li class="important">
+<p>Click&nbsp;<strong>OK</strong>&nbsp;to save your certificate, then select the Single Sign On tab again to return to the Single Sign-On Setup screen.</p>
+</li>
+</ol></li>
+<li>
+<p>Copy and paste the following into&nbsp;<strong>idP SSO Service URL</strong>:</p>
+<kbd id="signOnUrl">Sign into the Okta Admin dashboard to generate this value.</kbd></li>
+<li class="important">[Optional] We recommend checking&nbsp;<strong>Enable SP Initiated SAML Authentication</strong>. Be sure to read the <em>Before you begin</em> section above.</li>
+<li class="important">
+<p>Click&nbsp;<strong>OK</strong>&nbsp;to&nbsp;<strong>save</strong>&nbsp;your changes.</p>
+</li>
+<li>Done!</li>
+</ol>
+<p><img style="border: 0; padding: 0;" src="images/apps/workday-sso-setup.png" alt="workday-sso-setup.png" /></p>
+<p><img style="border: 0; padding: 0;" src="images/apps/workday-create-cert.png" alt="workday-create-cert.png" /></p>
+<p>&nbsp;</p>
+</div>
+</body>
+</html>

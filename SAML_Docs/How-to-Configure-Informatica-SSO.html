@@ -1,0 +1,174 @@
+<html>
+<head>
+<link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script type="text/javascript">
+try{Typekit.load();}catch(e){}
+</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<title>Setup SSO</title>
+
+<!-- <script> src=”resources/scripts/getAppValues.js” ></script> -->
+
+<script>
+function processData(data) {
+  $('#signOnUrl').html(data["signOnUrl"]);
+  $('#signOutUrl').html(data["signOutUrl"]);
+  $('#changePasswordUrl').html(data["changePasswordUrl"]);
+  $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
+   $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
+  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#x509CertText').html(data["x509CertText"]);
+  $('#x509CertTextPem').html(data["x509CertTextPem"]);
+  $('#x509CertTextPem').css("white-space", "pre");
+  $('#certFingerPrint').html(data["certFingerPrint"]);
+  $('#validFrom').html(data["validFrom"]);
+  $('#validTo').html(data["validTo"]);
+  $('#issuer').html(data["issuer"]);
+$('#metadataUrl').html(data["signOnUrl"]);
+ $('#errorUrl').html(data["signOutUrl"]);
+ $('#timeoutUrl').html(data["signOutUrl"]);
+ $('#delAuthUrl').html(data["delAuthUrl"]);
+ $('#saml11SignOnUrl').html(data["saml11SignOnUrl"]);    
+}
+function getURLParameter(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+}
+$(document).ready(function($) {
+  // This condition is to ensure that the ajax api code is executed only on the intended pages
+  if ($('#loginAdminApp').length > 0) {
+    var app = getURLParameter('app');
+    var subdomain = getURLParameter('subdomain');
+    var instanceId = getURLParameter('instanceId');
+    var baseAdminUrl = getURLParameter('baseAdminUrl');
+    var url;
+    if ((subdomain == null && baseAdminUrl == null) || app == null || instanceId == null) {
+      $('#loginAdminApp').show();
+    } else {
+      var endpoint = '/api/internal/v1/setup/help/saml/' + app + '/' + instanceId + '?callback=processData';
+      if (baseAdminUrl) {
+        url = baseAdminUrl + endpoint;
+      } else if (subdomain) {
+        url = 'https://' + subdomain + '.okta-admin.com' + endpoint;
+      }
+      $.ajax({
+        type: 'GET',
+        url: url,
+        jsonp: false,
+        jsonpCallback: 'processData',
+        dataType: 'jsonp',
+        success: function(json) {
+          $('#loginAdminApp').hide();
+        },
+        error: function(e,jqXHR,ajaxSettings,thrownError) {
+          $('#loginAdminApp').show();
+        },
+        timeout: 3000
+      });
+    }
+  }
+
+  
+  $('#mailto').on('click', function() {
+      var to = "DedicatedSAMLComplaintLine@okta.com"; // I am assuming this will always be same!
+      var body = "Dear Okta,%0D%0A%0D%0AI used your SAML setup instruction. I want you to know…%0D%0AI completed the SAML setup?%0D%0AI found errors in this doc?%0D%0A%0D%0AHere’s what I noticed:";
+      var subject = "Update Doc:" + $('h1').text();       
+      var mailto = "mailto:" + to + "?subject=" + subject + "&body=" + body;
+      window.location.href = mailto;
+    });
+
+});
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="header clearfix">
+        <div class="logo-container">
+            <img src="resources/css/okta-logo-white.png" alt="Okta" />
+        </div>
+    </div>
+
+<div class="okta-instructions">
+<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
+<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+</div>
+<h2>Send an email to your SaaS vendor.</h2>
+<p>&nbsp;</p>
+<p>Copy and paste the fields below to compose your own email:</p>
+<p class="bold indent-10">Subject</p>
+<kbd class="margin-btm-10"> Enabled inbound SSO for <strong>Org</strong></kbd>
+<p>&nbsp;</p>
+<kbd class="margin-btm-10"> Please enable Okta for inbound SSO access to company <strong>Org</strong> <br /> The administrator for this account is <strong>AdminEmail</strong> <br /> <br /> The API endpoint URL has to be copied has to the okta.ini. The value is assign to the serviceURL.PROD field. <br /> <strong><kbd id="informaticaApiUrl">Sign in to the Okta Admin app to have this variable generated for you</kbd></strong> <br /><br /> Login Redirect URL, sends an authentication request back to Okta. <br /> <kbd id="signOnUrl">Sign in to the Okta Admin app to have this variable generated for you</kbd> </kbd>
+<p><strong>Org</strong> - Name of the company</p>
+<p><strong>AdminEmail</strong> - Adminstrator's email for the company</p>
+<p><strong>SSOUrl</strong></p>
+<kbd id="signOnUrl">Sign in to the Okta Admin app to have this variable generated for you</kbd>
+<p><strong>ExternalKey</strong></p>
+<kbd id="externalKey">Sign in to the Okta Admin app to have this variable generated for you</kbd></div>
+<script type="text/javascript">// <![CDATA[
+function egenciaProcessData(data) {
+  jQuery('#signOnUrl').html(data["signOnUrl"]);
+  jQuery('#metadataUrl').html(data["signOnUrl"]);
+  jQuery('#signOutUrl').html(data["signOutUrl"]);
+  jQuery('#errorUrl').html(data["signOutUrl"]);
+  jQuery('#timeoutUrl').html(data["signOutUrl"]);
+  jQuery('#changePasswordUrl').html(data["changePasswordUrl"]);
+  jQuery('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
+  jQuery('#idpMetadata').html(data["idpMetadata"]);
+  jQuery('#x509CertText').html(data["x509CertText"]);
+  jQuery('#certFingerPrint').html(data["certFingerPrint"]);
+  jQuery('#validFrom').html(data["validFrom"]);
+  jQuery('#validTo').html(data["validTo"]);
+  jQuery('#issuer').html(data["issuer"]);
+  jQuery('#delAuthUrl').html(data["delAuthUrl"]);
+  jQuery('#saml11SignOnUrl').html(data["saml11SignOnUrl"]);
+  var baseAdminUrl = getURLParameter('baseAdminUrl');
+  var informaticaApiUrl = baseAdminUrl.replace('-admin','') + '/api/1/app/informatica_sso/sso';
+  jQuery('#informaticaApiUrl').html(informaticaApiUrl);
+}
+
+function getURLParameter(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+}
+
+(function($) { 
+  // This condition is to ensure that the ajax api code is executed only on the intended pages
+  if ($('#informaticaApp').length > 0) {
+    var app = getURLParameter('app');
+    var subdomain = getURLParameter('subdomain');
+    var instanceId = getURLParameter('instanceId');
+    var baseAdminUrl = getURLParameter('baseAdminUrl');
+    var url;
+
+    if ((subdomain == null && baseAdminUrl == null) || app == null || instanceId == null) {
+      $('#informaticaApp').show();
+    } else {
+      var endpoint = '/api/internal/v1/setup/help/saml/' + app + '/' + instanceId + '?callback=egenciaProcessData';
+      if (baseAdminUrl) {
+        url = baseAdminUrl + endpoint;
+      } else if (subdomain) {
+        url = 'https://' + subdomain + '.okta-admin.com' + endpoint;
+      }
+
+      $.ajax({
+        type: 'GET',
+        url: url,
+        jsonp: false,
+        jsonpCallback: 'egenciaProcessData',
+        dataType: 'jsonp',
+        success: function(json) {
+          $('#informaticaApp').hide();
+        },
+        error: function(e,jqXHR,ajaxSettings,thrownError) {
+          $('#informaticaApp').show();
+        },
+        timeout: 3000
+      });
+    }
+  }
+})(jQuery);
+// ]]></script>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<html>
+<head>
+<link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript" />-->
+<script type="text/javascript">
+try{Typekit.load();}catch(e){}
+</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<title>Setup SSO</title>
+
+<!-- <script> src=”resources/scripts/getAppValues.js” ></script> -->
+
+<script>
+function processData(data) {
+  $('#signOnUrl').html(data["signOnUrl"]);
+  $('#signOutUrl').html(data["signOutUrl"]);
+  $('#changePasswordUrl').html(data["changePasswordUrl"]);
+  $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
+   $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
+  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#x509CertText').html(data["x509CertText"]);
+  $('#x509CertTextPem').html(data["x509CertTextPem"]);
+  $('#x509CertTextPem').css("white-space", "pre");
+  $('#certFingerPrint').html(data["certFingerPrint"]);
+  $('#validFrom').html(data["validFrom"]);
+  $('#validTo').html(data["validTo"]);
+  $('#issuer').html(data["issuer"]);
+$('#metadataUrl').html(data["signOnUrl"]);
+ $('#errorUrl').html(data["signOutUrl"]);
+ $('#timeoutUrl').html(data["signOutUrl"]);
+ $('#delAuthUrl').html(data["delAuthUrl"]);
+ $('#saml11SignOnUrl').html(data["saml11SignOnUrl"]);    
+}
+function getURLParameter(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+}
+$(document).ready(function($) {
+  // This condition is to ensure that the ajax api code is executed only on the intended pages
+  if ($('#loginAdminApp').length > 0) {
+    var app = getURLParameter('app');
+    var subdomain = getURLParameter('subdomain');
+    var instanceId = getURLParameter('instanceId');
+    var baseAdminUrl = getURLParameter('baseAdminUrl');
+    var url;
+    if ((subdomain == null && baseAdminUrl == null) || app == null || instanceId == null) {
+      $('#loginAdminApp').show();
+    } else {
+      var endpoint = '/api/internal/v1/setup/help/saml/' + app + '/' + instanceId + '?callback=processData';
+      if (baseAdminUrl) {
+        url = baseAdminUrl + endpoint;
+      } else if (subdomain) {
+        url = 'https://' + subdomain + '.okta-admin.com' + endpoint;
+      }
+      $.ajax({
+        type: 'GET',
+        url: url,
+        jsonp: false,
+        jsonpCallback: 'processData',
+        dataType: 'jsonp',
+        success: function(json) {
+          $('#loginAdminApp').hide();
+        },
+        error: function(e,jqXHR,ajaxSettings,thrownError) {
+          $('#loginAdminApp').show();
+        },
+        timeout: 3000
+      });
+    }
+  }
+
+  
+  $('#mailto').on('click', function() {
+      var to = "DedicatedSAMLComplaintLine@okta.com"; // I am assuming this will always be same!
+      var body = "Dear Okta,%0D%0A%0D%0AI used your SAML setup instruction. I want you to know…%0D%0AI completed the SAML setup?%0D%0AI found errors in this doc?%0D%0A%0D%0AHere’s what I noticed:";
+      var subject = "Update Doc:" + $('h1').text();       
+      var mailto = "mailto:" + to + "?subject=" + subject + "&body=" + body;
+      window.location.href = mailto;
+    });
+
+});
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="header clearfix">
+        <div class="logo-container">
+            <img src="resources/css/okta-logo-white.png" alt="Okta" />
+        </div>
+    </div>
+
+<p>&nbsp;</p>
+<p><strong>Step 1: Log into Netsuite to retrieve the account ID</strong></p>
+<ul>
+<li>In Netsuite, navigate to Setup &gt; Integration &gt; Web Services Preferences (see screenshot)</li>
+<li>The account ID is referred to as the Partner ID in Okta</li>
+<li>The account ID must be configured as an attribute in the SAML 2.0 Template App</li>
+<li>If you use the OAN app instead, you'll have to provide the account ID in a field</li>
+</ul>
+<p>&nbsp;<img class="confluence-embedded-image" src="https://oktawiki.atlassian.net/wiki/download/attachments/6946883/image2013-4-23%209%3A35%3A50.png?version=1&amp;modificationDate=1366735191620&amp;api=v2" alt="" width="681" height="352" data-image-src="/wiki/download/attachments/6946883/image2013-4-23%209%3A35%3A50.png?version=1&amp;modificationDate=1366735191620&amp;api=v2" /></p>
+<p><strong>&nbsp;</strong></p>
+<p><strong>Step 2:<strong>&nbsp;</strong>Configure SAML 2.0 Template App in Okta (<strong><strong>If you are using OAN app skip to step 3)</strong></strong><br /></strong></p>
+<p><strong>&nbsp;</strong></p>
+<div class="table-wrap">
+<table class="confluenceTable tablesorter">
+<thead>
+<tr class="sortableHeader"><th class="confluenceTh sortableHeader" data-column="0">
+<div class="tablesorter-header-inner">Parameter</div>
+</th><th class="confluenceTh sortableHeader" data-column="1">
+<div class="tablesorter-header-inner">Value</div>
+</th></tr>
+</thead>
+<tbody>
+<tr>
+<td class="confluenceTd">
+<p><strong>Application label:&nbsp;</strong></p>
+<div><strong>&nbsp;</strong></div>
+</td>
+<td class="confluenceTd">Netsuite-Template</td>
+</tr>
+<tr>
+<td class="confluenceTd">
+<p><strong>Name ID Format</strong></p>
+</td>
+<td class="confluenceTd">EmailAddress</td>
+</tr>
+<tr>
+<td class="confluenceTd"><strong>Recipient</strong></td>
+<td class="confluenceTd"><a class="external-link" href="https://system.na1.netsuite.com/saml2/acs" rel="nofollow">https://system.na1.netsuite.com/saml2/acs</a></td>
+</tr>
+<tr>
+<td class="confluenceTd" colspan="1">
+<p><strong>Audience Restriction</strong></p>
+</td>
+<td class="confluenceTd" colspan="1"><a class="external-link" href="http://www.netsuite.com/sp" rel="nofollow">http://www.netsuite.com/sp</a></td>
+</tr>
+<tr>
+<td class="confluenceTd" colspan="1"><strong>authnContextClassRef</strong></td>
+<td class="confluenceTd" colspan="1">PasswordProtectedTransport</td>
+</tr>
+<tr>
+<td class="confluenceTd" colspan="1"><strong>Destination</strong></td>
+<td class="confluenceTd" colspan="1"><a class="external-link" href="https://system.na1.netsuite.com/saml2/acs" rel="nofollow">https://system.na1.netsuite.com/saml2/acs</a></td>
+</tr>
+<tr>
+<td class="confluenceTd" colspan="1"><strong>Response</strong></td>
+<td class="confluenceTd" colspan="1">Signed</td>
+</tr>
+<tr>
+<td class="confluenceTd" colspan="1"><strong>Assertion</strong></td>
+<td class="confluenceTd" colspan="1">Signed</td>
+</tr>
+<tr>
+<td class="confluenceTd" colspan="1"><strong>Request</strong></td>
+<td class="confluenceTd" colspan="1">Compressed</td>
+</tr>
+<tr>
+<td class="confluenceTd" colspan="1">
+<p><strong>Post Back URL</strong></p>
+<div><strong>&nbsp;</strong></div>
+</td>
+<td class="confluenceTd" colspan="1"><a class="external-link" href="https://system.na1.netsuite.com/saml2/acs" rel="nofollow">https://system.na1.netsuite.com/saml2/acs</a></td>
+</tr>
+<tr>
+<td class="confluenceTd" colspan="1">
+<p><strong>Attribute Statements</strong></p>
+</td>
+<td class="confluenceTd" colspan="1">email|${user.email}, account|&lt;netsuite account id&gt;</td>
+</tr>
+<tr>
+<td class="confluenceTd" colspan="1">
+<p><strong>Post Back URL</strong></p>
+</td>
+<td class="confluenceTd" colspan="1"><a class="external-link" href="https://system.na1.netsuite.com/saml2/acs" rel="nofollow">https://system.na1.netsuite.com/saml2/acs</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>&nbsp;</strong></p>
+<p><strong>Step 3: Download IDP Metadata from Okta.</strong></p>
+<p>From Single Sign On Page of SAML 2.0 Template and save it as a txt file</p>
+<h1 id="NetsuiteSAMLConfiguration-NetsuiteConfiguration">Netsuite Configuration</h1>
+<p><strong>&nbsp;</strong><strong>Step 1: Enable SAML:</strong></p>
+<ul>
+<li>In Netsuite, navigate to Setup &gt; Company &gt; Enable Features &gt; SuiteCloud</li>
+<li>Check the SAML Single Sign-on checkbox</li>
+</ul>
+<p><img class="confluence-embedded-image" src="https://oktawiki.atlassian.net/wiki/download/attachments/6946883/image2013-4-23%209%3A45%3A37.png?version=1&amp;modificationDate=1366735536257&amp;api=v2" alt="" data-image-src="/wiki/download/attachments/6946883/image2013-4-23%209%3A45%3A37.png?version=1&amp;modificationDate=1366735536257&amp;api=v2" /></p>
+<p><strong>Step 2: Adding SAML Permissions to Roles</strong></p>
+<ul>
+<li>Verbatim from Netsuite: Users must have the SAML Single Sign-on permission in order to access NetSuite through SAML.</li>
+<li>Edit users' assigned roles to include this permission
+<ul>
+<li>Navigate to Setup &gt; Users/Roles &gt; Manage Roles</li>
+<li>Add the "SAML Single Sign-on" permission to a role by first selecting a role, going to setup, and then clicking edit</li>
+</ul>
+</li>
+</ul>
+<p><img class="confluence-embedded-image" src="https://oktawiki.atlassian.net/wiki/download/attachments/6946883/image2013-4-23%209%3A45%3A59.png?version=1&amp;modificationDate=1366735558098&amp;api=v2" alt="" data-image-src="/wiki/download/attachments/6946883/image2013-4-23%209%3A45%3A59.png?version=1&amp;modificationDate=1366735558098&amp;api=v2" /></p>
+<p><strong>Step 3: Upload IDP Metadata</strong></p>
+<p><strong>&nbsp;</strong></p>
+<p><strong><img class="confluence-embedded-image" src="https://oktawiki.atlassian.net/wiki/download/attachments/6946883/image2013-4-23%209%3A46%3A28.png?version=1&amp;modificationDate=1366735587752&amp;api=v2" alt="" data-image-src="/wiki/download/attachments/6946883/image2013-4-23%209%3A46%3A28.png?version=1&amp;modificationDate=1366735587752&amp;api=v2" /></strong></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

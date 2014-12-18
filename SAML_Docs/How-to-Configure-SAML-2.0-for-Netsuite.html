@@ -1,0 +1,126 @@
+<html>
+<head>
+<link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script type="text/javascript">
+try{Typekit.load();}catch(e){}
+</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<title>Setup SSO</title>
+
+<!-- <script> src=”resources/scripts/getAppValues.js” ></script> -->
+
+<script>
+function processData(data) {
+  $('#signOnUrl').html(data["signOnUrl"]);
+  $('#signOutUrl').html(data["signOutUrl"]);
+  $('#changePasswordUrl').html(data["changePasswordUrl"]);
+  $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
+   $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
+  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#x509CertText').html(data["x509CertText"]);
+  $('#x509CertTextPem').html(data["x509CertTextPem"]);
+  $('#x509CertTextPem').css("white-space", "pre");
+  $('#certFingerPrint').html(data["certFingerPrint"]);
+  $('#validFrom').html(data["validFrom"]);
+  $('#validTo').html(data["validTo"]);
+  $('#issuer').html(data["issuer"]);
+$('#metadataUrl').html(data["signOnUrl"]);
+ $('#errorUrl').html(data["signOutUrl"]);
+ $('#timeoutUrl').html(data["signOutUrl"]);
+ $('#delAuthUrl').html(data["delAuthUrl"]);
+ $('#saml11SignOnUrl').html(data["saml11SignOnUrl"]);    
+}
+function getURLParameter(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+}
+$(document).ready(function($) {
+  // This condition is to ensure that the ajax api code is executed only on the intended pages
+  if ($('#loginAdminApp').length > 0) {
+    var app = getURLParameter('app');
+    var subdomain = getURLParameter('subdomain');
+    var instanceId = getURLParameter('instanceId');
+    var baseAdminUrl = getURLParameter('baseAdminUrl');
+    var url;
+    if ((subdomain == null && baseAdminUrl == null) || app == null || instanceId == null) {
+      $('#loginAdminApp').show();
+    } else {
+      var endpoint = '/api/internal/v1/setup/help/saml/' + app + '/' + instanceId + '?callback=processData';
+      if (baseAdminUrl) {
+        url = baseAdminUrl + endpoint;
+      } else if (subdomain) {
+        url = 'https://' + subdomain + '.okta-admin.com' + endpoint;
+      }
+      $.ajax({
+        type: 'GET',
+        url: url,
+        jsonp: false,
+        jsonpCallback: 'processData',
+        dataType: 'jsonp',
+        success: function(json) {
+          $('#loginAdminApp').hide();
+        },
+        error: function(e,jqXHR,ajaxSettings,thrownError) {
+          $('#loginAdminApp').show();
+        },
+        timeout: 3000
+      });
+    }
+  }
+
+  
+  $('#mailto').on('click', function() {
+      var to = "DedicatedSAMLComplaintLine@okta.com"; // I am assuming this will always be same!
+      var body = "Dear Okta,%0D%0A%0D%0AI used your SAML setup instruction. I want you to know…%0D%0AI completed the SAML setup?%0D%0AI found errors in this doc?%0D%0A%0D%0AHere’s what I noticed:";
+      var subject = "Update Doc:" + $('h1').text();       
+      var mailto = "mailto:" + to + "?subject=" + subject + "&body=" + body;
+      window.location.href = mailto;
+    });
+
+});
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="header clearfix">
+        <div class="logo-container">
+            <img src="resources/css/okta-logo-white.png" alt="Okta" />
+        </div>
+    </div>
+
+<div class="okta-instructions">
+<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
+<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+</div>
+<ol>
+<li>Sign on to Netsuite with your user credentials.&nbsp;</li>
+<li>Select <strong>Setup &gt; Company &gt; Enable Features</strong> on the top menu and submenus that appear, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/netsuite_b_1.png" alt="netsuite_b_1.png" /></li>
+<li>Select <strong>SuiteCloud</strong> on the Enable Features menu, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/netsuite_b_2.png" alt="netsuite_b_2.png" /></li>
+<li>Check <strong>SAML Single Sign-on</strong>, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/netsuite_b_3.png" alt="netsuite_b_3.png" /></li>
+<li>On the top menu, select <strong>Setup &gt; Users/Roles</strong>, and then click <strong>Manage Roles</strong>.<br /><br /><strong>Note:</strong> Do not click on <em>New</em> or <em>Search</em> in the final submenu that appears. Click <strong>Manage Roles</strong> to go to the next screen.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/netsuite_b_4.png" alt="netsuite_b_4.png" /></li>
+<li>The Manage Roles section that contains a list of all the roles assigned in your organization opens. Select <strong>Edit</strong> for a role for which you want to enable SAML, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/netsuite_b_5.png" alt="netsuite_b_5.png" /></li>
+<li>Select <strong>Permissions</strong> and then select <strong>Setup</strong>. Select the <strong>dropdown icon</strong> to display the list above the empty box. Select <strong>SAML Single Sign-on</strong>, and then select <strong>Add</strong>, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/netsuite_b_6.png" alt="netsuite_b_6.png" /></li>
+<li>After you select Add, select <strong>Set Up SAML Single Sign-on</strong>, and select <strong>Add</strong> again, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/netsuite_b_9.png" alt="netsuite_b_9.png" /><br /><br />You will see both selections listed with the level Full, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/netsuite_b_10.png" alt="netsuite_b_10.png" /></li>
+<li>Select <strong>Save</strong> to return to the Manage Roles section.</li>
+<li>Repeat steps 6–9 for each role for which you want to enable SAML.</li>
+<li>
+<p>On the main menu at the top of the page select <strong>Setup &gt; Integration &gt; SAML Single Sign-on</strong>, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/netsuite_b_7.png" alt="netsuite_b_7.png" /></p>
+</li>
+<li>The SAML Setup page opens, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/netsuite_b_8.png" alt="netsuite_b_8.png" /></li>
+<li>
+<p>Copy and paste the following URL into <strong style="font-size: 14px; background-color: initial;">Logout Landing Page</strong>, as shown above.</p>
+</li>
+<li><kbd id="signOutUrl">Sign into the Okta Admin dashboard to generate this value.</kbd></li>
+<li>
+<p>Copy and paste the following URL into <strong>Identity Provider Login Page</strong>, as shown above.</p>
+<kbd id="signOnUrl">Sign into the Okta Admin dashboard to generate this value.</kbd></li>
+<li>
+<p>Save the metadata shown below in a file named <em>metadata.txt. S</em>elect <strong>Upload</strong> <strong>IDP metadata File</strong>. Then, select Choose File and navigate to the <em>metadata.txt</em> file you just created, as shown above.</p>
+<textarea id="idpMetadata">Sign into the Okta Admin dashboard to generate this value.</textarea></li>
+<li>Select <strong>Submit</strong>, as shown above.</li>
+<li>Done!</li>
+</ol></div>
+</body>
+</html>

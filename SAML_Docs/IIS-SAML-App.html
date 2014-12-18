@@ -1,0 +1,162 @@
+<html>
+<head>
+<link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script type="text/javascript">
+try{Typekit.load();}catch(e){}
+</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<title>Setup SSO</title>
+
+<!-- <script> src=”resources/scripts/getAppValues.js” ></script> -->
+
+<script>
+function processData(data) {
+  $('#signOnUrl').html(data["signOnUrl"]);
+  $('#signOutUrl').html(data["signOutUrl"]);
+  $('#changePasswordUrl').html(data["changePasswordUrl"]);
+  $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
+   $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
+  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#x509CertText').html(data["x509CertText"]);
+  $('#x509CertTextPem').html(data["x509CertTextPem"]);
+  $('#x509CertTextPem').css("white-space", "pre");
+  $('#certFingerPrint').html(data["certFingerPrint"]);
+  $('#validFrom').html(data["validFrom"]);
+  $('#validTo').html(data["validTo"]);
+  $('#issuer').html(data["issuer"]);
+$('#metadataUrl').html(data["signOnUrl"]);
+ $('#errorUrl').html(data["signOutUrl"]);
+ $('#timeoutUrl').html(data["signOutUrl"]);
+ $('#delAuthUrl').html(data["delAuthUrl"]);
+ $('#saml11SignOnUrl').html(data["saml11SignOnUrl"]);    
+}
+function getURLParameter(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+}
+$(document).ready(function($) {
+  // This condition is to ensure that the ajax api code is executed only on the intended pages
+  if ($('#loginAdminApp').length > 0) {
+    var app = getURLParameter('app');
+    var subdomain = getURLParameter('subdomain');
+    var instanceId = getURLParameter('instanceId');
+    var baseAdminUrl = getURLParameter('baseAdminUrl');
+    var url;
+    if ((subdomain == null && baseAdminUrl == null) || app == null || instanceId == null) {
+      $('#loginAdminApp').show();
+    } else {
+      var endpoint = '/api/internal/v1/setup/help/saml/' + app + '/' + instanceId + '?callback=processData';
+      if (baseAdminUrl) {
+        url = baseAdminUrl + endpoint;
+      } else if (subdomain) {
+        url = 'https://' + subdomain + '.okta-admin.com' + endpoint;
+      }
+      $.ajax({
+        type: 'GET',
+        url: url,
+        jsonp: false,
+        jsonpCallback: 'processData',
+        dataType: 'jsonp',
+        success: function(json) {
+          $('#loginAdminApp').hide();
+        },
+        error: function(e,jqXHR,ajaxSettings,thrownError) {
+          $('#loginAdminApp').show();
+        },
+        timeout: 3000
+      });
+    }
+  }
+
+  
+  $('#mailto').on('click', function() {
+      var to = "DedicatedSAMLComplaintLine@okta.com"; // I am assuming this will always be same!
+      var body = "Dear Okta,%0D%0A%0D%0AI used your SAML setup instruction. I want you to know…%0D%0AI completed the SAML setup?%0D%0AI found errors in this doc?%0D%0A%0D%0AHere’s what I noticed:";
+      var subject = "Update Doc:" + $('h1').text();       
+      var mailto = "mailto:" + to + "?subject=" + subject + "&body=" + body;
+      window.location.href = mailto;
+    });
+
+});
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="header clearfix">
+        <div class="logo-container">
+            <img src="resources/css/okta-logo-white.png" alt="Okta" />
+        </div>
+    </div>
+
+<div class="okta-instructions">
+<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
+<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+</div>
+<h2>Overview</h2>
+<h3>Basic integration of Okta Authentication consists of the following three parts:</h3>
+<ul>
+<ul>
+<li>
+<p>Run-time libraries</p>
+</li>
+<li>
+<p>Configuration</p>
+</li>
+<li>
+<p>Forms Based Authentication</p>
+</li>
+</ul>
+</ul>
+<h2>Run-time libraries</h2>
+<ul>
+<ul><ol>
+<li>
+<p>Copy the&nbsp;<em>Okta.Authentication.dll</em> into <em>/bin</em> folder of the ASP.NET application.</p>
+</li>
+</ol></ul>
+</ul>
+<h2>Configuration</h2>
+<ul>
+<ul><ol>
+<li>
+<p>Edit the root Web.config file of the ASP.NET application. Add the following code to register the Okta Authentication configuration section.</p>
+<p style="padding-left: 60px;">&lt;configSections&gt;<br />&nbsp; &nbsp;&lt;!-- Okta Authentication uses a custom configuration section --&gt;<br />&nbsp; &nbsp;&lt;sectionGroup name="okta"&gt;<br />&nbsp; &nbsp; &nbsp; &lt;section name="authentication" <br />&nbsp; &nbsp; &nbsp; &nbsp; type="Okta.Authentication.Configuration.AuthenticationSection, Okta.Authentication"/&gt;<br />&nbsp; &nbsp; &nbsp; &lt;/sectionGroup&gt;<br />&lt;/configSections&gt;</p>
+</li>
+<li>
+<p>Add the following code to register Okta Authentication HTTP-module (for IIS 6 or IIS 7 with classic pipeline mode).</p>
+<p style="padding-left: 60px;">&lt;system.web&gt;<br />&nbsp; &lt;httpModules&gt;<br />&nbsp; &nbsp; &lt;!-- Okta Authentication uses an http-module to handle authorization process --&gt;<br />&nbsp; &nbsp; &lt;add name="OktaAuthentication" type="Okta.Authentication.OktaAuthenticationModule, Okta.Authentication"/&gt;<br />&nbsp; &lt;/httpModules&gt;<br />&lt;/system.web&gt;</p>
+</li>
+<li>
+<p>Add the following code to register Okta Authentication HTTP-module (for IIS 7 with integrated pipeline mode).</p>
+<p style="padding-left: 60px;">&lt;system.webServer&gt;<br />&nbsp; &lt;modules runAllManagedModulesForAllRequests="true"&gt;<br />&nbsp; &nbsp; &lt;!-- Okta Authentication uses an http-module to handle authorization process --&gt;<br />&nbsp; &nbsp; &lt;add name="OktaAuthentication" type="Okta.Authentication.OktaAuthenticationModule, Okta.Authentication"/&gt;<br />&nbsp; &lt;/modules&gt;<br /> &lt;/system.webServer&gt;</p>
+</li>
+<li>
+<p>Add the following Okta Authentication configuration section.&nbsp;</p>
+<p class="margin-top-5" style="padding-left: 60px;">&lt;okta&gt;<br />&nbsp; &nbsp; &lt;authentication&gt;<br />&nbsp; &nbsp; &nbsp; &lt;issuer&gt; [Issuer Data] &lt;/issuer&gt;<br />&nbsp; &nbsp; &nbsp; &lt;authenticationUrl&gt; [Authentication URL Data] &lt;/authenticationUrl&gt; <br />&nbsp; &nbsp; &nbsp; &lt;certificate&gt;<br />&nbsp; &nbsp; &nbsp; [Certificate Data]<br />&nbsp; &nbsp; &nbsp; &lt;/certificate&gt;<br />&nbsp; &nbsp; &nbsp; &lt;logoutUrls&gt;<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;add url="/Logout.aspx"/&gt;<br />&nbsp; &nbsp; &nbsp; &lt;/logoutUrls&gt; <br />&nbsp; &nbsp; &lt;/authentication&gt;<br />&lt;/okta&gt;</p>
+<p>After you have added this code, make the following three replacements.</p>
+<ul>
+<li>Replace [Issuer Data] with the following:
+<p><kbd id="issuer">Sign into the Okta Admin dashboard to generate this value.</kbd></p>
+</li>
+<li>Replace [Authentication URL Data] with the following:
+<p><kbd id="signOnUrl">Sign into the Okta Admin dashboard to generte this value.</kbd></p>
+</li>
+<li>Replace [Certificate Data] with the following:
+<p><kbd id="x509CertTextPem">Sign into the Okta Admin dashboard to generte this value.</kbd></p>
+</li>
+</ul>
+</li>
+</ol></ul>
+</ul>
+<h2>Forms Based Authentication</h2>
+<ul><ol><ol>
+<li>
+<p>Add the following code to configure the ASP.NET application to use Forms Based Authentication.</p>
+<p style="padding-left: 60px;">&lt;system.web&gt;<br />&nbsp; &lt;authentication mode="Forms"&gt;<br />&nbsp; &nbsp; &lt;forms loginUrl="~/Login.aspx"/&gt;<br />&nbsp; &lt;/authentication&gt;<br />&nbsp; &lt;authorization&gt;<br />&nbsp; &nbsp; &lt;deny users="?"/&gt;<br />&nbsp; &lt;/authorization&gt;<br /> &lt;/system.web&gt;</p>
+</li>
+</ol></ol></ul>
+</div>
+</body>
+</html>

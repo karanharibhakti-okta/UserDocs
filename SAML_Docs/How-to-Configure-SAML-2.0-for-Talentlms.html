@@ -1,0 +1,124 @@
+<html>
+<head>
+<link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script type="text/javascript">
+try{Typekit.load();}catch(e){}
+</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<title>Setup SSO</title>
+
+<!-- <script> src=”resources/scripts/getAppValues.js” ></script> -->
+
+<script>
+function processData(data) {
+  $('#signOnUrl').html(data["signOnUrl"]);
+  $('#signOutUrl').html(data["signOutUrl"]);
+  $('#changePasswordUrl').html(data["changePasswordUrl"]);
+  $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
+   $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
+  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#x509CertText').html(data["x509CertText"]);
+  $('#x509CertTextPem').html(data["x509CertTextPem"]);
+  $('#x509CertTextPem').css("white-space", "pre");
+  $('#certFingerPrint').html(data["certFingerPrint"]);
+  $('#validFrom').html(data["validFrom"]);
+  $('#validTo').html(data["validTo"]);
+  $('#issuer').html(data["issuer"]);
+$('#metadataUrl').html(data["signOnUrl"]);
+ $('#errorUrl').html(data["signOutUrl"]);
+ $('#timeoutUrl').html(data["signOutUrl"]);
+ $('#delAuthUrl').html(data["delAuthUrl"]);
+ $('#saml11SignOnUrl').html(data["saml11SignOnUrl"]);    
+}
+function getURLParameter(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+}
+$(document).ready(function($) {
+  // This condition is to ensure that the ajax api code is executed only on the intended pages
+  if ($('#loginAdminApp').length > 0) {
+    var app = getURLParameter('app');
+    var subdomain = getURLParameter('subdomain');
+    var instanceId = getURLParameter('instanceId');
+    var baseAdminUrl = getURLParameter('baseAdminUrl');
+    var url;
+    if ((subdomain == null && baseAdminUrl == null) || app == null || instanceId == null) {
+      $('#loginAdminApp').show();
+    } else {
+      var endpoint = '/api/internal/v1/setup/help/saml/' + app + '/' + instanceId + '?callback=processData';
+      if (baseAdminUrl) {
+        url = baseAdminUrl + endpoint;
+      } else if (subdomain) {
+        url = 'https://' + subdomain + '.okta-admin.com' + endpoint;
+      }
+      $.ajax({
+        type: 'GET',
+        url: url,
+        jsonp: false,
+        jsonpCallback: 'processData',
+        dataType: 'jsonp',
+        success: function(json) {
+          $('#loginAdminApp').hide();
+        },
+        error: function(e,jqXHR,ajaxSettings,thrownError) {
+          $('#loginAdminApp').show();
+        },
+        timeout: 3000
+      });
+    }
+  }
+
+  
+  $('#mailto').on('click', function() {
+      var to = "DedicatedSAMLComplaintLine@okta.com"; // I am assuming this will always be same!
+      var body = "Dear Okta,%0D%0A%0D%0AI used your SAML setup instruction. I want you to know…%0D%0AI completed the SAML setup?%0D%0AI found errors in this doc?%0D%0A%0D%0AHere’s what I noticed:";
+      var subject = "Update Doc:" + $('h1').text();       
+      var mailto = "mailto:" + to + "?subject=" + subject + "&body=" + body;
+      window.location.href = mailto;
+    });
+
+});
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="header clearfix">
+        <div class="logo-container">
+            <img src="resources/css/okta-logo-white.png" alt="Okta" />
+        </div>
+    </div>
+
+<div class="okta-instructions">
+<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
+<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+</div>
+<ol>
+<li>Sign in to Talentlms at <strong><a style="text-decoration: none; color: black;" onclick="return false;">https://&lt;your Talentlms domain&gt;.talentlms/com/account/system</a></strong>, where <em>&lt;your Talentlms domain&gt;</em> is the domain you have already set up.</li>
+<li>Select the green <strong>Go to admin</strong> button.</li>
+<li>Select <strong>Account &amp; Settings</strong> and then, select <strong>Users</strong> on the menu that appears.</li>
+<li>Select <strong>Single Sign-On (SSO)</strong> on the Users screen that opens. The screen shown below opens.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Talentlms_1b.png" alt="Talentlms_1b.png" /></li>
+<li>Select <strong>SAML2.0</strong> for the <strong>SSO integration type</strong>, as shown above.</li>
+<li>
+<p>Enter the following <strong>Identity provider (IdP)</strong>, as shown above.</p>
+<kbd id="issuer">Sign in to the Okta Admin app to generate this variable.</kbd></li>
+<li>
+<p>Enter the following <strong>Certificate fingerprint</strong>, as shown above.</p>
+<kbd id="certFingerPrint">Sign in to the Okta Admin app to generate this variable.</kbd></li>
+<li>
+<p>Enter the following&nbsp;<strong>Remote sign-in URL</strong>, as shown above.</p>
+<kbd id="signOnUrl">Sign in to the Okta Admin app to&nbsp;generate this variable.</kbd></li>
+<li>
+<p>Enter the following&nbsp;<strong>Remote sign-out URL</strong>, as shown above.</p>
+<kbd id="signOutUrl">Sign in to the Okta Admin app to&nbsp;generate this variable.</kbd></li>
+<li>
+<p><strong>TargetedID</strong>, <strong>First name</strong>, <strong>Last Name</strong>, and <strong>Email</strong> should contain the values <em>Username</em>, <em>FirstName</em>, <em>LastName</em>, and <em>Email</em>, as shown in step 4.</p>
+</li>
+<li>
+<p>Select&nbsp;<strong>Save and check your configuration</strong>, as shown above.</p>
+</li>
+<li>Talentlms only supports an SP-initiated flow. For the convenience of your end users, <strong>Okta recommends that you hide the Talentlms app and set up a Bookmark app</strong> with the Talentlms logo. For instructions on setting up a Bookmark app and hiding the original app, see <a href="https://support.okta.com/entries/27685638-Simulating-an-IDP-initiated-Flow-with-the-Bookmark-App" target="_blank">Simulating an IDP-initiated Flow with the Bookmark App</a>.&nbsp;<br /><br />The link for the SP-initiated flow is&nbsp;use <strong><a style="text-decoration: none; color: black;" onclick="return false;">https://&lt;your Talentlms domain&gt;.talentlms.com/index/ssologin/service:saml</a></strong>,&nbsp;where <em>&lt;your Talentlms domain&gt;</em> is the domain you have already set up.<br /><br />SAML 2.0 access is also available from the Login with SAML 2.0 link on the Talentlms page for your domain at <strong><a style="text-decoration: none; color: black;" onclick="return false;">https://&lt;your Talentlms domain&gt;.talentlms.com</a></strong>, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Talentlms_2.png" alt="Talentlms_2.png" /><br /><br /><strong>Note:</strong> Talentlms supports Just in Time (JIT) provisioning.</li>
+</ol></div>
+</body>
+</html>

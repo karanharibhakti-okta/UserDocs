@@ -1,0 +1,146 @@
+<html>
+<head>
+<link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script type="text/javascript">
+try{Typekit.load();}catch(e){}
+</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<title>Setup SSO</title>
+
+<!-- <script> src=”resources/scripts/getAppValues.js” ></script> -->
+
+<script>
+function processData(data) {
+  $('#signOnUrl').html(data["signOnUrl"]);
+  $('#signOutUrl').html(data["signOutUrl"]);
+  $('#changePasswordUrl').html(data["changePasswordUrl"]);
+  $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
+   $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
+  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#x509CertText').html(data["x509CertText"]);
+  $('#x509CertTextPem').html(data["x509CertTextPem"]);
+  $('#x509CertTextPem').css("white-space", "pre");
+  $('#certFingerPrint').html(data["certFingerPrint"]);
+  $('#validFrom').html(data["validFrom"]);
+  $('#validTo').html(data["validTo"]);
+  $('#issuer').html(data["issuer"]);
+$('#metadataUrl').html(data["signOnUrl"]);
+ $('#errorUrl').html(data["signOutUrl"]);
+ $('#timeoutUrl').html(data["signOutUrl"]);
+ $('#delAuthUrl').html(data["delAuthUrl"]);
+ $('#saml11SignOnUrl').html(data["saml11SignOnUrl"]);    
+}
+function getURLParameter(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+}
+$(document).ready(function($) {
+  // This condition is to ensure that the ajax api code is executed only on the intended pages
+  if ($('#loginAdminApp').length > 0) {
+    var app = getURLParameter('app');
+    var subdomain = getURLParameter('subdomain');
+    var instanceId = getURLParameter('instanceId');
+    var baseAdminUrl = getURLParameter('baseAdminUrl');
+    var url;
+    if ((subdomain == null && baseAdminUrl == null) || app == null || instanceId == null) {
+      $('#loginAdminApp').show();
+    } else {
+      var endpoint = '/api/internal/v1/setup/help/saml/' + app + '/' + instanceId + '?callback=processData';
+      if (baseAdminUrl) {
+        url = baseAdminUrl + endpoint;
+      } else if (subdomain) {
+        url = 'https://' + subdomain + '.okta-admin.com' + endpoint;
+      }
+      $.ajax({
+        type: 'GET',
+        url: url,
+        jsonp: false,
+        jsonpCallback: 'processData',
+        dataType: 'jsonp',
+        success: function(json) {
+          $('#loginAdminApp').hide();
+        },
+        error: function(e,jqXHR,ajaxSettings,thrownError) {
+          $('#loginAdminApp').show();
+        },
+        timeout: 3000
+      });
+    }
+  }
+
+  
+  $('#mailto').on('click', function() {
+      var to = "DedicatedSAMLComplaintLine@okta.com"; // I am assuming this will always be same!
+      var body = "Dear Okta,%0D%0A%0D%0AI used your SAML setup instruction. I want you to know…%0D%0AI completed the SAML setup?%0D%0AI found errors in this doc?%0D%0A%0D%0AHere’s what I noticed:";
+      var subject = "Update Doc:" + $('h1').text();       
+      var mailto = "mailto:" + to + "?subject=" + subject + "&body=" + body;
+      window.location.href = mailto;
+    });
+
+});
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="header clearfix">
+        <div class="logo-container">
+            <img src="resources/css/okta-logo-white.png" alt="Okta" />
+        </div>
+    </div>
+
+<div class="okta-instructions">
+<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
+<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+</div>
+<ol>
+<li>Install BMC Remedyforce into an existing Salesforce Organization.</li>
+<li>Log in to Salesforce with your administrator username and password-token.</li>
+<li>
+<p>Select&nbsp;<strong>Setup &gt; Security Controls &gt; Single SIgn-On Settings</strong>.</p>
+</li>
+<li>
+<p>Select <strong>Edit</strong>.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/BMCRemedyForce1.png" alt="BMCRemedyForce1.png" /></p>
+</li>
+<li>Select the <strong>SAML Enabled</strong> checkbox then click <strong>Save</strong>.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/BMCRemedyForce2.png" alt="BMCRemedyForce2.png" /></li>
+<li>Select <strong>New</strong>.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/BMCRemedyForce3.png" alt="BMCRemedyForce3.png" /><br /><br /></li>
+<li>Enter the following values in the following fields. &nbsp;See the screen shot at the end of this step for reference.<br /><ol>
+<ul>
+<li><strong>Issuer</strong>: Copy and paste the following value:<br /><br /><kbd id="issuer">Sign into the Okta Admin dashboard to generate this value</kbd></li>
+<li><strong>Identity Provider Certificate</strong>: &nbsp;&nbsp;</li>
+<ul>
+<li>First download the certificate:<br /><br /><kbd id="downloadCertificate">Sign in to the Okta Admin dashboard to generate this value.</kbd></li>
+<li>Then select&nbsp;<strong>Browse</strong>&nbsp;and select the certificate you just downloaded.</li>
+</ul>
+<li><strong>Signing Certificate</strong>: Select&nbsp;<strong>Default Certificate</strong>.</li>
+<li><strong>Assertion Decryption Certificate</strong>: Select&nbsp;<strong>Assertion not encrypted</strong>.</li>
+<li><strong>SAML Identity Location</strong>: Select&nbsp;<strong>Identity is in the Nameidentifier element of the Subject statement</strong>.</li>
+<li><strong>Identity Provider Login URL</strong>: Copy the following URL:<br /><br /><kbd id="signOnUrl">Sign into the Okta Admin dashboard to generate this value</kbd></li>
+<li><strong>Identity Provider Logout URL</strong>: Copy the following URL:<br /><br /><kbd id="signOutUrl">Sign into the Okta Admin dashboard to generate this value</kbd></li>
+<li><strong>Service Provider Initiated Request Binding</strong>: Select&nbsp;<strong>HTTP Post</strong>.</li>
+<li><strong>Entity id</strong>: Enter the following:<br /><br /><kbd>https://saml.salesforce.com</kbd></li>
+<li>
+<p>&nbsp;Select <strong>Save</strong>.</p>
+</li>
+</ul>
+</ol><br /><img style="border: 0; padding: 0;" src="images/apps/BMCRemedyForce4.png" alt="BMCRemedyForce4.png" /></li>
+<li>Copy the <strong>Salesforce Login URL</strong> from the SAML Single Sign-On Setting Detail:<br /><br /><img style="border: 0; padding: 0;" src="images/apps/BMCRemedyForce5.png" alt="BMCRemedyForce5.png" /></li>
+<li>Login into Okta and on the <strong>General</strong> tab, paste the <strong>Salesforce Login URL</strong> value into the <strong>SSO URL field:</strong><br /><br /><img style="border: 0; padding: 0;" src="images/apps/BMCRemedyForce6.png" alt="BMCRemedyForce6.png" /></li>
+<li>In Salesforce, navigate to <strong>Setup &gt; Domain Management &gt; Domains</strong>, then select your domain:<br /><br /><img style="border: 0; padding: 0;" src="images/apps/BMCRemedyForce7.png" alt="BMCRemedyForce7.png" /></li>
+<li>On the <strong>Login Page Settings</strong> section, select <strong>Edit</strong>.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/BMCRemedyForce8.png" alt="BMCRemedyForce8.png" /></li>
+<li>Select the <strong>Okta</strong> checkbox, then select <strong>Save</strong>.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/BMCRemedyForce9.png" alt="BMCRemedyForce9.png" /></li>
+<li>Done!</li>
+</ol></div>
+<div class="okta-instructions"><strong>Notes</strong>:</div>
+<div class="okta-instructions" style="padding-left: 30px;">Just In Time (JIT) Provisioning is not supported</div>
+<div class="okta-instructions" style="padding-left: 30px;">IdP-initiated flows are supported.&nbsp;</div>
+<div class="okta-instructions" style="padding-left: 30px;">SP-initiated flows are supported, with the following additional setup step:</div>
+<div class="okta-instructions"></div>
+<div class="okta-instructions" style="padding-left: 30px;">For SP-initiated flows, open your Salesforce login page and select <strong>Okta</strong>:<br /><br /></div>
+<div class="okta-instructions"></div>
+<div class="okta-instructions" style="padding-left: 30px;"><img style="border: 0; padding: 0;" src="images/apps/BMCRemedyForce10.png" alt="BMCRemedyForce10.png" /></div>
+<div class="okta-instructions"></div>
+<div class="okta-instructions"></div>
+</body>
+</html>

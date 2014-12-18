@@ -1,0 +1,125 @@
+<html>
+<head>
+<link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script type="text/javascript">
+try{Typekit.load();}catch(e){}
+</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<title>Setup SSO</title>
+
+<!-- <script> src=”resources/scripts/getAppValues.js” ></script> -->
+
+<script>
+function processData(data) {
+  $('#signOnUrl').html(data["signOnUrl"]);
+  $('#signOutUrl').html(data["signOutUrl"]);
+  $('#changePasswordUrl').html(data["changePasswordUrl"]);
+  $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
+   $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
+  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#x509CertText').html(data["x509CertText"]);
+  $('#x509CertTextPem').html(data["x509CertTextPem"]);
+  $('#x509CertTextPem').css("white-space", "pre");
+  $('#certFingerPrint').html(data["certFingerPrint"]);
+  $('#validFrom').html(data["validFrom"]);
+  $('#validTo').html(data["validTo"]);
+  $('#issuer').html(data["issuer"]);
+$('#metadataUrl').html(data["signOnUrl"]);
+ $('#errorUrl').html(data["signOutUrl"]);
+ $('#timeoutUrl').html(data["signOutUrl"]);
+ $('#delAuthUrl').html(data["delAuthUrl"]);
+ $('#saml11SignOnUrl').html(data["saml11SignOnUrl"]);    
+}
+function getURLParameter(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+}
+$(document).ready(function($) {
+  // This condition is to ensure that the ajax api code is executed only on the intended pages
+  if ($('#loginAdminApp').length > 0) {
+    var app = getURLParameter('app');
+    var subdomain = getURLParameter('subdomain');
+    var instanceId = getURLParameter('instanceId');
+    var baseAdminUrl = getURLParameter('baseAdminUrl');
+    var url;
+    if ((subdomain == null && baseAdminUrl == null) || app == null || instanceId == null) {
+      $('#loginAdminApp').show();
+    } else {
+      var endpoint = '/api/internal/v1/setup/help/saml/' + app + '/' + instanceId + '?callback=processData';
+      if (baseAdminUrl) {
+        url = baseAdminUrl + endpoint;
+      } else if (subdomain) {
+        url = 'https://' + subdomain + '.okta-admin.com' + endpoint;
+      }
+      $.ajax({
+        type: 'GET',
+        url: url,
+        jsonp: false,
+        jsonpCallback: 'processData',
+        dataType: 'jsonp',
+        success: function(json) {
+          $('#loginAdminApp').hide();
+        },
+        error: function(e,jqXHR,ajaxSettings,thrownError) {
+          $('#loginAdminApp').show();
+        },
+        timeout: 3000
+      });
+    }
+  }
+
+  
+  $('#mailto').on('click', function() {
+      var to = "DedicatedSAMLComplaintLine@okta.com"; // I am assuming this will always be same!
+      var body = "Dear Okta,%0D%0A%0D%0AI used your SAML setup instruction. I want you to know…%0D%0AI completed the SAML setup?%0D%0AI found errors in this doc?%0D%0A%0D%0AHere’s what I noticed:";
+      var subject = "Update Doc:" + $('h1').text();       
+      var mailto = "mailto:" + to + "?subject=" + subject + "&body=" + body;
+      window.location.href = mailto;
+    });
+
+});
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="header clearfix">
+        <div class="logo-container">
+            <img src="resources/css/okta-logo-white.png" alt="Okta" />
+        </div>
+    </div>
+
+<div class="okta-instructions">
+<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
+<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+</div>
+<p><strong>Note:</strong> Mimecast supports both SP- and IdP-initiated SAML and deep links.&nbsp;The username must be the email address that is used to sign into Mimecast. If this email address in not the same as the Okta username, please update the <em>Default username format</em> value in Okta accordingly.</p>
+<ol>
+<li><span style="font-size: 14px; background-color: initial;" data-mce-mark="1">Go to your <strong>Mimecast Administration Console</strong> and sign in with your credentials<strong>.&nbsp;</strong><br /></span></li>
+<li>
+<p>You can either enter information manually, or you can <span>use the Metadata URL import option</span>. To import, specify the <strong>Metadata URL</strong> on the Authentication Profile and select the <strong>Import</strong> option. Your metadata URL should have the following syntax: <strong><a style="text-decoration: none; color: black;" onclick="return false;">https://example.okta.com/app/&lt;identifier&gt;/sso/saml/metadata</a></strong> where the &lt;identifier&gt;&nbsp;is the portion of the Issuer URL shown in step 3a after the text <em><a style="text-decoration: none; color: black;" onclick="return false;">http://www.okta.com/</a></em>.</p>
+</li>
+<li>To enter information manually, complete the following four steps. Skip this step if you imported the metadata in step 2.<ol>
+<li>
+<p>Enter the following <strong>Issuer URL</strong>.</p>
+<kbd id="issuer">Sign in to the Okta Admin app to generate this variable.</kbd></li>
+<li>
+<p>Enter the following <strong>Login URL</strong>.</p>
+<kbd id="signOnUrl">Sign in to the Okta Admin app to generate this variable.</kbd></li>
+<li>
+<p>Enter the following <strong>Logout URL</strong>.</p>
+<kbd id="signOutUrl">Sign in to the Okta Admin app to generate this variable.</kbd></li>
+<li>
+<p>Enter the following <strong>Identity Provider Certificate (Metadata)</strong>.</p>
+<kbd id="x509CertText">Sign in to the Okta Admin app to generate this variable.</kbd></li>
+</ol></li>
+<li>The username in Okta must be the email address that is used to sign into Mimecast. If this email address is not the same as the Okta username, please update the&nbsp;<strong style="font-size: 14px; background-color: initial;">Default username format</strong>&nbsp;value in Okta accordingly, as shown below.&nbsp;<br /><br />
+<p><img style="border: 0; padding: 0;" src="images/apps/LearnUpon_1.png" alt="Username Format" /></p>
+</li>
+<li>
+<p><span>After saving your configuration in Mimecast, it can take up to 15 minutes before it is effective</span>.</p>
+</li>
+</ol></div>
+</body>
+</html>

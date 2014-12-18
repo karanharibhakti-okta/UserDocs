@@ -1,0 +1,287 @@
+<html>
+<head>
+<link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script type="text/javascript">
+try{Typekit.load();}catch(e){}
+</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<title>Setup SSO</title>
+
+<!-- <script> src=”resources/scripts/getAppValues.js” ></script> -->
+
+<script>
+function processData(data) {
+  $('#signOnUrl').html(data["signOnUrl"]);
+  $('#signOutUrl').html(data["signOutUrl"]);
+  $('#changePasswordUrl').html(data["changePasswordUrl"]);
+  $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
+   $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
+  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#x509CertText').html(data["x509CertText"]);
+  $('#x509CertTextPem').html(data["x509CertTextPem"]);
+  $('#x509CertTextPem').css("white-space", "pre");
+  $('#certFingerPrint').html(data["certFingerPrint"]);
+  $('#validFrom').html(data["validFrom"]);
+  $('#validTo').html(data["validTo"]);
+  $('#issuer').html(data["issuer"]);
+$('#metadataUrl').html(data["signOnUrl"]);
+ $('#errorUrl').html(data["signOutUrl"]);
+ $('#timeoutUrl').html(data["signOutUrl"]);
+ $('#delAuthUrl').html(data["delAuthUrl"]);
+ $('#saml11SignOnUrl').html(data["saml11SignOnUrl"]);    
+}
+function getURLParameter(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+}
+$(document).ready(function($) {
+  // This condition is to ensure that the ajax api code is executed only on the intended pages
+  if ($('#loginAdminApp').length > 0) {
+    var app = getURLParameter('app');
+    var subdomain = getURLParameter('subdomain');
+    var instanceId = getURLParameter('instanceId');
+    var baseAdminUrl = getURLParameter('baseAdminUrl');
+    var url;
+    if ((subdomain == null && baseAdminUrl == null) || app == null || instanceId == null) {
+      $('#loginAdminApp').show();
+    } else {
+      var endpoint = '/api/internal/v1/setup/help/saml/' + app + '/' + instanceId + '?callback=processData';
+      if (baseAdminUrl) {
+        url = baseAdminUrl + endpoint;
+      } else if (subdomain) {
+        url = 'https://' + subdomain + '.okta-admin.com' + endpoint;
+      }
+      $.ajax({
+        type: 'GET',
+        url: url,
+        jsonp: false,
+        jsonpCallback: 'processData',
+        dataType: 'jsonp',
+        success: function(json) {
+          $('#loginAdminApp').hide();
+        },
+        error: function(e,jqXHR,ajaxSettings,thrownError) {
+          $('#loginAdminApp').show();
+        },
+        timeout: 3000
+      });
+    }
+  }
+
+  
+  $('#mailto').on('click', function() {
+      var to = "DedicatedSAMLComplaintLine@okta.com"; // I am assuming this will always be same!
+      var body = "Dear Okta,%0D%0A%0D%0AI used your SAML setup instruction. I want you to know…%0D%0AI completed the SAML setup?%0D%0AI found errors in this doc?%0D%0A%0D%0AHere’s what I noticed:";
+      var subject = "Update Doc:" + $('h1').text();       
+      var mailto = "mailto:" + to + "?subject=" + subject + "&body=" + body;
+      window.location.href = mailto;
+    });
+
+});
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="header clearfix">
+        <div class="logo-container">
+            <img src="resources/css/okta-logo-white.png" alt="Okta" />
+        </div>
+    </div>
+
+<div class="okta-instructions">
+<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
+<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+</div>
+<h2>Go to the Single Sign-On Settings page in Veeva</h2>
+<ol><ol><ol>
+<li>
+<p>Log in to Veeva with the same administrator username and password-token used for User Management settings.</p>
+</li>
+<li>
+<p>Click on&nbsp;<strong>Setup</strong></p>
+</li>
+<li>
+<p>Click&nbsp;<strong>Security Controls</strong>&nbsp;to open the sub-menu<br /><img src="images/apps/veeva-setup.png" alt="veeva-setup.png" /></p>
+</li>
+<li>
+<p>Click&nbsp;<strong>Single Sign-On Settings</strong></p>
+</li>
+</ol></ol></ol>
+<h2>On the Single Sign-On Settings page</h2>
+<ol><ol><ol><ol><ol><ol>
+<li>
+<p>Click the&nbsp;<strong>Edit</strong>&nbsp;button to display a form similar to the page shown on the right →</p>
+</li>
+<li>
+<p>Check&nbsp;<strong>SAML Enabled</strong>&nbsp;and a form will display</p>
+</li>
+<li>
+<p>Set the&nbsp;<strong>SAML Version</strong>&nbsp;to&nbsp;<strong>2.0</strong></p>
+</li>
+<li>If you have Multiple&nbsp;End-points enabled, the configuration page may ask you to setup a&nbsp;<strong>Name</strong>&nbsp;and&nbsp;<strong>API Name</strong>. Set these values according to your preference.</li>
+<li>
+<p>Download your Okta Identity Provider Certificate so you can upload it in the <strong>Identity Provider Certificate</strong>&nbsp;field</p>
+<kbd id="downloadCertificate"> Sign in to the Okta Admin app to have this variable generated for you </kbd></li>
+<li>
+<p>Copy and paste the following key into&nbsp;<strong>Issuer</strong>:</p>
+<kbd id="issuer">Sign into the Okta Admin dashboard to generate this value.</kbd></li>
+<li class="optional">
+<p><strong>(Optional)</strong>&nbsp;Copy and paste the following URL into&nbsp;<strong>Identity Provider Login URL</strong>:</p>
+<kbd id="signOnUrl">Sign into the Okta Admin dashboard to generate this value.</kbd>
+<p>This URL will authenticate your users when they attempt to log in directly to Veeva or click on a deep link in Veeva and are not currently authenticated.</p>
+</li>
+<li class="optional">
+<p><strong>(Optional)</strong>&nbsp;Copy and paste the following URL into&nbsp;<strong>Identity Provider Logout URL</strong>:</p>
+<kbd id="signOutUrl">Sign into the Okta Admin dashboard to generate this value.</kbd>
+<p>This URL sends your users to their Okta home page when they log out of Veeva.</p>
+</li>
+<li>
+<p>Set the&nbsp;<strong>SAML User ID Type</strong>&nbsp;to&nbsp;<strong>Assertion contains User's Veeva username</strong></p>
+</li>
+<li>
+<p>Set the&nbsp;<strong>SAML User ID Location</strong>&nbsp;to&nbsp;<strong>User ID is in the NameIdentifier element of the Subject statement</strong></p>
+</li>
+<li>For<strong> Entity ID,</strong></li>
+</ol>
+<ul>
+<li>If you have custom domain setup, use <strong>https://&lt;customDomain&gt;.my.salesforce.com</strong></li>
+<li>If&nbsp;you do not have a custom domain setup, use&nbsp;<strong>https://saml.salesforce.com</strong></li>
+</ul>
+<li>For <strong>Service Provider Initiated Request Binding</strong>, select&nbsp;<strong>HTTP POST&nbsp;</strong><em>(Depending on the Salesforce environment you are in, you may or may not be asked for this value)</em></li>
+<li>Click&nbsp;<strong>Save</strong></li>
+<li>Look&nbsp;for the&nbsp;<strong>Salesforce Login URL</strong>&nbsp;which will appear after clicking&nbsp;Save<br /><img src="images/apps/Screen+Shot+2014-03-21+at+9.46.22+AM.png" alt="Screen_Shot_2014-03-21_at_9.46.22_AM.png" /></li>
+<li>In Okta, go&nbsp;to the General tab of the app Configuration page shown below, and enter the&nbsp;<strong>Salesforce Login URL</strong>&nbsp;in the&nbsp;<strong>Login URL&nbsp;</strong>field.&nbsp;<br /><img src="images/apps/Screen+Shot+2014-03-21+at+10.05.15+AM.png" alt="Screen_Shot_2014-03-21_at_10.05.15_AM.png" /></li>
+<li>If you&nbsp;are using a custom domain, then enter that value in the&nbsp;<strong>Custom Domain</strong>&nbsp;field in Okta, otherwise leave it blank.</li>
+<li>Click Save</li>
+<li>Done!</li>
+</ol></ol></ol></ol></ol>
+<h2>How to Configure Delegated Authentication in Veeva</h2>
+<div class="okta-callout okta-info">
+<p>Please note:&nbsp;Delegated authentication is an optional integration that can be used in addition to SAML 2.0.</p>
+</div>
+<h2>What does this feature do?</h2>
+<div class="okta-callout okta-info">
+<p>Delegated authentication enables various integrations with Veeva — like the Microsoft Outlook plugin — as well as giving you the ability to lock a user out of Veeva. Unlike SAML 2.0 single sign-on, delegated authentication is turned on at the user profile level. You have the ability to enable delegated authentication for a single user or large group; it all depends on who has the user profile where the&nbsp;<strong>Is Single Sign-On Enabled</strong>&nbsp;permission is enabled.</p>
+</div>
+<h2>Where can I find this feature in my version of Veeva?</h2>
+<div class="okta-callout okta-info">
+<p>You can't see this form until Veeva has enabled delegated authentication for your organization. Once enabled, the delegated authentication form is located on the<strong>Single Sign-On Settings</strong>&nbsp;page in Veeva — the same place where you configure SAML 2.0.</p>
+</div>
+<h2>Contact Veeva to enable delegated authentication</h2>
+<ol><ol><ol><ol><ol><ol><ol><ol><ol><ol><ol>
+<li>
+<p>Contact your Veeva Systems Account representative and ask them to enable&nbsp;<strong>delegated authentication</strong>&nbsp;for your organization. You can also do this by opening a case in the Veeva systems&nbsp;<a href="https://na3.salesforce.com/sserv/login.jsp?orgId=00D500000007dqn">customer service application</a></p>
+<p>Once Veeva systems enables delegated authentication you can proceed with the steps below.</p>
+</li>
+</ol></ol></ol></ol></ol></ol></ol></ol></ol></ol></ol>
+<h2>Enter your Delegated Gateway URL</h2>
+<ol><ol><ol><ol><ol><ol><ol><ol><ol><ol><ol>
+<li>
+<p>Go to the&nbsp;<strong>Single Sign-On Settings</strong>&nbsp;page located in the&nbsp;<strong>Setup</strong>&nbsp;&gt;&nbsp;<strong>Security Controls</strong>&nbsp;section of Veeva. Click the&nbsp;<strong>Edit</strong>&nbsp;button to display a form similar to the page shown on the right →</p>
+</li>
+<li>
+<p>Copy and paste the URL below into the&nbsp;<strong>Delegated Gateway URL</strong>&nbsp;field:</p>
+<kbd id="delAuthUrl"> Sign in to the Okta Admin app to have this variable generated for you </kbd></li>
+<li class="important">
+<p>Click&nbsp;<strong>Save</strong></p>
+</li>
+</ol></ol></ol></ol></ol></ol></ol></ol></ol></ol></ol><img class="thumb" src="https://tgu.oktapreview-admin.com/img/application/salesforce/setup/sfdc-del-auth-step-01-thumb.png?resourceHash=f97a93fcd7d6384536184a3d80f0d77c" alt="Enable delegated authentication in Veeva" width="340" height="248" />
+<h2>Tryout delegated authentication single sign-on with a cloned user profile</h2>
+<ol><ol><ol><ol><ol><ol><ol><ol><ol><ol><ol>
+<li>
+<p>We recommend creating a test user profile so you can experiment with this feature on a single user. If you feel comfortable with this feature then you can skip to the next section.</p>
+</li>
+<li>
+<p>Go to the&nbsp;<strong>Profiles</strong>&nbsp;page located in the&nbsp;<strong>Setup</strong>&nbsp;&gt;&nbsp;<strong>Manage Users</strong>&nbsp;section of Veeva</p>
+</li>
+<li>
+<p>Open a User Profile you would like to experiment with</p>
+</li>
+<li>
+<p>Click the&nbsp;<strong>Clone</strong>&nbsp;button to make a copy of this profile. Using a cloned profile allows you to avoid impacting any other users who have the original profile.</p>
+</li>
+<li>
+<p>Give the cloned profile a name</p>
+</li>
+<li class="important">
+<p>Click&nbsp;<strong>Save</strong></p>
+</li>
+</ol></ol></ol></ol></ol></ol></ol></ol></ol></ol></ol>
+<h2>Enable delegated authentication single sign-on for a user profile</h2>
+<p><strong>IMPORTANT</strong>: Enabling single sign-on for a user profile will affect every user who is assigned that user profile. If you want to experiment with a single user first, we reccomend creating a cloned profile (see above) to test with.</p>
+<ol><ol><ol><ol><ol><ol><ol><ol><ol><ol><ol>
+<li>
+<p>Go to the&nbsp;<strong>Profiles</strong>&nbsp;page located in the&nbsp;<strong>Setup</strong>&nbsp;&gt;&nbsp;<strong>Manage Users</strong>&nbsp;section of Veeva</p>
+</li>
+<li>
+<p>Click&nbsp;<strong>Edit</strong>&nbsp;on the user profile and scroll down to the&nbsp;<strong>General User Permissions</strong>&nbsp;section</p>
+</li>
+<li>
+<p>Check the&nbsp;<strong>Is Single Sign-On Enabled</strong>&nbsp;checkbox</p>
+</li>
+<li class="important">
+<p>Click&nbsp;<strong>Save</strong></p>
+</li>
+</ol></ol></ol></ol></ol></ol></ol></ol></ol></ol></ol>
+<h2>Enable delegated authentication single sign-on for a Veeva user</h2>
+<ol><ol><ol><ol><ol><ol><ol><ol><ol><ol><ol>
+<li>
+<p><strong>IMPORTANT</strong>: Do not enable delegated authentication for the Veeva user used by Okta to connect to the Veeva User Management APIs. The API user is specified in the User Management settings page within Okta.</p>
+</li>
+<li>
+<p>Go to the&nbsp;<strong>Users</strong>&nbsp;page located in the&nbsp;<strong>Setup</strong>&nbsp;&gt;&nbsp;<strong>Manage Users</strong>&nbsp;section of Veeva</p>
+</li>
+<li>
+<p>Click&nbsp;<strong>Edit</strong>&nbsp;for a user you want to enable single sign-on for</p>
+</li>
+<li>
+<p>Select a&nbsp;<strong>Profile</strong>&nbsp;that has delegated authentication single sign-on enabled (use the cloned profile if you are experimenting)</p>
+</li>
+<li class="important">
+<p>Click&nbsp;<strong>Save</strong></p>
+</li>
+</ol></ol></ol></ol></ol></ol></ol></ol></ol></ol></ol>
+<h2>Assign your single sign-on enabled Veeva user to an Okta user</h2>
+<ol><ol><ol><ol><ol><ol><ol><ol><ol><ol><ol>
+<li>
+<p>In Okta, go to the People list and click a person's name to open their profile</p>
+</li>
+<li>
+<p>Click&nbsp;<strong>Assign Application</strong></p>
+</li>
+<li>
+<p>Select&nbsp;<strong>Veeva</strong>&nbsp;from the list and&nbsp;<strong>enter a Veeva username that has delegated authentication enabled</strong></p>
+</li>
+<li class="important">
+<p>Click&nbsp;<strong>Save</strong></p>
+</li>
+</ol></ol></ol></ol></ol></ol></ol></ol></ol></ol></ol>
+<h2>Test it out!</h2>
+<ol><ol><ol><ol><ol><ol><ol><ol><ol><ol><ol>
+<li>
+<p><a class="action" href="https://login.salesforce.com/" target="_blank">CLICK HERE</a>&nbsp;to go to the Veeva login page</p>
+</li>
+<li>
+<p>Enter the&nbsp;<strong>Veeva username</strong>&nbsp;you used in the previous section</p>
+</li>
+<li>
+<p>Enter the&nbsp;<strong>Okta password</strong>&nbsp;for the Okta user assigned the&nbsp;<strong>Veeva username</strong>&nbsp;above</p>
+</li>
+<li class="important">
+<p>Click&nbsp;<strong>Login</strong></p>
+</li>
+<li>
+<p>Assuming you logged in successfully, you can use these credentials for Veeva client application integrations like the Microsoft Outlook plugin and other APIs.</p>
+</li>
+</ol></ol></ol></ol></ol></ol></ol></ol></ol></ol></ol>
+<h2>Done!</h2>
+<ol><ol><ol><ol><ol><ol><ol><ol>
+<li>
+<p>Your users are ready to single sign-on to Veeva!</p>
+<p>You can assign Veeva access to users from their user profile within Okta.</p>
+</li>
+</ol></ol></ol></ol></ol></ol></ol></ol></div>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<html>
+<head>
+<link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script type="text/javascript">
+try{Typekit.load();}catch(e){}
+</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<title>Setup SSO</title>
+
+<!-- <script> src=”resources/scripts/getAppValues.js” ></script> -->
+
+<script>
+function processData(data) {
+  $('#signOnUrl').html(data["signOnUrl"]);
+  $('#signOutUrl').html(data["signOutUrl"]);
+  $('#changePasswordUrl').html(data["changePasswordUrl"]);
+  $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
+   $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
+  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#x509CertText').html(data["x509CertText"]);
+  $('#x509CertTextPem').html(data["x509CertTextPem"]);
+  $('#x509CertTextPem').css("white-space", "pre");
+  $('#certFingerPrint').html(data["certFingerPrint"]);
+  $('#validFrom').html(data["validFrom"]);
+  $('#validTo').html(data["validTo"]);
+  $('#issuer').html(data["issuer"]);
+$('#metadataUrl').html(data["signOnUrl"]);
+ $('#errorUrl').html(data["signOutUrl"]);
+ $('#timeoutUrl').html(data["signOutUrl"]);
+ $('#delAuthUrl').html(data["delAuthUrl"]);
+ $('#saml11SignOnUrl').html(data["saml11SignOnUrl"]);    
+}
+function getURLParameter(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+}
+$(document).ready(function($) {
+  // This condition is to ensure that the ajax api code is executed only on the intended pages
+  if ($('#loginAdminApp').length > 0) {
+    var app = getURLParameter('app');
+    var subdomain = getURLParameter('subdomain');
+    var instanceId = getURLParameter('instanceId');
+    var baseAdminUrl = getURLParameter('baseAdminUrl');
+    var url;
+    if ((subdomain == null && baseAdminUrl == null) || app == null || instanceId == null) {
+      $('#loginAdminApp').show();
+    } else {
+      var endpoint = '/api/internal/v1/setup/help/saml/' + app + '/' + instanceId + '?callback=processData';
+      if (baseAdminUrl) {
+        url = baseAdminUrl + endpoint;
+      } else if (subdomain) {
+        url = 'https://' + subdomain + '.okta-admin.com' + endpoint;
+      }
+      $.ajax({
+        type: 'GET',
+        url: url,
+        jsonp: false,
+        jsonpCallback: 'processData',
+        dataType: 'jsonp',
+        success: function(json) {
+          $('#loginAdminApp').hide();
+        },
+        error: function(e,jqXHR,ajaxSettings,thrownError) {
+          $('#loginAdminApp').show();
+        },
+        timeout: 3000
+      });
+    }
+  }
+
+  
+  $('#mailto').on('click', function() {
+      var to = "DedicatedSAMLComplaintLine@okta.com"; // I am assuming this will always be same!
+      var body = "Dear Okta,%0D%0A%0D%0AI used your SAML setup instruction. I want you to know…%0D%0AI completed the SAML setup?%0D%0AI found errors in this doc?%0D%0A%0D%0AHere’s what I noticed:";
+      var subject = "Update Doc:" + $('h1').text();       
+      var mailto = "mailto:" + to + "?subject=" + subject + "&body=" + body;
+      window.location.href = mailto;
+    });
+
+});
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="header clearfix">
+        <div class="logo-container">
+            <img src="resources/css/okta-logo-white.png" alt="Okta" />
+        </div>
+    </div>
+
+<div class="okta-instructions">
+<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
+<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+</div>
+<p><strong>Send an email to Norton Zone support and ask them to enable SAML 2.0. Provide the following three items in the message.</strong></p>
+<ol>
+<li>Copy the following<strong>&nbsp;IDP Metadata</strong>&nbsp;into the message.<br />&nbsp;<textarea id="idpMetadata" style="margin: 0px; height: 270px; width: 730px;">Sign in to the Okta Admin app to generate this variable.</textarea></li>
+<li>Request Norton Zone to&nbsp;whitelist your company’s Okta instance in the Norton Zone’s Single Sign-On (SSO) system using the attached IDP Metadata.</li>
+<li>Request a company code of your choice. Your end users will enter this company code when they sign into Norton Zone.&nbsp;Norton Zone uses this code to identify your company’s Okta instance and to redirect your users to your company’s Okta website.&nbsp;</li>
+</ol><strong>After&nbsp;After Norton Zone Enterprise Support creates a&nbsp;company code and whitelists your company’s Okta instance, you get a confirmation&nbsp;email. This usually takes a few days. After you receive the confirmation email,&nbsp;activate your Norton Zone for Business Pro (Enterprise) license. There are three steps to this procedure.</strong></div>
+<div class="okta-instructions"></div>
+<div class="okta-instructions"><ol>
+<li>
+<p>Click the URL specified in the email that you received when you purchased&nbsp;Norton Zone for Business Pro.</p>
+</li>
+<li>
+<p>On the Norton Zone activation page, under <strong>Choose identity manager</strong>, select&nbsp;<strong>I have a SAML based Identity Provider and company code</strong>, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Norton_Zone_1.png" alt="Norton_Zone_1.png" /><br /><br /></p>
+</li>
+<li>
+<p>In the <strong>Company Code</strong> field, type your company code, and then click <strong>Activate&nbsp;Account</strong>, as shown below.&nbsp;<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Norton_Zone_2.png" alt="Norton_Zone_2.png" /></p>
+</li>
+</ol></div>
+<div class="okta-instructions"><strong><strong><strong>After activation, you are redirected to your company’s Okta website. Sign in with the Okta credentials of the administrator to whom you assigned the Norton Zone application when you added Norton Zone to your company's Okta instance.<br /><br />After you sign in to Okta, you are redirected back to the Create Zone Name dialog in the Norton Zone website. Enter a name for your business zone. Click next and accept the terms.</strong></strong></strong></div>
+<div class="okta-instructions"></div>
+<h2 class="okta-instructions"><strong><strong><strong>Optional: Set Up Automatic User Provisioning and Deprovisioning from Norton Zone</strong></strong></strong></h2>
+<div class="okta-instructions">
+<p>Norton Zone for Business Pro lets you automate user provisioning and&nbsp;deprovisioning. This way, your company’s Norton Zone administrator does not&nbsp;have to add users manually through the Norton Zone Admin console. You must&nbsp;configure your company’s Okta instance to leverage the Norton Zone provisioning&nbsp;APIs to automate user provisioning and deprovisioning.</p>
+<p>After you enable automatic user provisioning and deprovisioning for Norton Zone&nbsp;in your company’s Okta instance, there are two features.</p>
+<ul>
+<li>When new users are added to your corporate directory, Okta automatically adds&nbsp;those users to Norton Zone and Norton Zone sends the users an email invitation to join your business zone. The Norton Zone administrator can view the new users in the <strong>Manage Users</strong> page in the Norton Zone Admin console.</li>
+<li>When users are removed from your corporate directory, Okta automatically&nbsp;removes those users from Norton Zone. The Norton Zone administrator can no&nbsp;longer view the users in the <strong>Manage Users</strong> page in the Norton Zone Admin&nbsp;console. The users are signed out of Norton Zone and can no longer sign in to&nbsp;Norton Zone.&nbsp;</li>
+</ul>
+<p>Before you enable automated user provisioning and de provisioning for Norton&nbsp;Zone in Okta, you need the <strong>IdP Provider ID</strong>, which is your company code, the <strong>Team&nbsp;ID</strong>, and the <strong>Shared Secret</strong>. You can acquire the Team ID and the Shared Secret&nbsp;for your Norton Zone account from the Norton Zone website.</p>
+<p><strong>To acquire Team ID and Shared Secret from Norton Zone, complete the following four steps:</strong></p>
+<ol>
+<li>Sign in to your company’s Okta website using your administrator account.</li>
+<li>From the Administrator Dashboard, select <strong style="background-color: #efefef;">My Applications</strong> and click Norton Zone. You are&nbsp;redirected to the Norton Zone Admin console in the Norton Zone website.</li>
+<li>On the <strong>Admin</strong> page, select &lt;strong"&gt;Keystore, and select&nbsp;&lt;strong"&gt;Get IdP Configuration. Norton&nbsp;Zone displays your Team ID and Shared Secret, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Norton_Zone_3.png" alt="Norton_Zone_3.png" /></li>
+<li>Copy and save the Team ID and Shared Secret to a file.<br /><br /></li>
+</ol></div>
+<div class="okta-instructions"><strong><strong><strong>Enter the information into the Norton Zone website by completing the following seven steps:</strong></strong></strong></div>
+<div class="okta-instructions"></div>
+<div class="okta-instructions"><ol>
+<li>Sign in to your company’s Okta website using your administrator account.</li>
+<li>From the Administrator Dashboard, select the <strong>Applications</strong> tab, and then select Norton Zone.</li>
+<li>Select <strong>User Management</strong> and then click <strong>Edit</strong> from the <strong>User&nbsp;Management Settings</strong> pane.</li>
+<li>Check <strong>Enable user management for Norton Zone</strong>.</li>
+<li>Under API Credentials, in the IdP Provider ID field, type your company code and copy and paste the Team ID and Shared Secret that you acquired from the Norton Zone website.</li>
+<li>Under User Management Features, check each of the following items:<br />
+<ul>
+<li>Provision new Norton Zone accounts from Okta</li>
+<li>Push Okta user profile updates to Norton Zone</li>
+<li>Deprovision unassigned Norton Zone accounts</li>
+</ul>
+</li>
+<li>Select <strong>Save</strong>.</li>
+</ol>
+<h2>&nbsp;Verifying the Norton Zone and Okta Integration</h2>
+<p>To verify that &nbsp;Norton Zone and Okta are correctly integrated, you can add sample users&nbsp;to your company’s Okta instance and assign the Norton Zone application to those&nbsp;users. If you have users already added to your Okta instance before you enable&nbsp;automated provisioning, you can assign the Norton Zone application to those users. The following four steps describe the process.</p>
+<ol>
+<li>Sign in to your company’s Okta website using your administrator account.</li>
+<li>From the Administrator Dashboard, select <strong>Applications</strong>, and then select&nbsp;<strong>Norton Zone</strong>.</li>
+<li>Select the <strong>People</strong> tab and enter the name of the user to whom you want to assign the&nbsp;application, and select it.</li>
+<li>Select <strong>Next</strong>, and then select <strong>Done</strong>.</li>
+</ol><strong>To verify the integration, sign in&nbsp;to the Norton Zone&nbsp;website as an administrator after you have assigned Norton Zone to a user in Okta. The integration is successful if&nbsp;the user is automatically added to&nbsp;your business zone and listed under the Manage Users page in the Norton&nbsp;Zone Admin console.</strong><br />
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</div>
+<div class="okta-instructions"></div>
+<div class="okta-instructions"></div>
+<div class="okta-instructions"></div>
+<div class="okta-instructions"></div>
+<div class="okta-instructions"></div>
+</body>
+</html>
