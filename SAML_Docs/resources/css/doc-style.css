@@ -144,7 +144,7 @@ kbd, blockquote {
 }
 
 kbd, code, kbd *, code * {
-    font-family: 'Andale Mono', 'Courier New', Courier, monospace;
+    font-family: Courier, monospace;
     letter-spacing: -0.04em;
     font-weight: normal;
 }
