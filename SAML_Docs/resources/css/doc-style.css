@@ -77,7 +77,8 @@ hr {
 .okta-instructions ol > li {
     position: relative;
     padding-left: 10px;
-    line-height: 1.8em;
+    line-height: 24px;
+    margin-top: 1.6em;
 }
 ol > li:before {
     color: #ffffff;
@@ -105,16 +106,19 @@ ol > li:before {
 /* Headings */
 .okta-instructions h1 {
     font-size: 30px;
-    font-weight: bold;
+    font-weight: 700;
 }
 .okta-instructions h2 {
     font-size: 24px;
+    font-weight: normal;
 }
 .okta-instructions h3 {
     font-size: 18px;
+    font-weight: 700;
 }
 .okta-instructions h4 {
     font-size: 16px;
+    font-weight: normal;
 }
 .okta-instructions h1, .okta-instructions h2 {
     color: #5e5e5e
