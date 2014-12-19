@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript"></script>
 <script type="text/javascript">
 try{Typekit.load();}catch(e){}
 </script>
@@ -91,11 +91,11 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+<div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
+<p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
 </div>
-<div class="okta-callout okta-warning">
-<p><strong>Read this before you enable SAML</strong></p>
+<div class="okta-callout okta-warning"><span class="icon-24 icon-warning"></span>
+<h3>Read this before you enable SAML</h3>
 <p>Enabling SAML will affect all users who use this application, which means that users will not be able to sign in through their regular sign in page. They will only be able to access the app through the Okta service, except as noted below.</p>
 <p>Coupa&nbsp;<span>supports both SP-initiated and IdP-initiated SAML flows.</span></p>
 </div>
@@ -115,7 +115,7 @@ $(document).ready(function($) {
 </li>
 <li>
 <p>Copy the following <strong>Metadata</strong>, and save it in a file named <em>metadata.xml</em>.</p>
-<textarea id="idpMetadata" style="margin-top: 0px; margin-bottom: 0px; height: 435px;">Sign into the Okta Admin app to generate this variable.</textarea></li>
+<kbd id="idpMetadata" style="margin-top: 0px; margin-bottom: 0px; height: 435px;">Sign into the Okta Admin app to generate this variable.</kbd></li>
 <li>
 <p>Select <strong>Choose File</strong> next to <strong>Upload Idp metadata</strong>, as shown above. Choose the file <em>metadata.xml</em> that you just created.</p>
 </li>
@@ -144,7 +144,7 @@ $(document).ready(function($) {
 <li>
 <p>Done!<br /><br /></p>
 </li>
-</ol></ol>
+</ol>
 <h3>Note</h3>
 </div>
 </div>

@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript"></script>
 <script type="text/javascript">
 try{Typekit.load();}catch(e){}
 </script>
@@ -91,11 +91,11 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+<div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
+<p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
 </div>
-<div class="okta-callout okta-warning">
-<p><strong>Read this before you enable SAML</strong></p>
+<div class="okta-callout okta-warning"><span class="icon-24 icon-warning"></span>
+<h3>Read this before you enable SAML</h3>
 <p>Enabling SAML will affect all users who use this application, which means that users will not be able to sign-in through their regular log-in page. They will only be able to access the app through the Okta service.</p>
 </div>
 <h1 id="successfactors-setup-instructions"><span style="font-size: 25px; line-height: 30px;">Contact SuccessFactors Customer Support</span></h1>

@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript"></script>
 <script type="text/javascript">
 try{Typekit.load();}catch(e){}
 </script>
@@ -91,7 +91,7 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
+<div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
 <p><strong>Please sign-in to the Okta Admin app to have your organization specific variables generated for you. You might not be able to complete the setup without these generated variables.</strong></p>
 </div>
 <ol>
@@ -100,7 +100,7 @@ $(document).ready(function($) {
 </li>
 <li>
 <p>Attach the following metadata in an .xml file to the email.</p>
-<textarea id="idpMetadata">Sign into the Okta Administrator Dashboard to generate this value.</textarea></li>
+<kbd id="idpMetadata">Sign into the Okta Administrator Dashboard to generate this value.</kbd></li>
 <li>IntraLinks will process your request and enable SAML.</li>
 <li>
 <p>After your request is processed by IntraLinks, use the following URLs as need, after substituting the data shown below for &lt;entityID&gt;.<br /><br /> Production: <a style="text-decoration: none; color: black;" onclick="return false;">https://services.intralinks.com/login/?PartnerIdpId=&lt;entityID&gt;</a><br /> Sandbox: &nbsp; &nbsp;<a style="text-decoration: none; color: black;" onclick="return false;">https://preview.intralinks.com/login/?PartnerIdpId=&lt;entityID&gt;</a></p>

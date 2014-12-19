@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript"></script>
 <script type="text/javascript">
 try{Typekit.load();}catch(e){}
 </script>
@@ -91,11 +91,11 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+<div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
+<p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
 </div>
-<div class="okta-callout okta-warning">
-<p><strong>Read this before you enable SAML</strong></p>
+<div class="okta-callout okta-warning"><span class="icon-24 icon-warning"></span>
+<h3>Read this before you enable SAML</h3>
 <p>CrashPlan PROe supports an SP-initiated SAML flow. For the convenience of your end users, <strong>Okta recommends that you hide the CrashPlan PROe app and set up a Bookmark app</strong> with the CrashPlan PROe logo after you complete this SAML setup. For instructions on setting up a Bookmark app and hiding the original app, see <a href="https://support.okta.com/entries/27685638-Simulating-an-IDP-initiated-Flow-with-the-Bookmark-App" target="_blank">Simulating an IDP-initiated Flow with the Bookmark App</a>.</p>
 <p><span>Two-way communication on TCP ports 80 and 443 between the Identity Provider and PROe Master Server is required. The Service Provider (Crashplan PROe) and Identity Provider (Okta) must be able to communicate with each other to perform metadata exchange</span></p>
 </div>

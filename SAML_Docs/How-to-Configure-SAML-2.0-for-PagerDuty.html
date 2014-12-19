@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript"></script>
 <script type="text/javascript">
 try{Typekit.load();}catch(e){}
 </script>
@@ -91,10 +91,10 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+<div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
+<p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
 </div>
-<ol><ol>
+<ol>
 <li>Go to the PagerDuty administration site and sign in. Select <strong>Account Settings</strong> from the top menu, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/PagerDuty_2.png" alt="PagerDuty_2.png" /></li>
 <li>Select <strong>Single Sign-on</strong> in the menu that appears on the right side of the window, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/PagerDuty_3.png" alt="PagerDuty_3.png" /></li>
 <li>Copy and paste the following certificate into the <strong>X.509 Certificate</strong> field. Be sure to include the BEGIN CERTIFICATE and END CERTIFICATE lines, as shown below.<br /><br />
@@ -107,6 +107,6 @@ $(document).ready(function($) {
 <li>In the Okta Dashboard for the PagerDuty application,&nbsp;select&nbsp;<em>Okta username</em>&nbsp;for the&nbsp;<strong>Default username format</strong>, as shown below.<br /><img style="border: 0; padding: 0;" src="images/apps/PagerDuty_6.png" alt="PagerDuty_6.png" /></li>
 <li>Select <strong>Save</strong>.</li>
 <li>Done!</li>
-</ol></ol></div>
+</ol></div>
 </body>
 </html>

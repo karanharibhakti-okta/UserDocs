@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript"></script>
 <script type="text/javascript">
 try{Typekit.load();}catch(e){}
 </script>
@@ -91,11 +91,11 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+<div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
+<p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
 </div>
 <h2>Contact Hostanalytics' Customer Support</h2>
-<ol><ol>
+<ol>
 <li>
 <p>Ask Hostanalytics' customer support to enable SAML 2.0 Single Sign-On for your account. They'll ask for the following information:</p>
 </li>
@@ -103,7 +103,7 @@ $(document).ready(function($) {
 <p>Redirect url:</p>
 <kbd id="signOnUrl">Sign in to the Okta Admin app to have this variable generated for you</kbd></li>
 <li>Certificate:<kbd id="downloadCertificate"> Sign in to the Okta Admin app to have this variable generated for you </kbd></li>
-</ol></ol>
+</ol>
 <h2>Next steps</h2>
 <ol>
 <li>

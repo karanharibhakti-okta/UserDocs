@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript"></script>
 <script type="text/javascript">
 try{Typekit.load();}catch(e){}
 </script>
@@ -91,15 +91,15 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+<div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
+<p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
 </div>
-<ol><ol><ol>
-<li><strong>IDP Metadata</strong>: <textarea id="idpMetadata">Sign in to the Okta Admin app to have this variable generated for you</textarea></li>
+<ol>
+<li><strong>IDP Metadata</strong>: <kbd id="idpMetadata">Sign in to the Okta Admin app to have this variable generated for you</kbd></li>
 <li>&nbsp;<strong>&nbsp;IDP Issuer/Entity ID</strong>:<kbd id="issuer">Sign in to the Okta Admin app to have this variable generated for you</kbd></li>
 <li>x.509 Certificate&nbsp;for Downloading/uploading in <strong>.cert Format</strong>:<kbd id="downloadCertificate">Sign in to the Okta Admin app to have this variable generated for you</kbd></li>
 <li><strong>Login URL/SignOn URL</strong>:&nbsp;<kbd id="signOnUrl">Sign in to the Okta Admin app to have this variable generated for you</kbd></li>
 <li><strong>Logout</strong> <strong>URL/SignOut UR</strong>L:<kbd id="signOutUrl"> Sign in to the Okta Admin app to have this variable generated for you&nbsp;</kbd></li>
-</ol></ol></ol></div>
+</ol></div>
 </body>
 </html>

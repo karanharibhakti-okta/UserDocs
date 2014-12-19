@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript"></script>
 <script type="text/javascript">
 try{Typekit.load();}catch(e){}
 </script>
@@ -91,12 +91,12 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
+<div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
 <p><strong>Please sign-in to the Okta Admin app to have your organization specific variables generated for you. You might not be able to complete the setup without these generated variables.</strong></p>
 </div>
 <h2>Before you begin</h2>
-<div class="okta-callout okta-warning">
-<p><strong>Read this before you enable SAML</strong></p>
+<div class="okta-callout okta-warning"><span class="icon-24 icon-warning"></span>
+<h3>Read this before you enable SAML</h3>
 <p>Enabling SAML will affect all users who use this application, which means that users will not be able to sign-in through their regular log-in page, if you enable SP initiated SSO. Users will only be able to access the app through the Okta service.</p>
 <p><strong>Backup URL</strong></p>
 <p>Workday provides a backup log-in url where users can sign-in using their normal username and password in the following format:&nbsp;<strong>[Your Workday URL]/login.flex?redirect=n</strong><br /><br />If you log into:&nbsp;<a style="text-decoration: none; color: black;" onclick="return false;">https://acme.workday.com/login-auth.html,</a> [Your Workday URL] is: <a style="text-decoration: none; color: black;" onclick="return false;">https://acme.workday.com</a>.</p>

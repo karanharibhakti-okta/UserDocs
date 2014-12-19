@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript"></script>
 <script type="text/javascript">
 try{Typekit.load();}catch(e){}
 </script>
@@ -91,7 +91,7 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
+<div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
 <p><strong>Please sign-in to the Okta Admin app to have your organization specific variables generated for you. You might not be able to complete the setup without these generated variables.</strong></p>
 </div>
 <ol>
@@ -100,7 +100,7 @@ $(document).ready(function($) {
 </li>
 <li>
 <p>Copy the following&nbsp;<strong>Metadata</strong>&nbsp;into a text file. Save it with the file name&nbsp;<em>metadata.xml</em>. Attach this file to the message.</p>
-<textarea id="idpMetadata" style="margin-top: 0px; margin-bottom: 0px; height: 266px; width: 700px;">Sign into the Okta Admin dashboard to generate this value.</textarea></li>
+<kbd id="idpMetadata" style="margin-top: 0px; margin-bottom: 0px; height: 266px; width: 700px;">Sign into the Okta Admin dashboard to generate this value.</kbd></li>
 <li>Fuze will process your request and send you a <strong>Discovery Key</strong>.</li>
 <li>In Okta, navigate to the General tab for the Fuze app. Enter the <strong>Discovery Key</strong>, and then select <strong>Save</strong>, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Fuze_1.png" alt="Fuze_1.png" /></li>
 <li>Done!</li>

@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript"></script>
 <script type="text/javascript">
 try{Typekit.load();}catch(e){}
 </script>
@@ -91,13 +91,13 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+<div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
+<p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
 </div>
 <ol>
 <li>Sign in to Logic Monitor with your credentials. <br />The URL is <strong>https://&lt;subdomain&gt;.logicmonitor.com/santaba/uiv2/setting/ssosettings.jsp</strong> where <em>&lt;subdomain&gt;</em> is the name of your subdomain.</li>
-<li>Save the following <strong>Metadata</strong> into into a text file.&nbsp;<textarea id="idpMetadata" style="margin: 0px; height: 147px; width: 818px;">Sign into the Okta Admin dashboard to generate this value.
-</textarea></li>
+<li>Save the following <strong>Metadata</strong> into into a text file.&nbsp;<kbd id="idpMetadata" style="margin: 0px; height: 147px; width: 818px;">Sign into the Okta Admin dashboard to generate this value.
+</kbd></li>
 <li>Click the <strong>Browse</strong> button in the Logic Monitor window in the <em>Identity Provider Metadata File</em> section, as shown below. Navigate to the file you just saved. After you upload the file, the metadata appears as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/LogicMonitor_1.jpg" alt="LogicMonitor_1.jpg" /></li>
 <li>Click the <strong>Save Changes</strong> button.</li>
 <li>Done!</li>

@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript"></script>
 <script type="text/javascript">
 try{Typekit.load();}catch(e){}
 </script>
@@ -91,15 +91,15 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+<div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
+<p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
 </div>
 <ol>
 <li>
 <p>Contact Greenhouse.io support at&nbsp;<strong>support@greenhouse.io&nbsp;</strong>to enable SAML for your account.&nbsp;</p>
 </li>
 <li>
-<p>Copy the following <strong>IDP Metadata</strong> and paste it into the email:&nbsp;<br /><br /><textarea id="idpMetadata">Sign into the Okta Admin dashboard to generate this value.</textarea></p>
+<p>Copy the following <strong>IDP Metadata</strong> and paste it into the email:&nbsp;<br /><br /><kbd id="idpMetadata">Sign into the Okta Admin dashboard to generate this value.</kbd></p>
 </li>
 <li>
 <p>Download the Token Signing <strong>Certificate</strong> below and attach it to the email:<br /><br /> <kbd id="downloadCertificate">Sign into the Okta Admin dashboard to generate this value.<br /></kbd></p>

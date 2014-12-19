@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript"></script>
 <script type="text/javascript">
 try{Typekit.load();}catch(e){}
 </script>
@@ -91,8 +91,8 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+<div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
+<p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
 </div>
 <ol>
 <li>
@@ -107,7 +107,7 @@ $(document).ready(function($) {
 <li>Copy the following link to the <strong>Sign on URL</strong> field, shown below.<br /><br /><kbd id="signOnUrl"> Sign into the Okta Admin dashboard to generate this value.</kbd></li>
 <li>
 <p>Cut and paste the following certificate including the BEGIN CERTIFICATE and END CERTIFICATE lines into the x.509 certificate field, shown below.</p>
-<textarea id="x509CertTextPem"> Sign into the Okta Admin dashboard to generate this value.</textarea></li>
+<kbd id="x509CertTextPem"> Sign into the Okta Admin dashboard to generate this value.</kbd></li>
 <li>
 <p>Copy the following link to <strong>Logout To URL</strong> field, shown below.</p>
 <kbd id="signOutUrl">Sign into the Okta Admin dashboard to generate this value.</kbd></li>

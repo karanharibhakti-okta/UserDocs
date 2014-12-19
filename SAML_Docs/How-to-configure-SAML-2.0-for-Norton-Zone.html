@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript"></script>
 <script type="text/javascript">
 try{Typekit.load();}catch(e){}
 </script>
@@ -91,12 +91,12 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+<div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
+<p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
 </div>
 <p><strong>Send an email to Norton Zone support and ask them to enable SAML 2.0. Provide the following three items in the message.</strong></p>
 <ol>
-<li>Copy the following<strong>&nbsp;IDP Metadata</strong>&nbsp;into the message.<br />&nbsp;<textarea id="idpMetadata" style="margin: 0px; height: 270px; width: 730px;">Sign in to the Okta Admin app to generate this variable.</textarea></li>
+<li>Copy the following<strong>&nbsp;IDP Metadata</strong>&nbsp;into the message.<br />&nbsp;<kbd id="idpMetadata" style="margin: 0px; height: 270px; width: 730px;">Sign in to the Okta Admin app to generate this variable.</kbd></li>
 <li>Request Norton Zone to&nbsp;whitelist your company’s Okta instance in the Norton Zone’s Single Sign-On (SSO) system using the attached IDP Metadata.</li>
 <li>Request a company code of your choice. Your end users will enter this company code when they sign into Norton Zone.&nbsp;Norton Zone uses this code to identify your company’s Okta instance and to redirect your users to your company’s Okta website.&nbsp;</li>
 </ol><strong>After&nbsp;After Norton Zone Enterprise Support creates a&nbsp;company code and whitelists your company’s Okta instance, you get a confirmation&nbsp;email. This usually takes a few days. After you receive the confirmation email,&nbsp;activate your Norton Zone for Business Pro (Enterprise) license. There are three steps to this procedure.</strong></div>

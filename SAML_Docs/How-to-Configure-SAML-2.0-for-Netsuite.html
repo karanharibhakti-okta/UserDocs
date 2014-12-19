@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript"></script>
 <script type="text/javascript">
 try{Typekit.load();}catch(e){}
 </script>
@@ -91,8 +91,8 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+<div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
+<p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
 </div>
 <ol>
 <li>Sign on to Netsuite with your user credentials.&nbsp;</li>
@@ -118,7 +118,7 @@ $(document).ready(function($) {
 <kbd id="signOnUrl">Sign into the Okta Admin dashboard to generate this value.</kbd></li>
 <li>
 <p>Save the metadata shown below in a file named <em>metadata.txt. S</em>elect <strong>Upload</strong> <strong>IDP metadata File</strong>. Then, select Choose File and navigate to the <em>metadata.txt</em> file you just created, as shown above.</p>
-<textarea id="idpMetadata">Sign into the Okta Admin dashboard to generate this value.</textarea></li>
+<kbd id="idpMetadata">Sign into the Okta Admin dashboard to generate this value.</kbd></li>
 <li>Select <strong>Submit</strong>, as shown above.</li>
 <li>Done!</li>
 </ol></div>

@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript"></script>
 <script type="text/javascript">
 try{Typekit.load();}catch(e){}
 </script>
@@ -91,14 +91,14 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+<div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
+<p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
 </div>
 <ol>
 <li>
 <p>Contact QPharma support and request they enable&nbsp;SAML for your account.</p>
 </li>
-<li>Provide the following <strong>IDP Metadata</strong>.<br />&nbsp;<textarea id="idpMetadata" style="margin: 0px; height: 270px; width: 730px;">Sign in to the Okta Admin app to generate this variable.</textarea></li>
+<li>Provide the following <strong>IDP Metadata</strong>.<br />&nbsp;<kbd id="idpMetadata" style="margin: 0px; height: 270px; width: 730px;">Sign in to the Okta Admin app to generate this variable.</kbd></li>
 <li>QPharma will notify you when SAML is enabled.</li>
 <li>Done!</li>
 </ol><strong style="background-color: initial;">Note:</strong> <span style="background-color: initial;">IDP-initiated flows are supported. SP-initiated flows and Just in Time (JIT) provisioning are not supported.</span></div>

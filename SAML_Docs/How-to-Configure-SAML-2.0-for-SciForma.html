@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript"></script>
 <script type="text/javascript">
 try{Typekit.load();}catch(e){}
 </script>
@@ -91,16 +91,15 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
+<div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
 <p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
 </div>
-<div class="okta-callout okta-warning">
-<p><strong>Read this before you enable SAML</strong></p>
+<div class="okta-callout okta-warning"><span class="icon-24 icon-warning"></span>
+<h3>Read this before you enable SAML</h3>
 <p>SciForma supports an SP-initiated SAML flow. For the convenience of your end users, <strong>Okta recommends that you hide the SciForma app and set up a Bookmark app</strong> with the SciForma logo after you complete this SAML setup. For instructions on setting up a Bookmark app and hiding the original app, see <a href="https://support.okta.com/entries/27685638-Simulating-an-IDP-initiated-Flow-with-the-Bookmark-App" target="_blank">Simulating an IDP-initiated Flow with the Bookmark App</a>.</p>
 </div>
 <h2><strong>If you are a user:</strong></h2>
-</div>
-<div class="okta-instructions"><ol><ol><ol>
+<ol>
 <li>Email the SciForma Administrator to enable SAML for your organization.</li>
 <li>
 <p>Attach the following <strong>Single Sign On URL</strong>&nbsp;to the message.</p>
@@ -110,9 +109,9 @@ $(document).ready(function($) {
 <kbd id="downloadCertificate"> Sign in to the Okta Admin app to generate this variable.</kbd></li>
 <li>After the SciForma Administrator processes your request, you will receive an&nbsp;confirmation email. Once your receive the confirmation, you can assign people to the application.</li>
 <li>Done!</li>
-</ol></ol></ol>
+</ol>
 <h2><strong>If you are the Administrator:</strong></h2>
-<ol><ol><ol>
+<ol>
 <li>Sign into SciForma with your administrator credentials. Navigate to <strong>System &gt; Security</strong> and then select the <strong>Single Sign-on Authentication</strong> tab, as shown below.<br /><br />
 <p><img style="border: 0; padding: 0;" src="images/apps/scifroma.png" alt="scifroma.png" /></p>
 </li>
@@ -133,7 +132,7 @@ $(document).ready(function($) {
 <p><kbd>https://&lt;your_subdomain&gt;.sciforma.net/sciforma/saml/post</kbd></p>
 </li>
 <li>Done!</li>
-</ol></ol></ol>
+</ol>
 <p style="padding-left: 58px;"><strong>Note:</strong> An SP-initiated flow is supported from the URL <strong>https://&lt;your_subdomain&gt;.sciforma.net<span>/main.html</span></strong>, where <em>&lt;your_subdomain&gt;</em> is the name of your SciForma subdomain. IdP-initiated flows and Just in Time (JIT) provisioning are not supported.</p>
 <strong><a><br /></a></strong>
 <h2>&nbsp;</h2>

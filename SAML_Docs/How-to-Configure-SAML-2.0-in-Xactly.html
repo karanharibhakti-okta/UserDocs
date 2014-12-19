@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript"></script>
 <script type="text/javascript">
 try{Typekit.load();}catch(e){}
 </script>
@@ -91,8 +91,8 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+<div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
+<p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
 </div>
 <h2>Send an email to Xactly with your Okta Certificate</h2>
 <ol>
@@ -121,7 +121,7 @@ $(document).ready(function($) {
 <kbd id="downloadCertificate"> Sign in to the Okta Admin app to have this variable generated for you</kbd></li>
 <li>
 <p>The <strong>IDP metadata</strong> is:</p>
-<textarea id="idpMetadata"> Sign in to the Okta Admin app to have this variable generated for you</textarea></li>
+<kbd id="idpMetadata"> Sign in to the Okta Admin app to have this variable generated for you</kbd></li>
 </ol>
 <p>Wait for Xactly to send you the shared key needed to configure the SAML application for your organization. If you want to allow your users to sign-on to Xactly immediately, you can change the sign-on mode to&nbsp;<strong>Secure Web Authentication</strong>. No further configuration will be required by you if you choose&nbsp;<strong>Secure Web Authentication</strong>.</p>
 </div>

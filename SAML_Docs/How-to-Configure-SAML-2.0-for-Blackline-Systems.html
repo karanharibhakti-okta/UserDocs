@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript"></script>
 <script type="text/javascript">
 try{Typekit.load();}catch(e){}
 </script>
@@ -91,13 +91,13 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+<div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
+<p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
 </div>
 <p>Some of the following fields are required to configure SAML 2.0, but not all. Provide the information requested either in the site for the app for which you are configuring SAML, or an email to support, if that is what the app provider requests.</p>
 <p><strong>Note:</strong> Some of the terminology can vary among apps. For example, some apps refer to the Sign Out URL as the&nbsp;Identity Provider HTTP POST URL. Sometimes you might have to look at the sample data provided by an app to determine which field to use.</p>
 <ol>
-<li><strong>IDP Metadata</strong>: <textarea id="idpMetadata">Sign in to the Okta Admin app to generate this variable.</textarea></li>
+<li><strong>IDP Metadata</strong>: <kbd id="idpMetadata">Sign in to the Okta Admin app to generate this variable.</kbd></li>
 <li>&nbsp;<strong>&nbsp;IDP Issuer/Entity ID</strong>:<kbd id="issuer">Sign in to the Okta Admin&nbsp;<span>app to generate this variable.</span></kbd></li>
 <li><strong>x.509 Certificate.</strong>&nbsp;Please use <strong>one</strong> of the following certificate formats, as requested by the app provider:</li>
 <ul>

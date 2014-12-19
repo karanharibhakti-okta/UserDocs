@@ -20,6 +20,10 @@ body {
     font-size: 14px;
     line-height: 1.5;
 }
+hr {
+    border: 0;
+    border-bottom: 1px solid #ddd;
+}
 .clearfix {
     display: block;
 }
@@ -97,23 +101,20 @@ ol > li:before {
 .okta-instructions ol > li > ol > li:before {
     content: counter(li, lower-alpha);
 }
-/*.okta-instructions p, .okta-instructions span, .okta-instructions li {
-    font-size: 1.1em;
-}*/
-/* Headings */
 
+/* Headings */
 .okta-instructions h1 {
-    font-size: 36px;
+    font-size: 30px;
     font-weight: bold;
 }
 .okta-instructions h2 {
-    font-size: 30px;
-}
-.okta-instructions h3 {
     font-size: 24px;
 }
-.okta-instructions h4 {
+.okta-instructions h3 {
     font-size: 18px;
+}
+.okta-instructions h4 {
+    font-size: 16px;
 }
 .okta-instructions h1, .okta-instructions h2 {
     color: #5e5e5e
@@ -181,9 +182,18 @@ kbd, code, kbd *, code * {
 .okta-callout h2,
 .okta-callout h3 {
     font-size: 16px;
+    line-height: 24px;
     font-weight: normal;
 }
 
+.okta-callout p + p,
+.okta-callout h2 + p,
+.okta-callout h3 + p {
+    margin-top: 5px;
+}
+.okta-callout li + li {
+    margin-top: 8px;
+}
 .okta-callout .icon-24 {
     background-image: url(callouts-sprite.png);
     background-repeat: no-repeat;

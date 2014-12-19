@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript"></script>
 <script type="text/javascript">
 try{Typekit.load();}catch(e){}
 </script>
@@ -73,9 +73,8 @@ $(document).ready(function($) {
   $('#mailto').on('click', function() {
       var to = "DedicatedSAMLComplaintLine@okta.com"; // I am assuming this will always be same!
       var body = "Dear Okta,%0D%0A%0D%0AI used your SAML setup instruction. I want you to know…%0D%0AI completed the SAML setup?%0D%0AI found errors in this doc?%0D%0A%0D%0AHere’s what I noticed:";
-      var subject = "Update Doc:" + $('h1').text();       
-      var mailto = "mailto:" + to + "?subject=" + subject + "&body=" + body;
-      window.location.href = mailto;
+      var subject = "Update Doc:" + $('h1').text();
+      window.location.href = "mailto:" + to + "?subject=" + subject + "&body=" + body;
     });
 
 });
@@ -91,8 +90,8 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+<div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
+<p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
 </div>
 <h2>Contact Taleo to enable SAML 1.1 for your account</h2>
 <p>You will need to provide the following things to Taleo in order to complete the integration:</p>

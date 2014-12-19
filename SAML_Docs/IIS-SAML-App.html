@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript"></script>
 <script type="text/javascript">
 try{Typekit.load();}catch(e){}
 </script>
@@ -91,12 +91,11 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+<div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
+<p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
 </div>
 <h2>Overview</h2>
 <h3>Basic integration of Okta Authentication consists of the following three parts:</h3>
-<ul>
 <ul>
 <li>
 <p>Run-time libraries</p>
@@ -108,18 +107,14 @@ $(document).ready(function($) {
 <p>Forms Based Authentication</p>
 </li>
 </ul>
-</ul>
 <h2>Run-time libraries</h2>
-<ul>
-<ul><ol>
+<ol>
 <li>
 <p>Copy the&nbsp;<em>Okta.Authentication.dll</em> into <em>/bin</em> folder of the ASP.NET application.</p>
 </li>
-</ol></ul>
-</ul>
+</ol>
 <h2>Configuration</h2>
-<ul>
-<ul><ol>
+<ol>
 <li>
 <p>Edit the root Web.config file of the ASP.NET application. Add the following code to register the Okta Authentication configuration section.</p>
 <p style="padding-left: 60px;">&lt;configSections&gt;<br />&nbsp; &nbsp;&lt;!-- Okta Authentication uses a custom configuration section --&gt;<br />&nbsp; &nbsp;&lt;sectionGroup name="okta"&gt;<br />&nbsp; &nbsp; &nbsp; &lt;section name="authentication" <br />&nbsp; &nbsp; &nbsp; &nbsp; type="Okta.Authentication.Configuration.AuthenticationSection, Okta.Authentication"/&gt;<br />&nbsp; &nbsp; &nbsp; &lt;/sectionGroup&gt;<br />&lt;/configSections&gt;</p>
@@ -146,17 +141,14 @@ $(document).ready(function($) {
 <li>Replace [Certificate Data] with the following:
 <p><kbd id="x509CertTextPem">Sign into the Okta Admin dashboard to generte this value.</kbd></p>
 </li>
-</ul>
-</li>
-</ol></ul>
-</ul>
+</ol>
 <h2>Forms Based Authentication</h2>
-<ul><ol><ol>
+<ol>
 <li>
 <p>Add the following code to configure the ASP.NET application to use Forms Based Authentication.</p>
 <p style="padding-left: 60px;">&lt;system.web&gt;<br />&nbsp; &lt;authentication mode="Forms"&gt;<br />&nbsp; &nbsp; &lt;forms loginUrl="~/Login.aspx"/&gt;<br />&nbsp; &lt;/authentication&gt;<br />&nbsp; &lt;authorization&gt;<br />&nbsp; &nbsp; &lt;deny users="?"/&gt;<br />&nbsp; &lt;/authorization&gt;<br /> &lt;/system.web&gt;</p>
 </li>
-</ol></ol></ul>
+</ol>
 </div>
 </body>
 </html>

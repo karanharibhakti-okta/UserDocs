@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript"></script>
 <script type="text/javascript">
 try{Typekit.load();}catch(e){}
 </script>
@@ -91,8 +91,8 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+<div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
+<p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
 </div>
 <ol>
 <li>Generate your service provider certificate (Private Key File (PEM) and Certificate file (CRT)).<br /><br />The following examples use the <em>openssl</em> tool:</li>
@@ -114,7 +114,7 @@ $(document).ready(function($) {
 <li>Select <strong>UPLOAD FILE(S)</strong> to upload both the&nbsp;<strong>Private Key file (PEM)</strong> and the&nbsp;<strong>Certificate file (CRT) </strong>you generated in step 1.</li>
 <li>
 <p>Copy the following into the <strong>XML Metadata</strong> field:</p>
-<textarea id="idpMetadata" style="margin-top: 0px; margin-bottom: 0px; height: 266px; width: 700px;">Sign into the Okta Admin dashboard to generate this value.</textarea></li>
+<kbd id="idpMetadata" style="margin-top: 0px; margin-bottom: 0px; height: 266px; width: 700px;">Sign into the Okta Admin dashboard to generate this value.</kbd></li>
 <li>For&nbsp;<strong>Username Attribute</strong>, enter <em><strong>username</strong></em>.</li>
 <li>Select <strong>SAVE CHANGES</strong>.</li>
 </ul>

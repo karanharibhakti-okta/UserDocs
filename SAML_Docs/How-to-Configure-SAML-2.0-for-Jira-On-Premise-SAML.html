@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript"></script>
 <script type="text/javascript">
 try{Typekit.load();}catch(e){}
 </script>
@@ -91,12 +91,12 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+<div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
+<p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
 </div>
 <ol>
 <li>Create <strong>okta-config-jira.xml</strong> on the Jira server and paste the following configuration into it.<br /><br />&lt;configuration&gt;<br />&nbsp; &lt;applications&gt;<br />&nbsp; &nbsp; &lt;application&gt;<br />&nbsp; &nbsp; &nbsp; [Metadata]<br />&nbsp; &nbsp; &lt;/application&gt;<br />&nbsp; &lt;/applications&gt;<br />&lt;/configuration&gt;</li>
-<li>Substitute the following text for [Metadata] in the file you just created.<br /><br /><textarea id="idpMetadata" rows="25">Sign into the Okta Admin dashboard to generate this value.</textarea></li>
+<li>Substitute the following text for [Metadata] in the file you just created.<br /><br /><kbd id="idpMetadata" rows="25">Sign into the Okta Admin dashboard to generate this value.</kbd></li>
 <li>Make the following updates to the <strong>[jira_webdir]/WEB-INF/classes/seraph-config.xml</strong> file.</li>
 <ul>
 <ul>

@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript"></script>
 <script type="text/javascript">
 try{Typekit.load();}catch(e){}
 </script>
@@ -91,10 +91,10 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+<div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
+<p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
 </div>
-<ol><ol><ol>
+<ol>
 <li>
 <p><a href="http://www.webex.com/go/connectadmin" target="_blank">Sign in</a> to the&nbsp;<strong>Cisco WebEx Connect Administration Tool .</strong></p>
 </li>
@@ -106,8 +106,8 @@ $(document).ready(function($) {
 </ol></li>
 <li>Click&nbsp;<strong>Federated Web SSO Configuration&nbsp;</strong>to display the&nbsp;<strong>Federated Web SSO Configuration&nbsp;</strong>dialog box.<br /><img src="images/apps/webexconnect.png" alt="webexconnect.png" /><br />From the&nbsp;<strong>Federation Protocol</strong>&nbsp;drop down list, select the federation protocol&nbsp;<strong>SAML 2.0</strong>&nbsp;The fields displayed in the&nbsp;<strong>Federated Web SSO Configuration</strong>&nbsp;dialog box vary based on the selected federation protocol. By default, the configuration fields for SAML 2.0 will be displayed each time the&nbsp;<strong>Federated Web SSO Configuration</strong>&nbsp;dialog box is opened.</li>
 <li>Click&nbsp;<strong>Import SAML Metadata</strong>&nbsp;to open the&nbsp;<strong>Federated Web SSO Configuration - SAML Metadata</strong>&nbsp;dialog box.</li>
-<li>Click&nbsp;<strong>Import and import following metadata file</strong>, click on&nbsp;<strong>Back&nbsp;</strong>to complete the import. <textarea id="idpMetadata"> Sign in to the Okta Admin app to have this variable generated for you </textarea></li>
+<li>Click&nbsp;<strong>Import and import following metadata file</strong>, click on&nbsp;<strong>Back&nbsp;</strong>to complete the import. <kbd id="idpMetadata"> Sign in to the Okta Admin app to have this variable generated for you </kbd></li>
 <li>Done!</li>
-</ol></ol></ol></div>
+</ol></div>
 </body>
 </html>

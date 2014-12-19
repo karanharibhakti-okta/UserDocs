@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript"></script>
 <script type="text/javascript">
 try{Typekit.load();}catch(e){}
 </script>
@@ -91,16 +91,16 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+<div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
+<p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
 </div>
-<ol><ol>
+<ol>
 <li>
 <p>Please send an email to&nbsp;<span>the Mimeo team at jchen@mimeo.com and request that they create a separate tenant for you and provide you with the Post Back URL and the following attributes: Instance Type (Sandbox vs. Production), Company Name, Company ID, Organization ID, Authorized Market Place URL</span></p>
 </li>
 <li>Download following certificate and attach it to the email.<br /><br /> <kbd id="downloadCertificate">Sign in to the Okta Admin app to have this variable generated for you.</kbd></li>
 <li>After you receive the information, open the Mimeo application in the Administration panel of Okta and add the information into the corresponding fields in the General tab.</li>
 <li>Done!<br /><br /><br /></li>
-</ol></ol></div>
+</ol></div>
 </body>
 </html>

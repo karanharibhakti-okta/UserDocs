@@ -1,127 +1,129 @@
 <html>
 <head>
-<link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
-<script type="text/javascript">
-try{Typekit.load();}catch(e){}
-</script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="//use.typekit.net/jff5neq.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        try{Typekit.load();}catch(e){}
+    </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-<title>Setup SSO</title>
+    <title>Setup SSO</title>
 
-<!-- <script> src=”resources/scripts/getAppValues.js” ></script> -->
+    <!-- <script> src=”resources/scripts/getAppValues.js” ></script> -->
 
-<script>
-function processData(data) {
-  $('#signOnUrl').html(data["signOnUrl"]);
-  $('#signOutUrl').html(data["signOutUrl"]);
-  $('#changePasswordUrl').html(data["changePasswordUrl"]);
-  $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
-   $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
-  $('#idpMetadata').html(data["idpMetadata"]);
-  $('#x509CertText').html(data["x509CertText"]);
-  $('#x509CertTextPem').html(data["x509CertTextPem"]);
-  $('#x509CertTextPem').css("white-space", "pre");
-  $('#certFingerPrint').html(data["certFingerPrint"]);
-  $('#validFrom').html(data["validFrom"]);
-  $('#validTo').html(data["validTo"]);
-  $('#issuer').html(data["issuer"]);
-$('#metadataUrl').html(data["signOnUrl"]);
- $('#errorUrl').html(data["signOutUrl"]);
- $('#timeoutUrl').html(data["signOutUrl"]);
- $('#delAuthUrl').html(data["delAuthUrl"]);
- $('#saml11SignOnUrl').html(data["saml11SignOnUrl"]);    
-}
-function getURLParameter(name) {
-    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
-}
-$(document).ready(function($) {
-  // This condition is to ensure that the ajax api code is executed only on the intended pages
-  if ($('#loginAdminApp').length > 0) {
-    var app = getURLParameter('app');
-    var subdomain = getURLParameter('subdomain');
-    var instanceId = getURLParameter('instanceId');
-    var baseAdminUrl = getURLParameter('baseAdminUrl');
-    var url;
-    if ((subdomain == null && baseAdminUrl == null) || app == null || instanceId == null) {
-      $('#loginAdminApp').show();
-    } else {
-      var endpoint = '/api/internal/v1/setup/help/saml/' + app + '/' + instanceId + '?callback=processData';
-      if (baseAdminUrl) {
-        url = baseAdminUrl + endpoint;
-      } else if (subdomain) {
-        url = 'https://' + subdomain + '.okta-admin.com' + endpoint;
-      }
-      $.ajax({
-        type: 'GET',
-        url: url,
-        jsonp: false,
-        jsonpCallback: 'processData',
-        dataType: 'jsonp',
-        success: function(json) {
-          $('#loginAdminApp').hide();
-        },
-        error: function(e,jqXHR,ajaxSettings,thrownError) {
-          $('#loginAdminApp').show();
-        },
-        timeout: 3000
-      });
-    }
-  }
+    <script>
+        function processData(data) {
+            $('#signOnUrl').html(data["signOnUrl"]);
+            $('#signOutUrl').html(data["signOutUrl"]);
+            $('#changePasswordUrl').html(data["changePasswordUrl"]);
+            $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
+            $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
+            $('#idpMetadata').html(data["idpMetadata"]);
+            $('#x509CertText').html(data["x509CertText"]);
+            $('#x509CertTextPem').html(data["x509CertTextPem"]);
+            $('#x509CertTextPem').css("white-space", "pre");
+            $('#certFingerPrint').html(data["certFingerPrint"]);
+            $('#validFrom').html(data["validFrom"]);
+            $('#validTo').html(data["validTo"]);
+            $('#issuer').html(data["issuer"]);
+            $('#metadataUrl').html(data["signOnUrl"]);
+            $('#errorUrl').html(data["signOutUrl"]);
+            $('#timeoutUrl').html(data["signOutUrl"]);
+            $('#delAuthUrl').html(data["delAuthUrl"]);
+            $('#saml11SignOnUrl').html(data["saml11SignOnUrl"]);
+        }
+        function getURLParameter(name) {
+            return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+        }
+        $(document).ready(function($) {
+            // This condition is to ensure that the ajax api code is executed only on the intended pages
+            if ($('#loginAdminApp').length > 0) {
+                var app = getURLParameter('app');
+                var subdomain = getURLParameter('subdomain');
+                var instanceId = getURLParameter('instanceId');
+                var baseAdminUrl = getURLParameter('baseAdminUrl');
+                var url;
+                if ((subdomain == null && baseAdminUrl == null) || app == null || instanceId == null) {
+                    $('#loginAdminApp').show();
+                } else {
+                    var endpoint = '/api/internal/v1/setup/help/saml/' + app + '/' + instanceId + '?callback=processData';
+                    if (baseAdminUrl) {
+                        url = baseAdminUrl + endpoint;
+                    } else if (subdomain) {
+                        url = 'https://' + subdomain + '.okta-admin.com' + endpoint;
+                    }
+                    $.ajax({
+                        type: 'GET',
+                        url: url,
+                        jsonp: false,
+                        jsonpCallback: 'processData',
+                        dataType: 'jsonp',
+                        success: function(json) {
+                            $('#loginAdminApp').hide();
+                        },
+                        error: function(e,jqXHR,ajaxSettings,thrownError) {
+                            $('#loginAdminApp').show();
+                        },
+                        timeout: 3000
+                    });
+                }
+            }
 
-  
-  $('#mailto').on('click', function() {
-      var to = "DedicatedSAMLComplaintLine@okta.com"; // I am assuming this will always be same!
-      var body = "Dear Okta,%0D%0A%0D%0AI used your SAML setup instruction. I want you to know…%0D%0AI completed the SAML setup?%0D%0AI found errors in this doc?%0D%0A%0D%0AHere’s what I noticed:";
-      var subject = "Update Doc:" + $('h1').text();       
-      var mailto = "mailto:" + to + "?subject=" + subject + "&body=" + body;
-      window.location.href = mailto;
-    });
 
-});
-</script>
+            $('#mailto').on('click', function() {
+                var to = "DedicatedSAMLComplaintLine@okta.com"; // I am assuming this will always be same!
+                var body = "Dear Okta,%0D%0A%0D%0AI used your SAML setup instruction. I want you to know…%0D%0AI completed the SAML setup?%0D%0AI found errors in this doc?%0D%0A%0D%0AHere’s what I noticed:";
+                var subject = "Update Doc:" + $('h1').text();
+                var mailto = "mailto:" + to + "?subject=" + subject + "&body=" + body;
+                window.location.href = mailto;
+            });
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        });
+    </script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
 <div class="header clearfix">
-        <div class="logo-container">
-            <img src="resources/css/okta-logo-white.png" alt="Okta" />
-        </div>
+    <div class="logo-container">
+        <img src="resources/css/okta-logo-white.png" alt="Okta" />
     </div>
+</div>
 
 <div class="okta-instructions">
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
-</div>
-<div class="okta-callout okta-warning">
-<h2 id="postini-setup-instructions"><span class="icon warning-24">Read this before you turn on SAML:</span></h2>
-<p>Enabling SAML will affect all users who use this application, which means that users will not be able to sign-in through their regular log-in page. They will only be able to access the app through the Okta service.</p>
-</div>
-<h2>Sign in to Postini Admin Center</h2>
-<ol>
-<li>
-<p>Click on&nbsp;<strong>Orgs and Users</strong>, and then select your top-level Org</p>
-</li>
-<li>
-<p>Go to the&nbsp;<strong>Organization Settings</strong>&nbsp;page, and then click on the&nbsp;<strong>Single Sign On</strong>&nbsp;section.</p>
-<p>Note that this section is available only for your top-level Organization and will not appear in sub-organizations.</p>
-</li>
-<li>
-<p>Copy and paste the following into&nbsp;<strong>Issuer Name</strong>:</p>
-<kbd id="issuer">Sign into the Okta admin app to have this variable generated for you.</kbd></li>
-<li>
-<p>Copy and paste your certificate (below) into the&nbsp;<strong>Your Certificate</strong>&nbsp;section:</p>
-<kbd id="x509CertTextPem">Sign into the Okta admin app to have this variable generated for you.</kbd></li>
-<li>
-<p>Click&nbsp;<strong>Add Configuration</strong>. You will see this configuration saved on the bottom of the page</p>
-</li>
-<li>
-<p>For each Organization that you want to use SAML, you will need to enable this option. Go to the&nbsp;<strong>General Setting</strong>&nbsp;page for each Org, and then change the&nbsp;<strong>Authentication Method</strong>&nbsp;to&nbsp;<strong>SAML SSO</strong>.</p>
-</li>
-</ol><img src="images/apps/postiniSAML.png" alt="postiniSAML.png" width="811" height="803" /><br />
-<h2>Done!</h2>
-<p>Your users are ready to single sign-on to Postini!</p>
+    <div id="loginAdminApp" class="okta-callout okta-error" style="display: none;">
+        <span class="icon-24 icon-error"></span>
+        <p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+    </div>
+    <div class="okta-callout okta-warning">
+        <span class="icon-24 icon-warning"></span>
+        <h2 id="postini-setup-instructions">Read this before you turn on SAML</h2>
+        <p>Enabling SAML will affect all users who use this application, which means that users will not be able to sign-in through their regular log-in page. They will only be able to access the app through the Okta service.</p>
+    </div>
+    <h2>Sign in to Postini Admin Center</h2>
+    <ol>
+        <li>
+            <p>Click on&nbsp;<strong>Orgs and Users</strong>, and then select your top-level Org</p>
+        </li>
+        <li>
+            <p>Go to the&nbsp;<strong>Organization Settings</strong>&nbsp;page, and then click on the&nbsp;<strong>Single Sign On</strong>&nbsp;section.</p>
+            <p>Note that this section is available only for your top-level Organization and will not appear in sub-organizations.</p>
+        </li>
+        <li>
+            <p>Copy and paste the following into&nbsp;<strong>Issuer Name</strong>:</p>
+            <kbd id="issuer">Sign into the Okta admin app to have this variable generated for you.</kbd></li>
+        <li>
+            <p>Copy and paste your certificate (below) into the&nbsp;<strong>Your Certificate</strong>&nbsp;section:</p>
+            <kbd id="x509CertTextPem">Sign into the Okta admin app to have this variable generated for you.</kbd></li>
+        <li>
+            <p>Click&nbsp;<strong>Add Configuration</strong>. You will see this configuration saved on the bottom of the page</p>
+        </li>
+        <li>
+            <p>For each Organization that you want to use SAML, you will need to enable this option. Go to the&nbsp;<strong>General Setting</strong>&nbsp;page for each Org, and then change the&nbsp;<strong>Authentication Method</strong>&nbsp;to&nbsp;<strong>SAML SSO</strong>.</p>
+        </li>
+    </ol><img src="images/apps/postiniSAML.png" alt="postiniSAML.png" width="811" height="803" /><br />
+    <h2>Done!</h2>
+    <p>Your users are ready to single sign-on to Postini!</p>
 </div>
 </body>
 </html>

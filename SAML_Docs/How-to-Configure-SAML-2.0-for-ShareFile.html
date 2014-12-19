@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//use.typekit.net/jff5neq.js" type="text/javascript" /</script>
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript"></script>
 <script type="text/javascript">
 try{Typekit.load();}catch(e){}
 </script>
@@ -91,10 +91,10 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+<div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
+<p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
 </div>
-<ol><ol><ol><ol>
+<ol>
 <li>
 <p>Log in to ShareFile Administrative Console and click on <strong>Configure Single Sign-On</strong>.<strong><br /><img src="images/apps/SHAREFILE%21.jpg" alt="SHAREFILE_.jpg" /><br /></strong></p>
 </li>
@@ -107,12 +107,12 @@ $(document).ready(function($) {
 <li>Done!<br /><br />
 <h2><strong>Optional Settings</strong></h2>
 </li>
-</ol></ol>
+</ol>
 <li><strong>Require SSO Login</strong>: This is a customer preference. If you organization wants SSO Required, enter the information here.&nbsp;</li>
 <li><strong>SSO IP Range</strong>: Enter as appropriate.</li>
 <li><strong>SP-initiated SSO Certificate</strong>: HTTP Redirect with no Signature.</li>
 <li><strong>SP-initiated Auth Context</strong>: Password Protected Transport.</li>
 <li><strong>Active Profile Cookies</strong>: &nbsp;Leave blank.<br /><br /><br /></li>
-</ol></ol></div>
+</ol></div>
 </body>
 </html>
