@@ -91,23 +91,26 @@ $(document).ready(function($) {
     </div>
 
 <div class="okta-instructions">
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+<div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
+<p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
 </div>
-<ol><ol>
-<li>
-<p>Email R&amp;D Logic at<span>&nbsp;</span>rdtime@rdlogic.com&nbsp;to enable SAML for R&amp;D Time and paste the following two pieces of information into the message.&nbsp;</p>
+<p>Some of the following fields are required to configure SAML 2.0, but not all. Provide the information requested either in the site for the app for which you are configuring SAML, or an email to support, if that is what the app provider requests.</p>
+<p><strong>Note:</strong> Some of the terminology can vary among apps. For example, some apps refer to the Sign Out URL as the&nbsp;Identity Provider HTTP POST URL. You might have to look at the sample data provided by an app to determine which field to use.</p>
+<ol>
+<li><strong>IDP Metadata:<br /><br />&nbsp;<kbd id="idpMetadata" style="margin: 0px; width: 817px; height: 190px;">Sign into the Okta Admin Dashboard to generate this variable.</kbd></strong></li>
+</ol><ol>
+<li>&nbsp;<strong>&nbsp;IDP Issuer/Entity ID</strong>:<kbd id="issuer">Sign into the Okta Admin Dashboard to generate this variable.</kbd></li>
+<li><strong>x.509 Certificate.</strong>&nbsp;Please use <strong>one</strong> of the following certificate formats, as requested by the app provider:</li>
+<ul>
+<li>x.509 Certificate to download and upload in <strong>.cert Format</strong>:<kbd id="downloadCertificate">Sign into the Okta Admin Dashboard to generate this variable.</kbd></li>
+<li>x.509 Certificate to cut and paste in <strong>Text Format</strong>:<kbd id="x509CertText">Sign into the Okta Admin Dashboard to generate this variable.</kbd></li>
+<li>x509 Certificate to cut and paste in <strong>PEM Text Format</strong>:
+<pre id="x509CertTextPem">Sign into the Okta Admin Dashboard to generate this variable.</pre>
 </li>
-<li>
-<p><strong>IDP Metadata</strong>:</p>
-<textarea id="idpMetadata" style="margin: 0px; height: 79px; width: 793px;"> Sign in to the Okta Admin app to have this variable generated for you </textarea></li>
-<li><strong>Sign Off UR</strong>L:<br /><br /><kbd id="signOutUrl">Sign in to the Okta Admin app to have this variable generated for you</kbd></li>
-</ol>
-<li><strong>After R&amp;D Logic enables SAML, Logic, you can log in to R&amp;D Time through SAML.&nbsp;</strong></li>
-</ol>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<div class="instructions-text instructions-text-wide"></div>
-</div>
+<li>x509 Certificate <strong>Fingerprint</strong> to cut and paste:<kbd id="certFingerPrint">Sign into the Okta Admin Dashboard to generate this variable.</kbd></li>
+</ul>
+<li><strong>Login URL/SignOn URL:</strong><kbd id="signOnUrl">Sign into the Okta Admin Dashboard to generate this variable.</kbd></li>
+<li><strong>Logout</strong> <strong>URL/SignOut UR</strong>L:<kbd id="signOutUrl">Sign into the Okta Admin Dashboard to generate this variable.</kbd></li>
+</ol></div>
 </body>
 </html>
