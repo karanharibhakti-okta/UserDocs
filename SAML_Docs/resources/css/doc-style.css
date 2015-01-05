@@ -135,7 +135,7 @@ ol > li:before {
 }
 /* Code and quotes */
 
-kbd, blockquote {
+kbd, blockquote, pre {
     background: #f9f9f9;
     border: 1px solid #e1e1e1;
     border-radius: 3px 3px 3px 3px;
@@ -147,11 +147,13 @@ kbd, blockquote {
     margin-top: 0;
 }
 
-kbd, code, kbd *, code * {
+kbd, code, pre, 
+kbd *, code *, pre * {
     font-family: Courier, monospace;
     letter-spacing: -0.04em;
     font-weight: normal;
 }
+
 /* Callouts */
 
 .okta-callout {

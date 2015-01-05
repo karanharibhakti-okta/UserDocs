@@ -101,7 +101,7 @@ $(document).ready(function($) {
 <li>
 <p><strong>IDP Metadata</strong>:</p>
 <textarea id="idpMetadata" style="margin: 0px; height: 79px; width: 793px;"> Sign in to the Okta Admin app to have this variable generated for you </textarea></li>
-<li><strong>Sign Off UR</strong>L:<br /><br /><kbd id="signOutUrl">Sign in to the Okta Admin app to have this variable generated for you</kbd></li>
+<li><strong>Sign Off UR</strong>L:<br /><br /><kbd id="signOutUrl">Sign in to the Okta Admin app to have this variable generated for you.</kbd></li>
 </ol>
 <li><strong>After R&amp;D Logic enables SAML, Logic, you can log in to R&amp;D Time through SAML.&nbsp;</strong></li>
 </ol>
