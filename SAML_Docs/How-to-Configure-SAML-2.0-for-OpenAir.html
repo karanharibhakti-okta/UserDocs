@@ -18,7 +18,7 @@ function processData(data) {
   $('#changePasswordUrl').html(data["changePasswordUrl"]);
   $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
    $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
-  $('#idpMetadata').text(data["idpMetadata"]);
+  $('#idpMetadata').html(data["idpMetadata"]);
   $('#x509CertText').html(data["x509CertText"]);
   $('#x509CertTextPem').html(data["x509CertTextPem"]);
   $('#x509CertTextPem').css("white-space", "pre");
@@ -95,6 +95,19 @@ $(document).ready(function($) {
 <p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
 </div>
 <p>Provide the following&nbsp;<strong>IDP metadata</strong>&nbsp;to OpenAir.</p>
-<kbd id="idpMetadata">Sign in to the Okta Admin app to generate this variable.</kbd></div>
+<pre id="idpMetadata">&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" entityID="k10dgf3ztSOPRJEXKOEZ"&gt;&lt;md:IDPSSODescriptor WantAuthnRequestsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol"&gt;&lt;md:KeyDescriptor use="signing"&gt;&lt;ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#"&gt;&lt;ds:X509Data&gt;&lt;ds:X509Certificate&gt;MIICmTCCAgKgAwIBAgIGAUU+Zd6+MA0GCSqGSIb3DQEBBQUAMIGPMQswCQYDVQQGEwJVUzETMBEG
+A1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEU
+MBIGA1UECwwLU1NPUHJvdmlkZXIxEDAOBgNVBAMMB2hlaWRpY28xHDAaBgkqhkiG9w0BCQEWDWlu
+Zm9Ab2t0YS5jb20wHhcNMTQwNDA3MjI1MjU0WhcNNDQwNDA3MjI1MzU0WjCBjzELMAkGA1UEBhMC
+VVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xDTALBgNVBAoM
+BE9rdGExFDASBgNVBAsMC1NTT1Byb3ZpZGVyMRAwDgYDVQQDDAdoZWlkaWNvMRwwGgYJKoZIhvcN
+AQkBFg1pbmZvQG9rdGEuY29tMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCXVPUrGDW2d1F1
+xG+9mGdXctZYFZ+3pSunTbkV6WRpwvJWVlXZHAvxExNVqccyu7kNF5d+GAkVHdpUgPCKBJYKw42y
+m8LcJOm3QKtxzpKcZqwsla9aOgbtUKF08BgAoQDHC4DO1wVlj1SubpU9bCoO2HOMvehFoC1Uo8Ws
+rvrG+QIDAQABMA0GCSqGSIb3DQEBBQUAA4GBABloQhvxt3rbxTHOCIwU8Yb1q1ObEXyv9Mckodi8
+Ly1PT+jODZqmXMVO9zs6m7rHmZu55fUExhpI9X7EerZiD1R0eI4UTxEO0Wod+08SyymJ2cApXq2C
+f47i64xir17GvEjpckW+Q0qKDd3Q24Fg9uWtSnb6EOEk6oHAnI0vNyvf&lt;/ds:X509Certificate&gt;&lt;/ds:X509Data&gt;&lt;/ds:KeyInfo&gt;&lt;/md:KeyDescriptor&gt;&lt;md:NameIDFormat&gt;urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress&lt;/md:NameIDFormat&gt;&lt;md:NameIDFormat&gt;urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified&lt;/md:NameIDFormat&gt;&lt;md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://heidico.okta.com/app/plateau/k10dgf3ztSOPRJEXKOEZ/sso/saml"/&gt;&lt;md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://heidico.okta.com/app/plateau/k10dgf3ztSOPRJEXKOEZ/sso/saml"/&gt;&lt;/md:IDPSSODescriptor&gt;&lt;/md:EntityDescriptor&gt;</pre></div>
 </body>
 </html>
+
+<?xml version="1.0" encoding="UTF-8"?>
