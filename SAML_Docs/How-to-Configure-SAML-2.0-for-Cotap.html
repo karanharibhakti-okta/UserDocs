@@ -18,7 +18,7 @@ function processData(data) {
   $('#changePasswordUrl').html(data["changePasswordUrl"]);
   $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
    $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
-  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#idpMetadata').text(data["idpMetadata"]);
   $('#x509CertText').html(data["x509CertText"]);
   $('#x509CertTextPem').html(data["x509CertTextPem"]);
   $('#x509CertTextPem').css("white-space", "pre");
@@ -100,7 +100,7 @@ $(document).ready(function($) {
 </li>
 <li>
 <p>Provide the following <strong>IDP Metadata</strong>:&nbsp;</p>
-<p><kbd id="idpMetadata" style="margin: 0px; height: 187px; width: 700px;">Sign in to Okta Admin app to generate this variable.</kbd></p>
+<p><kbd id="idpMetadata">Sign in to Okta Admin app to generate this variable.</kbd></p>
 </li>
 <li>
 <p>Provide the following&nbsp;<strong>Certificate</strong>.</p>

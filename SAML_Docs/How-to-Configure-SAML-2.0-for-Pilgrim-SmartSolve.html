@@ -18,7 +18,7 @@ function processData(data) {
   $('#changePasswordUrl').html(data["changePasswordUrl"]);
   $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
    $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
-  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#idpMetadata').text(data["idpMetadata"]);
   $('#x509CertText').html(data["x509CertText"]);
   $('#x509CertTextPem').html(data["x509CertTextPem"]);
   $('#x509CertTextPem').css("white-space", "pre");
@@ -100,7 +100,7 @@ $(document).ready(function($) {
 </li>
 <li>
 <p><span style="background-color: initial;" data-mce-mark="1">Copy the following&nbsp;</span><strong>IDP Metadata</strong><span style="background-color: initial;" data-mce-mark="1">&nbsp;into a text file. Save it with the file name&nbsp;</span><em>metadata.xml</em><span style="background-color: initial;" data-mce-mark="1">. Attach this file to the email message.</span></p>
-<p><kbd id="idpMetadata" style="margin: 0px; height: 187px; width: 700px;">Sign in to Okta Admin app to generate this variable.</kbd></p>
+<p><kbd id="idpMetadata">Sign in to Okta Admin app to generate this variable.</kbd></p>
 </li>
 <li>Download and attach the following <strong>x.509 Certificate</strong> to the email:<br /><br /><kbd id="downloadCertificate">Sign in to the Okta Admin dashboard to generate this value.</kbd></li>
 <li>You can configure this value. The general format is <strong><a style="text-decoration: none; color: black;" onclick="return false;">https://yourDomain.com/identityProvider</a></strong>. A sample SmartSolveBaseURL is <em><a style="text-decoration: none; color: black;" onclick="return false;">https://smartsolve.pilgrimasp.com/OktaSAML</a></em>.</li>

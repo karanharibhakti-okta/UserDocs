@@ -18,7 +18,7 @@ function processData(data) {
   $('#changePasswordUrl').html(data["changePasswordUrl"]);
   $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
    $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
-  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#idpMetadata').text(data["idpMetadata"]);
   $('#x509CertText').html(data["x509CertText"]);
   $('#x509CertTextPem').html(data["x509CertTextPem"]);
   $('#x509CertTextPem').css("white-space", "pre");
@@ -95,7 +95,8 @@ $(document).ready(function($) {
 <p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
 </div>
 <ol>
-<li>Copy and save the following IdP Metadata show below with the filename <strong>metadata.xml</strong>.&nbsp;<br /> <kbd id="idpMetadata" style="margin: 0px; height: 214px; width: 799px;">Sign into the Okta Admin dashboard to generate this value.</kbd></li>
+<li>Copy and save the following IdP Metadata show below with the filename <strong>metadata.xml</strong>.&nbsp;<br />
+    <kbd id="idpMetadata">Sign into the Okta Admin dashboard to generate this value.</kbd></li>
 <li>Download following <strong>x.509 certificate</strong>:<br /><br /> <kbd id="downloadCertificate">Sign in to the Okta Admin app to generate this link.</kbd></li>
 <li>
 <p>Send an email message to Clari and request that they enable SAML for your organization.</p>

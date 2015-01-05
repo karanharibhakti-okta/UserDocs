@@ -18,7 +18,7 @@ function processData(data) {
   $('#changePasswordUrl').html(data["changePasswordUrl"]);
   $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
    $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
-  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#idpMetadata').text(data["idpMetadata"]);
   $('#x509CertText').html(data["x509CertText"]);
   $('#x509CertTextPem').html(data["x509CertTextPem"]);
   $('#x509CertTextPem').css("white-space", "pre");
@@ -97,7 +97,7 @@ $(document).ready(function($) {
 <ol>
 <li>
 <p>Copy the following&nbsp;<strong>IDP Metadata</strong>&nbsp;into a text file. Save it with the file name&nbsp;<em>metadata.xml</em>.&nbsp;</p>
-<p><kbd id="idpMetadata" style="margin: 0px; height: 187px; width: 700px;">Sign in to Okta Admin app to generate this variable.</kbd></p>
+<p><kbd id="idpMetadata">Sign in to Okta Admin app to generate this variable.</kbd></p>
 </li>
 <li><span style="background-color: initial;">Open your SnapLogic instance and navigate to <strong>Manager &gt; Settings</strong>.</span></li>
 <li><span style="background-color: initial;">Select <strong>Configure SSO...</strong>, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/SnapLogic_1.png" alt="SnapLogic_1.png" /><br /></span></li>

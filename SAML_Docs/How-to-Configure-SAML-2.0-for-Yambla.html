@@ -18,7 +18,7 @@ function processData(data) {
   $('#changePasswordUrl').html(data["changePasswordUrl"]);
   $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
    $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
-  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#idpMetadata').text(data["idpMetadata"]);
   $('#x509CertText').html(data["x509CertText"]);
   $('#x509CertTextPem').html(data["x509CertTextPem"]);
   $('#x509CertTextPem').css("white-space", "pre");
@@ -99,7 +99,7 @@ $(document).ready(function($) {
 <p>Email Yambla support to&nbsp;enable SAML for your account.&nbsp;</p>
 </li>
 <li>
-<p>Copy the following <strong>IDP Metadata</strong> and paste it into the email:&nbsp;<br /><br /><kbd id="idpMetadata" style="margin: 0px; height: 184px; width: 600px;">Sign into the Okta Admin dashboard to generate this value.</kbd></p>
+<p>Copy the following <strong>IDP Metadata</strong> and paste it into the email:&nbsp;<br /><br /><kbd id="idpMetadata">Sign into the Okta Admin dashboard to generate this value.</kbd></p>
 </li>
 <li>
 <p>After receiving confirmation from Yambla that SAML is enabled, in the Okta Dashboard for the Yambla application, enter <em><a style="text-decoration: none; color: black;" onclick="return false;">https://www.yambla.com/site/loginWithSAML</a></em> into the <strong>Default Relay State field</strong>, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Yambla_1.png" alt="Yambla_1.png" /></p>

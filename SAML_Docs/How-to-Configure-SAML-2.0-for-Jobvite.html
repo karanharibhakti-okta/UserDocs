@@ -18,7 +18,7 @@ function processData(data) {
   $('#changePasswordUrl').html(data["changePasswordUrl"]);
   $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
    $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
-  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#idpMetadata').text(data["idpMetadata"]);
   $('#x509CertText').html(data["x509CertText"]);
   $('#x509CertTextPem').html(data["x509CertTextPem"]);
   $('#x509CertTextPem').css("white-space", "pre");
@@ -109,7 +109,7 @@ $(document).ready(function($) {
 <kbd id="signOnUrl">Sign in to the Okta Admin app<span>&nbsp;to generate this variable.</span></kbd></li>
 <li>
 <p>Copy the following <strong>IDP Metadata</strong> into a text file. Save it with the file name <em>metadata.xml</em> and attach it to the message.</p>
-<kbd id="idpMetadata" style="margin-top: 0px; margin-bottom: 0px; height: 266px; width: 700px;">Sign into the Okta Admin dashboard to generate this value.</kbd></li>
+<kbd id="idpMetadata">Sign into the Okta Admin dashboard to generate this value.</kbd></li>
 </ol></li>
 <li>
 <p dir="ltr">Jobvite does not currently support JIT Provisioning with SAML. For more information on Jobvite SSO, ask your Customer Support Contact to provide you with the <em>Overview of Jobvite Single Sign On</em> document.</p>

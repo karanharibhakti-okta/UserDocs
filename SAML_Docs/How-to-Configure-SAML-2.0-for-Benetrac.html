@@ -18,7 +18,7 @@ function processData(data) {
   $('#changePasswordUrl').html(data["changePasswordUrl"]);
   $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
    $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
-  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#idpMetadata').text(data["idpMetadata"]);
   $('#x509CertText').html(data["x509CertText"]);
   $('#x509CertTextPem').html(data["x509CertTextPem"]);
   $('#x509CertTextPem').css("white-space", "pre");
@@ -100,7 +100,7 @@ Provide the following information to your Benetrac Administrator:<ol>
 <p>Certificate:</p>
 <kbd id="downloadCertificate"> Sign into the Okta Admin dashboard to generate this value.</kbd></li>
 <li>Login URL:<br /><br /><kbd id="signOnUrl"> Sign into the Okta Admin dashboard to generate this value. </kbd></li>
-<li>IDP Metadata:<br /><br /><kbd id="idpMetadata" style="margin-top: 0px; margin-bottom: 0px; height: 266px; width: 700px;">Sign into the Okta Admin dashboard to generate this value.</kbd></li>
+<li>IDP Metadata:<br /><br /><kbd id="idpMetadata">Sign into the Okta Admin dashboard to generate this value.</kbd></li>
 </ol>
 <h2>&nbsp;</h2>
 </div>

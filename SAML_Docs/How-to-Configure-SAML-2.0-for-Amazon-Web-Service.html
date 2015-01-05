@@ -18,7 +18,7 @@ function processData(data) {
   $('#changePasswordUrl').html(data["changePasswordUrl"]);
   $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
    $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
-  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#idpMetadata').text(data["idpMetadata"]);
   $('#x509CertText').html(data["x509CertText"]);
   $('#x509CertTextPem').html(data["x509CertTextPem"]);
   $('#x509CertTextPem').css("white-space", "pre");
@@ -97,7 +97,7 @@ $(document).ready(function($) {
 <ol>
 <li>Sign into AWS and select <strong>Create SAML Provider</strong>, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Amazon_AWS_0.png" alt="Amazon_AWS_0.png" width="722" height="114" /></li>
 <li>
-<p>Provide the following&nbsp;<strong>IDP metadata</strong>&nbsp;when prompted.<br /><br /><kbd id="idpMetadata" style="margin: 0px; height: 214px; width: 700px;">Sign into the Okta Admin dashboard to generate this value.</kbd></p>
+<p>Provide the following&nbsp;<strong>IDP metadata</strong>&nbsp;when prompted.<br /><br /><kbd id="idpMetadata">Sign into the Okta Admin dashboard to generate this value.</kbd></p>
 </li>
 <li>
 <p>&nbsp;Be sure to copy the <strong>Provider ARN</strong> when it displays, as shown below.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Amazon_AWS_1.png" alt="Amazon_AWS_1.png" width="690" height="396" /></p>

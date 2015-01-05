@@ -18,7 +18,7 @@ function processData(data) {
   $('#changePasswordUrl').html(data["changePasswordUrl"]);
   $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
    $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
-  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#idpMetadata').text(data["idpMetadata"]);
   $('#x509CertText').html(data["x509CertText"]);
   $('#x509CertTextPem').html(data["x509CertTextPem"]);
   $('#x509CertTextPem').css("white-space", "pre");
@@ -96,7 +96,7 @@ $(document).ready(function($) {
 </div>
 <ol>
 <li>Create <strong>okta-config-jira.xml</strong> on the Jira server and paste the following configuration into it.<br /><br />&lt;configuration&gt;<br />&nbsp; &lt;applications&gt;<br />&nbsp; &nbsp; &lt;application&gt;<br />&nbsp; &nbsp; &nbsp; [Metadata]<br />&nbsp; &nbsp; &lt;/application&gt;<br />&nbsp; &lt;/applications&gt;<br />&lt;/configuration&gt;</li>
-<li>Substitute the following text for [Metadata] in the file you just created.<br /><br /><kbd id="idpMetadata" rows="25">Sign into the Okta Admin dashboard to generate this value.</kbd></li>
+<li>Substitute the following text for [Metadata] in the file you just created.<br /><br /><kbd id="idpMetadata">Sign into the Okta Admin dashboard to generate this value.</kbd></li>
 <li>Make the following updates to the <strong>[jira_webdir]/WEB-INF/classes/seraph-config.xml</strong> file.</li>
 <ul>
 <ul>

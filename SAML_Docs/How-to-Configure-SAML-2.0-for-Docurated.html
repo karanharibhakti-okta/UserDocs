@@ -18,7 +18,7 @@ function processData(data) {
   $('#changePasswordUrl').html(data["changePasswordUrl"]);
   $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
    $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
-  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#idpMetadata').text(data["idpMetadata"]);
   $('#x509CertText').html(data["x509CertText"]);
   $('#x509CertTextPem').html(data["x509CertTextPem"]);
   $('#x509CertTextPem').css("white-space", "pre");
@@ -97,7 +97,7 @@ $(document).ready(function($) {
 <ol>
 <li>
 <p dir="ltr">Copy the following <strong style="background-color: initial;">IDP Metadata</strong> into a text file. Save it with the file name <em style="background-color: initial;">metadata.xml</em>.</p>
-<kbd id="idpMetadata" style="margin-top: 0px; margin-bottom: 0px; height: 266px; width: 700px;">Sign into the Okta Admin dashboard to generate this value.</kbd></li>
+<kbd id="idpMetadata">Sign into the Okta Admin dashboard to generate this value.</kbd></li>
 <li>
 <p>Send a message to Docurated support and request SAML support. Include the following three items in the message.</p>
 <ol>

@@ -18,7 +18,7 @@ function processData(data) {
   $('#changePasswordUrl').html(data["changePasswordUrl"]);
   $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
    $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
-  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#idpMetadata').text(data["idpMetadata"]);
   $('#x509CertText').html(data["x509CertText"]);
   $('#x509CertTextPem').html(data["x509CertTextPem"]);
   $('#x509CertTextPem').css("white-space", "pre");
@@ -105,7 +105,7 @@ $(document).ready(function($) {
 <li>Enter <strong>Okta</strong> for the <strong>IdP Nickname</strong>, as shown above.</li>
 <li>
 <p>Copy and paste the following <strong>Idp Metadata</strong>, and then, click <strong>Save</strong>, as shown above.</p>
-<kbd id="idpMetadata" style="margin: 0px; height: 218px; width: 625px;">Sign in to the Okta Admin app to generate this variable.</kbd></li>
+<kbd id="idpMetadata">Sign in to the Okta Admin app to generate this variable.</kbd></li>
 <li>Select <strong>Add Domain</strong>, as shown below. Follow the instructions in the Smartsheet documentation located at <a href="http://www.smartsheet.com/files/haymaker/SAMLSelfServiceInstructions.pdf" target="_blank">http://www.smartsheet.com/files/haymaker/SAMLSelfServiceInstructions.pdf</a>&nbsp;to add your domain configuration.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Smartsheet_5.png" alt="Smartsheet_5.png" /></li>
 <li>
 <p>After setting up the domain, copy and paste the following <strong>SSO URL</strong>.</p>

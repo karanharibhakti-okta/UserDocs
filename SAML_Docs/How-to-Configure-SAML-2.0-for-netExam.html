@@ -18,7 +18,7 @@ function processData(data) {
   $('#changePasswordUrl').html(data["changePasswordUrl"]);
   $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
    $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
-  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#idpMetadata').text(data["idpMetadata"]);
   $('#x509CertText').html(data["x509CertText"]);
   $('#x509CertTextPem').html(data["x509CertTextPem"]);
   $('#x509CertTextPem').css("white-space", "pre");
@@ -100,7 +100,7 @@ $(document).ready(function($) {
 </li>
 <li>
 <p><span data-mce-mark="1">Copy the following&nbsp;</span><strong>IDP Metadata</strong><span data-mce-mark="1">&nbsp;into a text file. Save it with the file name&nbsp;</span><em>metadata.xml</em><span data-mce-mark="1">. Attach this file to the email message.</span></p>
-<p><kbd id="idpMetadata" style="margin: 0px; height: 187px; width: 700px;">Sign in to Okta Admin app to generate this variable.</kbd></p>
+<p><kbd id="idpMetadata">Sign in to Okta Admin app to generate this variable.</kbd></p>
 </li>
 <li><span style="background-color: initial;" data-mce-mark="1">netExam will process your request. After you receive a confirmation email, you can start assigning people to the application.</span></li>
 <li>

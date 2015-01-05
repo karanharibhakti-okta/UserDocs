@@ -18,7 +18,7 @@ function processData(data) {
   $('#changePasswordUrl').html(data["changePasswordUrl"]);
   $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
    $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
-  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#idpMetadata').text(data["idpMetadata"]);
   $('#x509CertText').html(data["x509CertText"]);
   $('#x509CertTextPem').html(data["x509CertTextPem"]);
   $('#x509CertTextPem').css("white-space", "pre");
@@ -97,7 +97,7 @@ $(document).ready(function($) {
 <ol>
 <li>
 <p>Send an email to Jive support to request SAML 2.0 &nbsp;access. Attach the following metadata to the message.</p>
-<p><kbd id="idpMetadata" style="margin: 0px; height: 187px; width: 700px;">Sign in to Okta Admin app to have this variable generated for you</kbd></p>
+<p><kbd id="idpMetadata">Sign in to Okta Admin app to have this variable generated for you</kbd></p>
 </li>
 <li>
 <p>&nbsp;Wait for a reply. After you receive confirmation, continue with the following steps to complete the customization.</p>

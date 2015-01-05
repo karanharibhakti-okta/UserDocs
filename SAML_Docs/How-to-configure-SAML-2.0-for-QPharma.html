@@ -18,7 +18,7 @@ function processData(data) {
   $('#changePasswordUrl').html(data["changePasswordUrl"]);
   $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
    $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
-  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#idpMetadata').text(data["idpMetadata"]);
   $('#x509CertText').html(data["x509CertText"]);
   $('#x509CertTextPem').html(data["x509CertTextPem"]);
   $('#x509CertTextPem').css("white-space", "pre");
@@ -98,7 +98,7 @@ $(document).ready(function($) {
 <li>
 <p>Contact QPharma support and request they enable&nbsp;SAML for your account.</p>
 </li>
-<li>Provide the following <strong>IDP Metadata</strong>.<br />&nbsp;<kbd id="idpMetadata" style="margin: 0px; height: 270px; width: 730px;">Sign in to the Okta Admin app to generate this variable.</kbd></li>
+<li>Provide the following <strong>IDP Metadata</strong>.<br />&nbsp;<kbd id="idpMetadata">Sign in to the Okta Admin app to generate this variable.</kbd></li>
 <li>QPharma will notify you when SAML is enabled.</li>
 <li>Done!</li>
 </ol><strong style="background-color: initial;">Note:</strong> <span style="background-color: initial;">IDP-initiated flows are supported. SP-initiated flows and Just in Time (JIT) provisioning are not supported.</span></div>

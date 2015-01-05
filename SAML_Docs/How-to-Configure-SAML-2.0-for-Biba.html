@@ -18,7 +18,7 @@ function processData(data) {
   $('#changePasswordUrl').html(data["changePasswordUrl"]);
   $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
    $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
-  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#idpMetadata').text(data["idpMetadata"]);
   $('#x509CertText').html(data["x509CertText"]);
   $('#x509CertTextPem').html(data["x509CertTextPem"]);
   $('#x509CertTextPem').css("white-space", "pre");
@@ -98,7 +98,7 @@ $(document).ready(function($) {
 <li>Send an email message to Biba support at <strong>saml@biba.com</strong> and request that they enable SAML for your organization.</li>
 <li>
 <p>Copy and save the following IdP Metadata show below with the filename <strong>metadata.xml</strong>.</p>
-<kbd id="idpMetadata" style="margin: 0px; height: 214px; width: 799px;">Sign into the Okta Admin dashboard to generate this value.</kbd></li>
+<kbd id="idpMetadata">Sign into the Okta Admin dashboard to generate this value.</kbd></li>
 <li>
 <p>Attach the file you saved in step 2 to the email message.</p>
 </li>

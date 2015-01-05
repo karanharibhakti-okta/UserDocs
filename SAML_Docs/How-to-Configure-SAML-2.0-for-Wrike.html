@@ -18,7 +18,7 @@ function processData(data) {
   $('#changePasswordUrl').html(data["changePasswordUrl"]);
   $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
    $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
-  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#idpMetadata').text(data["idpMetadata"]);
   $('#x509CertText').html(data["x509CertText"]);
   $('#x509CertTextPem').html(data["x509CertTextPem"]);
   $('#x509CertTextPem').css("white-space", "pre");
@@ -100,7 +100,7 @@ $(document).ready(function($) {
 </li>
 <li>
 <p>Copy the following <strong>IDP Metadata</strong> into a text file. Save it with the file name <em>metadata.xml</em>&nbsp; and attach it to the message.</p>
-<kbd id="idpMetadata" style="margin-top: 0px; margin-bottom: 0px; height: 266px; width: 700px;">Sign into the Okta Admin dashboard to generate this value.</kbd></li>
+<kbd id="idpMetadata">Sign into the Okta Admin dashboard to generate this value.</kbd></li>
 <li>
 <p>Wrike will notify you when SAML is enabled.&nbsp;<span data-mce-mark="1">Once Wrike has turned on SAML, click on the Wrike chiclet on your dashboard to authenticate via SAML.</span></p>
 </li>

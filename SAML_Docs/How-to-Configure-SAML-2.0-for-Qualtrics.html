@@ -18,7 +18,7 @@ function processData(data) {
   $('#changePasswordUrl').html(data["changePasswordUrl"]);
   $('#downloadCertificate').html('<a href="' + data["idpCertDownload"] + '">' + data["idpCertDownload"] + '</a>');
    $('#downloadCertificatePem').html('<a href="' + data["idpCertDownload"] + '?fileExtension=pem">' + data["idpCertDownload"] + '</a>');
-  $('#idpMetadata').html(data["idpMetadata"]);
+  $('#idpMetadata').text(data["idpMetadata"]);
   $('#x509CertText').html(data["x509CertText"]);
   $('#x509CertTextPem').html(data["x509CertTextPem"]);
   $('#x509CertTextPem').css("white-space", "pre");
@@ -113,7 +113,7 @@ $(document).ready(function($) {
 <li>Select the&nbsp;<strong style="font-size: 14px; background-color: initial;">&gt;&gt;</strong>&nbsp;button to move to the next screen.</li>
 </ol></li>
 <li>On the next page of the survey that begins with the text <em>Copy and paste the link below...</em>, select the&nbsp;<strong>&gt;&gt;</strong>&nbsp;button to move to the next screen.</li>
-<li>Copy and save the following IdP Metadata show below with the filename <strong>metadata.xml</strong>.&nbsp;<br /> <kbd id="idpMetadata" style="margin: 0px; height: 214px; width: 799px;">Sign into the Okta Admin dashboard to generate this value.</kbd></li>
+<li>Copy and save the following IdP Metadata show below with the filename <strong>metadata.xml</strong>.&nbsp;<br /> <kbd id="idpMetadata" >Sign into the Okta Admin dashboard to generate this value.</kbd></li>
 <li>
 <p>On the next page of the survey, select the following responses.</p>
 <ol>
