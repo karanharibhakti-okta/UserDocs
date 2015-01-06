@@ -145,6 +145,7 @@ kbd, blockquote, pre {
     margin-bottom: 20px;
     line-height: 20px;
     margin-top: 0;
+    overflow: scroll;
 }
 
 kbd, code, pre, 
