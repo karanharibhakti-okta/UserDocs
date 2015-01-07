@@ -19,24 +19,25 @@ try{Typekit.load();}catch(e){}
             <img src="resources/css/okta-logo-white.png" alt="Okta" />
         </div>
     </div>
+<h1>How to Configure SAML 2.0 for Quip</h1>
 
 <div class="okta-instructions">
-<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
-<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+<div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
+<p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
 </div>
+
 <ol>
+<li>Copy and save the following IdP Metadata show below with the filename <strong>metadata.xml</strong>.&nbsp;<br /> <textarea id="idpMetadata" style="margin: 0px; height: 214px; width: 799px;">Sign into the Okta Admin dashboard to generate this value.</textarea></li>
 <li>
-<p>Email R&amp;D Logic at<span>&nbsp;</span>rdtime@rdlogic.com&nbsp;to enable SAML for R&amp;D Time and paste the following two pieces of information into the message.&nbsp;</p>
+<p>Send an email message to Quip and request that they enable SAML for your organization.</p>
 </li>
-<li>
-<p><strong>IDP Metadata</strong>:</p>
-<pre id="idpMetadata">Sign in to Okta Admin app to have this variable generated for you.</pre></li>
-<li><strong>Sign Off UR</strong>L:<br /><br /><kbd id="signOutUrl">Sign in to the Okta Admin app to have this variable generated for you.</kbd></li>
-<li><strong>After R&amp;D Logic enables SAML, Logic, you can log in to R&amp;D Time through SAML.&nbsp;</strong></li>
-</ol>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<div class="instructions-text instructions-text-wide"></div>
+<li>Attach the metadata.xml file you created in step 1.</li>
+<li>Quip will process your request and notify you when SAML is enabled.</li>
+<li><span style="font-size: 14px; background-color: initial;" data-mce-mark="1">After you receive the confirmation email from Quip, you can assign people to the application.</span></li>
+<li><span style="background-color: initial;" data-mce-mark="1">Done!</span></li>
+</ol></div>
+<strong>Note:</strong>&nbsp;SP-initiated flows and Just In Time (JIT) provisioning are supported.&nbsp;
+
 </div>
 </body>
 </html>

@@ -19,7 +19,7 @@ try{Typekit.load();}catch(e){}
             <img src="resources/css/okta-logo-white.png" alt="Okta" />
         </div>
     </div>
-
+<h1>How to Configure SAML 2.0 for Amazon Web Service</h1>
 <div class="okta-instructions">
 <div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
 <p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
@@ -46,20 +46,26 @@ try{Typekit.load();}catch(e){}
 <li>In Okta, enable User Management for your app, and assign users. Specify the role as the role that you created in step 6, as shown below. If you are on Okta SSO or you do NOT want to enable User Management, go to step 10.<br /><br /><img style="border: 0; padding: 0;" src="images/apps/Amazon_AWS_5.png" alt="Amazon_AWS_5.png" /></li>
 <li>
 <p dir="ltr">Optionally, you can specify the region that your users sign in to. To specify a region, on the Okta Dashboard for the Amazon Web Services application, select the <strong>Sign On</strong> tab. Enter one of the values shown below in the&nbsp;<strong>Default Relay State&nbsp;</strong>field. Continue to Step 11.</p>
-<table class="auto" style="border-collapse: collapse;" border="1" cellspacing="5" cellpadding="5">
+
+
+
+<table style="width: 1000px; height: 152px; border-collapse: collapse;" border="1" cellspacing="5" cellpadding="5" align=“left”>
 <tbody>
-<tr align="center"><th>Region</th><th>Default Relay State</th></tr>
-<tr align="center">
-<td><br />US East (N. Virginia)&nbsp;<br /><br /></td>
-<td align="center"><a style="text-decoration: none; color: black;" onclick="return false;">https://us-east-1.console.aws.amazon.com</a>&nbsp;</td>
+<tr>
+<td align=“left”><strong>Region</strong></td>
+<td align=“left”><strong>Default Relay State</strong></td>
 </tr>
-<tr align="center">
-<td><br />US West (Oregon)&nbsp;<br /><br /></td>
-<td align="center"><a style="text-decoration: none; color: black;" onclick="return false;">https://us-west-2.console.aws.amazon.com</a>&nbsp;</td>
+<tr>
+<td align=“left”>US East (N. Virginia)</td>
+<td align=“left”>https://us-east-1.console.aws.amazon.com</td>
 </tr>
-<tr align="center">
-<td><br />EU (Ireland)&nbsp;<br /><br /></td>
-<td align="center"><a style="text-decoration: none; color: black;" onclick="return false;">https://eu-west-1.console.aws.amazon.com</a>&nbsp;</td>
+<tr>
+<td align=“left”> US West (Oregon) </td>
+<td align=“left”> https://us-west-2.console.aws.amazon.com </td>
+</tr>
+<tr>
+<td align=“left”>EU (Ireland) </td>
+<td align=“left”>https://eu-west-1.console.aws.amazon.com</td>
 </tr>
 </tbody>
 </table>

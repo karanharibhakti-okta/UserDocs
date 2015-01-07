@@ -19,23 +19,26 @@ try{Typekit.load();}catch(e){}
             <img src="resources/css/okta-logo-white.png" alt="Okta" />
         </div>
     </div>
+<h1>How to Configure SAML 2.0 for Informatica SSO</h1>
 
 <div class="okta-instructions">
 <div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
 <p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
 </div>
-<h2>Send an email to your SaaS vendor.</h2>
+<p>To enable SAML, send an email to your SaaS vendor as described below:</p>
 <p>&nbsp;</p>
-<p>Copy and paste the fields below to compose your own email:</p>
-<p class="bold indent-10">Subject</p>
+<ol>
+<li>Copy and paste the fields below into an email and send to Informatica:</li>
+<ul>
+<li><strong>Subject</strong></li>
 <kbd class="margin-btm-10"> Enabled inbound SSO for <strong>Org</strong></kbd>
 <p>&nbsp;</p>
 <kbd class="margin-btm-10"> Please enable Okta for inbound SSO access to company <strong>Org</strong> <br /> The administrator for this account is <strong>AdminEmail</strong> <br /> <br /> The API endpoint URL has to be copied has to the okta.ini. The value is assign to the serviceURL.PROD field. <br /> <strong><kbd id="informaticaApiUrl">Sign in to the Okta Admin app to have this variable generated for you.</kbd></strong> <br /><br /> Login Redirect URL, sends an authentication request back to Okta. <br /> <kbd id="signOnUrl">Sign in to the Okta Admin app to have this variable generated for you.</kbd> </kbd>
-<p><strong>Org</strong> - Name of the company</p>
-<p><strong>AdminEmail</strong> - Adminstrator's email for the company</p>
-<p><strong>SSOUrl</strong></p>
+<li><strong>Org</strong> - Name of the company</li>
+<li><strong>AdminEmail</strong> - Adminstrator's email for the company</li>
+<li><strong>SSOUrl</strong></li>
 <kbd id="signOnUrl">Sign in to the Okta Admin app to have this variable generated for you.</kbd>
-<p><strong>ExternalKey</strong></p>
+<li><strong>ExternalKey</strong></li>
 <kbd id="externalKey">Sign in to the Okta Admin app to have this variable generated for you.</kbd></div>
 <script type="text/javascript">// <![CDATA[
 function egenciaProcessData(data) {
@@ -100,5 +103,7 @@ function getURLParameter(name) {
   }
 })(jQuery);
 // ]]></script>
+</ul>
+</ol>
 </body>
 </html>

@@ -19,7 +19,7 @@ try{Typekit.load();}catch(e){}
             <img src="resources/css/okta-logo-white.png" alt="Okta" />
         </div>
     </div>
-
+<h1>How to Configure SAML 2.0</h1>
 <div class="okta-instructions">
 <div id="loginAdminApp" class="okta-callout okta-error" style="display: none;"><span class="icon-24 icon-error"></span>
 <p>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</p>
@@ -27,8 +27,9 @@ try{Typekit.load();}catch(e){}
 <p>Some of the following fields are required to configure SAML 2.0, but not all. Provide the information requested either in the site for the app for which you are configuring SAML, or an email to support, if that is what the app provider requests.</p>
 <p><strong>Note:</strong> Some of the terminology can vary among apps. For example, some apps refer to the Sign Out URL as the&nbsp;Identity Provider HTTP POST URL. You might have to look at the sample data provided by an app to determine which field to use.</p>
 <ol>
-<li><strong>IDP Metadata:<br /><br />&nbsp;<pre id="idpMetadata">Sign in to Okta Admin app to have this variable generated for you.</pre></strong></li>
-</ol><ol>
+<li><strong>IDP Metadata:<br>
+  <pre id="idpMetadata">Sign in to Okta Admin app to have this variable generated for you.</pre></strong></li>
+
 <li>&nbsp;<strong>&nbsp;IDP Issuer/Entity ID</strong>:<kbd id="issuer">Sign into the Okta Admin Dashboard to generate this variable.</kbd></li>
 <li><strong>x.509 Certificate.</strong>&nbsp;Please use <strong>one</strong> of the following certificate formats, as requested by the app provider:</li>
 <ul>
