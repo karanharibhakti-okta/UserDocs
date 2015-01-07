@@ -20,5 +20,34 @@ try{Typekit.load();}catch(e){}
         </div>
     </div>
 
+<div class="okta-instructions">
+<h1>How to Configure SAML 2.0 for Litmos (Callidus Cloud)</h1>
+<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
+<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+</div>
+<div class="instructions clearfix">
+<div class="instructions-text"><ol class="bullets">
+<li>
+<p>Log in to Litmos and navigate to&nbsp;<strong>Account &gt; Integrations</strong>.</p>
+</li>
+<li>Scroll down and select&nbsp;<strong>SAML 2.0 (Single Sign On).<br /><img style="border: 0; padding: 0;" src="images/apps/+.png" alt="Screen_Shot_2014-09-18_at_3.10.46_PM.png" /><br /></strong></li>
+<li>Check <strong>Enable&nbsp;SAML</strong>.<strong><br /><img style="border: 0; padding: 0;" src="images/apps/Screen+Shot+2014-09-18+at+3.18.12+PM.png" alt="Screen_Shot_2014-09-18_at_3.18.12_PM.png" /><br /></strong></li>
+<li>
+<p>Copy and paste the following value to the <strong>Origin URl</strong> field:</p>
+<kbd id="signOnUrl">Sign into the Okta Admin dashboard to generate this value. </kbd></li>
+<li>
+<p>Copy and paste the following value to the <strong>SAML x.509&nbsp;Certificate</strong> field:&nbsp;<strong><br /></strong></p>
+<pre id="x509CertTextPem">Sign into the Okta Admin Dashboard to generate this variable.</pre>
+</li>
+<li>
+<p>If you wish to autogenerate users, check the checkbox <strong>Autogenerate users.</strong></p>
+</li>
+<li>Select <strong>Save changes</strong>.</li>
+<li>Done!</li>
+</ol>
+<p><strong>Note:</strong> Litmos supports IdP-initiated flow and Just In Time (JIT) provisioning. SP-initiated flow is not supported.</p>
+</div>
+</div>
+</div>
 </body>
 </html>
