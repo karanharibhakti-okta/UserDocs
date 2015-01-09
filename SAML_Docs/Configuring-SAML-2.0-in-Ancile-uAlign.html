@@ -1,0 +1,48 @@
+<html>
+<head>
+<link href="resources/css/doc-style.css" media="all" rel="stylesheet" type="text/css" />
+<script src="//use.typekit.net/jff5neq.js" type="text/javascript"></script>
+<script type="text/javascript">
+try{Typekit.load();}catch(e){}
+</script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script><script src="resources/scripts/vkbeautify.js"></script>
+
+<title>Setup SSO</title>
+
+<script src="resources/scripts/getAppValues.js"></script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="header clearfix">
+        <div class="logo-container">
+            <img src="resources/css/okta-logo-white.png" alt="Okta" />
+        </div>
+    </div>
+<h1>How to Configure SAML 2.0 for Ancile uAlign</h1>
+
+
+<div class="okta-instructions">
+<div id="loginAdminApp" class="okta-callout okta-danger" style="display: none;">
+<p><strong>This setup might fail without parameter values that are customized for your organization. Please use the Okta Administrator Dashboard to add an application and view the values that are specific for your organization.</strong></p>
+</div>
+<ol>
+<li>
+<p>Log in to you Ancile uAlign Admin console, go to the <strong>Settings gear</strong> on the upper right corner and click on <strong>Organization</strong>.<br /><img src="images/apps/Ancile1.png" alt=“Ancile1.png" /></p>
+</li>
+<li>
+<p>Next, click on the <strong>Edit</strong> icon on the right side as shown below.<br /><img src="images/apps/Ancile2.png" alt=“Ancile2.png” /></p>
+</li>
+<li>Scroll down to the Authentication Settings and check <strong>Enable SAML 2.0 Authentication</strong>.<br /><img src="images/apps/Ancile3.png" alt=“Ancile3.png" /></li>
+<li>Copy and paste the following to the <strong>Identity Provider SAML Url</strong> field:<kbd id="signOnUrl">Sign in to the Okta Admin app to&nbsp;generate this variable.</kbd></li>
+<li>Copy and paste the following to the <strong>Identity Provider Public certificate</strong> field:
+<pre id="x509CertTextPem">Sign in to the Okta Admin app to generate this variable.</pre>
+</li>
+<li>Copy and paste the following to the <strong>Identity Provider Logout Url</strong> field:<kbd id="signOutUrl">Sign in to the Okta Admin app to&nbsp;generate this variable.<br /></kbd></li>
+<li>Next, copy the&nbsp;<strong>ANCILE uAlign SAML Endpoint&nbsp;</strong>from the Ancile uAlign Authentication Settings page, and paste it in OKta under the General tab:<br /><img src="images/apps/Ancile4.png" alt=“Ancile4.png" /></li>
+<li>Hit Save in both Okta and Ancile uAlign.</li>
+<li>Done!</li>
+</ol>
+<p>Note: Ancile uAlign supports both <strong>IDP-initiated</strong> and <strong>SP-initiated</strong> flows. For SP-initiated SAML authentication, go to&nbsp;https://app.ancileualign.com/login, enter you email address and click Next.</p>
+</div>
