@@ -12,7 +12,7 @@ function processData(data) {
   $('#validFrom').html(data["validFrom"]);
   $('#validTo').html(data["validTo"]);
   $('#issuer').html(data["issuer"]);
-$('#metadataUrl').html(data["signOnUrl"]);
+$('#metadataUrl').html(data["signOnUrl"] + '/metadata');
  $('#errorUrl').html(data["signOutUrl"]);
  $('#timeoutUrl').html(data["signOutUrl"]);
  $('#delAuthUrl').html(data["delAuthUrl"]);
